@@ -1,7 +1,7 @@
 #pragma once
 #include "AABB.h"
 #include "Object.h"
-#include <map>
+#include <vector>
 #include <string>
 class GameManager
 {
@@ -12,9 +12,9 @@ public:
 
 	void calCollide();
 	void Step(float dt);
-	const std::map<std::string, Object*> getObjectList() { return ObjectList; }
+	const std::vector<std::pair<std::string, Object*>> getObjectList() { return ObjectList; }
 private:
-	std::map<std::string, Object*> ObjectList;
+	std::vector<std::pair<std::string, Object*>> ObjectList;
 	int l;
 
 };

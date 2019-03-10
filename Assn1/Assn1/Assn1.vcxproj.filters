@@ -21,14 +21,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assn1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>소스 파일\System</Filter>
     </ClCompile>
     <ClCompile Include="AABB.cpp">
       <Filter>소스 파일\AABB</Filter>
@@ -37,6 +31,12 @@
       <Filter>소스 파일\AABB</Filter>
     </ClCompile>
     <ClCompile Include="Step.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Example.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetect.cpp">
       <Filter>소스 파일\System</Filter>
     </ClCompile>
   </ItemGroup>
