@@ -13,22 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\System">
+      <UniqueIdentifier>{e0873bae-c622-4e29-b0e1-d2aa5e455d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\AABB">
+      <UniqueIdentifier>{7e5e870a-1a5c-4f1a-8edb-7bdbee7f4e56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assn1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="AABB.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\AABB</Filter>
     </ClCompile>
     <ClCompile Include="AABBCollideChecker.cpp">
+      <Filter>소스 파일\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="Step.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Example.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="CollisionDetect.cpp">
+      <Filter>소스 파일\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
