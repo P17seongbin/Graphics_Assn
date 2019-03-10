@@ -1,5 +1,6 @@
 #include "System.h"
 #include <algorithm>
+#include <GL/glew.h>
 #include <GL/freeglut.h> 
 GameManager::GameManager()
 {
@@ -8,6 +9,7 @@ GameManager::GameManager()
 }
 void GameManager::Draw()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
 	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
 	{
 		it->second->Draw();

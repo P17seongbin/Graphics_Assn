@@ -10,5 +10,3 @@ CircleAABB::CircleAABB()
 	type = AABBType::Circle;
 	SetCollider();
 }
-
-
