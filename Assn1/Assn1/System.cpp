@@ -1,20 +1,19 @@
 #include "System.h"
-
-GameManager::GameManager()
-{
-	//Init AABB's Collider Function Point map
-	l = 0;
-}
+#include <algorithm>
 
 void GameManager::calCollide()
 {
-	for (int i = 0; i < l; i++)
+	//모든 오브젝트의 충돌 판정을 검사합니다.
+	for (std::map<std::string, Object*>::iterator lhs = ObjectList.begin();lhs != ObjectList.end(); lhs++)
 	{
-		for (int j = i + 1; j < l; j++)
+		for (std::map<std::string, Object*>::iterator rhs = ObjectList.begin(); rhs != ObjectList.end(); rhs++)
 		{
-			if (ObjectList[i].collidebox->IsCollide(ObjectList[j].collidebox))
+			if (lhs->first != rhs->first)//두 오브젝트가 다른건가요?
 			{
-				ObjectList[i].onCollide(&ObjectList[j]);
+				if (lhs->second->collidebox->IsCollide(rhs->second->collidebox))//두 오브젝트가 충돌하나요?
+				{
+					lhs->second->onCollide(rhs->second);//ㅇㅇㅇ
+				}
 			}
 		}
 	}
@@ -25,10 +24,12 @@ bool GameManager::removeObject(std::string tag)
 	if (ObjectList.find(tag) != ObjectList.end())
 	{
 		ObjectList.erase(tag);
+		l--;
 		return true;
 	}
 	return false;
 }
+
 void GameManager::addObject(std::string tag, Object* t) {
 	if (ObjectList.find(tag) == ObjectList.end())
 	{

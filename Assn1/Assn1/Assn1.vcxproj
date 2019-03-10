@@ -161,6 +161,7 @@
     <ClCompile Include="AABBCollideChecker.cpp" />
     <ClCompile Include="Assn1.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Step.cpp" />
     <ClCompile Include="System.cpp" />
   </ItemGroup>
   <ItemGroup>

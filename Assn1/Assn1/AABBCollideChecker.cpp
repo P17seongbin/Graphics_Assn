@@ -21,7 +21,7 @@ void CircleAABB::SetCollider()
 	collidechecker[AABBType::Rect] = CheckCollide_CR;
 }
 
-
+//Rect-Rect
 bool CheckCollide_RR(AABB *a, AABB *b)
 {
 	RectAABB *A = (RectAABB*)a;
@@ -33,6 +33,7 @@ bool CheckCollide_RR(AABB *a, AABB *b)
 	bool colY = posA.second + sizeA.second >= posB.second && posB.second + sizeB.second >= posB.second;
 	return colX && colY;
 }
+//Circle-Rect
 bool CheckCollide_CR(AABB *a, AABB *b)
 {
 	CircleAABB *A = (CircleAABB*)a;
@@ -48,10 +49,12 @@ bool CheckCollide_CR(AABB *a, AABB *b)
 	return sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius();
 
 }
+//Rect-Circle
 bool CheckCollide_RC(AABB *a, AABB *b)
 {
 	return CheckCollide_CR(b, a);
 }
+//CIrcle-Circle
 bool CheckCollide_CC(AABB *a,AABB *b)
 {
 	CircleAABB *A = (CircleAABB*)a;
@@ -59,12 +62,13 @@ bool CheckCollide_CC(AABB *a,AABB *b)
 	float dist = getDist(A->getPos(), B->getPos());
 	return dist <= (A->getRadius() + B->getRadius());
 }
-
+//pair operator+
 std::pair<float, float>& operator+(std::pair<float, float> &a, std::pair<float, float> &b)
 {
 	std::pair<float, float> res = std::make_pair(a.first + b.first, a.second + b.second);
 	return res;
 }
+//pair operator-
 std::pair<float, float>& operator-(std::pair<float, float> &a, std::pair<float, float> &b)
 {
 	std::pair<float, float> res = std::make_pair(a.first - b.first, a.second - b.second);

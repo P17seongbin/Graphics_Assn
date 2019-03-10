@@ -7,17 +7,12 @@ class GameManager
 {
 public:
 	GameManager();
-	void addObject(std::string tag, Object* t) {
-		if (ObjectList.find(tag) == ObjectList.end())
-		{
-			ObjectList[tag] = t;
-			l++;
-		}
-	}
+	void addObject(std::string tag, Object* t);
 	bool removeObject(std::string tag);
 
 	void calCollide();
 	void Step(float dt);
+	const std::map<std::string, Object*> getObjectList() { return ObjectList; }
 private:
 	std::map<std::string, Object*> ObjectList;
 	int l;

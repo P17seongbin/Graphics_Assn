@@ -23,13 +23,13 @@ public:
 	bool IsCollide(AABB *other) {
 		return collidechecker[other->getType()];
 	};//다른 AABB와 충돌했는지 검사합니다
-
 	const std::pair<float, float> getPos() { return pos; }
 	void setPos(float x, float y) { pos.first = x; pos.second = y; }
 
 protected:
 	std::pair<float, float> pos;
 	AABBType type;
+
 	std::map<AABBType, CollideFunctionptr> collidechecker;
 };
 
