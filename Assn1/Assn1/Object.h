@@ -18,16 +18,15 @@ public:
 	}//다른 Object와 충돌한 상황을 나타냅니다. 
 
 	const std::pair<float, float> getPos() { return pos; }
-	void setPos(float x, float y) { pos.first = x; pos.second = y; }
-	void addPos(float dx, float dy) { pos.first += dx; pos.second += dy; }
+	void setPos(float x, float y) { pos = std::make_pair(x,y); }
+	void addPos(float dx, float dy) { pos = std::make_pair(pos.first + dx, pos.second + dy); }
 
 	const std::pair<float, float> getSpeed() { return speed; }
-	void setSpeed(float vx, float vy) { pos = std::make_pair(vx,vy); }
-	void addSpeed(float ax, float ay) {
-		pos = std::make_pair(pos.first + ax, pos.second + ay);
-	}
+	void setSpeed(float vx, float vy) { speed = std::make_pair(vx,vy); }
+	void addSpeed(float ax, float ay) { speed = std::make_pair(speed.first + ax, speed.second + ay);	}
+
 	const std::pair<float, float> getAccel() { return accel; }
-	void setAccel(float ax, float ay) { pos.first = ax; pos.second = ay; }
+	void setAccel(float ax, float ay) { accel = std::make_pair(ax, ay);}
 
 	bool isDestroy() { return destroyed; }
 	void setDestroy(bool v) { destroyed = v; }
