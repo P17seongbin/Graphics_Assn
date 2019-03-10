@@ -11,7 +11,8 @@ public:
 	bool removeObject(std::string tag);
 
 	void calCollide();
-	void Step(float dt);
+	void Step(int dt);
+	void Draw();
 	const std::vector<std::pair<std::string, Object*>> getObjectList() { return ObjectList; }
 private:
 	std::vector<std::pair<std::string, Object*>> ObjectList;
