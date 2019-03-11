@@ -1,4 +1,5 @@
-#include "Object.h"
+#include "Player.h"
+
 const float DEG2RAD = 3.14159 / 180;
 
 void Player::Draw()
@@ -15,6 +16,8 @@ void Player::Draw()
 	glEnd();
 }
 
+
+
 void Ball::Step(int dt) {
 	if (pos.first < 0 || pos.first > 100) speed = std::make_pair(speed.first * -1, speed.second);
 	if (pos.second < 0 || pos.second > 100)  speed = std::make_pair(speed.first, speed.second * -1);
@@ -27,8 +30,15 @@ void Ball::Draw()
 	glBegin(GL_POLYGON);
 	glVertex2f(pos.first, pos.second);
 	glVertex2f(pos.first, pos.second + radius);
-	glVertex2f(pos.first + radius, pos.second +radius);
+	glVertex2f(pos.first + radius, pos.second + radius);
 	glVertex2f(pos.first + radius, pos.second);
 	glEnd();
 
+}
+void Player::Move(int dt)
+{
+	float dx = (speed.first * dt) + (accel.first * dt * dt / (float)2);
+	float dy = (speed.second * dt) + (accel.second * dt * dt / (float)2);
+
+	addPos(dx, dy);
 }

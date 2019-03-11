@@ -1,8 +1,10 @@
 ﻿  Example.cpp
-c:\users\spock_the_wizard\documents\assn1\assn1\assn1\object.h(70): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\백성빈\desktop\pl_assn\assn1\assn1\object.h(70): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+  Step.cpp
+c:\users\백성빈\desktop\pl_assn\assn1\assn1\object.h(70): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
   코드를 생성하고 있습니다.
-  7 of 360 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
+  2 of 357 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Assn1.vcxproj -> C:\Users\Spock_the_Wizard\Documents\Assn1\Assn1\Release\Assn1.exe
+  Assn1.vcxproj -> C:\Users\백성빈\Desktop\PL_Assn\Assn1\Release\Assn1.exe
