@@ -31,17 +31,19 @@ void Player::Step(int dt)
 	{
 		if (keyhandler->isAsciiKeyPressed('z'))
 			setSpeed(-1 * SPEED, 0);
-		if (keyhandler->isAsciiKeyPressed('c'))
+		else if (keyhandler->isAsciiKeyPressed('c'))
 			setSpeed(SPEED, 0);
+		else setSpeed(0, 0);
 	}
 	else
 	{
 		if (keyhandler->isSpecialKeyPressed(GLUT_KEY_LEFT)) {
 			setSpeed(-1 * SPEED, 0);
 		}
-		if (keyhandler->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
+		else if (keyhandler->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
 			setSpeed(SPEED, 0);
 		}
+		else setSpeed(0, 0);
 	}
 	Move(dt);
 }
