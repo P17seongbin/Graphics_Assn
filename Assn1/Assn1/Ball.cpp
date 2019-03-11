@@ -1,5 +1,4 @@
 #include "Ball.h"
-
 void Ball::Step(int dt) {
 	if (pos.first < 0 || pos.first > 100) speed = std::make_pair(speed.first * -1, speed.second);
 	if (pos.second < 0 || pos.second > 100)  speed = std::make_pair(speed.first, speed.second * -1);

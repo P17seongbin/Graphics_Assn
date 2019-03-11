@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="KeyInputHandler.hpp" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="System.h" />

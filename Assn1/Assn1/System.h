@@ -1,5 +1,4 @@
 #pragma once
-#include "AABB.h"
 #include "Object.h"
 #include <vector>
 #include <string>

@@ -1,8 +1,10 @@
-#pragma once
+#include "KeyInputHandler.hpp"
 #include "AABB.h"
-#include<vector>
+#include <vector>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+
+#pragma once
 
 class Object
 {
@@ -43,4 +45,5 @@ protected:
 		std::pair<float, float> speed;
 		std::pair<float, float> accel;
 		bool destroyed = false;//이 오브젝트가 수명을 다했는지를 나타냅니다. 
+		KeyHandler* keyhandler;
 };
