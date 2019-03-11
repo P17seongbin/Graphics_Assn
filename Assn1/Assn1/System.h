@@ -3,6 +3,9 @@
 #include "Object.h"
 #include <vector>
 #include <string>
+#define SPEED 0.1
+#define TIMEPERFRAME 16//¥‹¿ß:ms
+
 class GameManager
 {
 public:
