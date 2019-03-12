@@ -40,6 +40,7 @@ public:
 
 	bool isDestroy() { return destroyed; }
 	void setDestroy(bool v) { destroyed = v; }
+
 protected:
 		std::pair<float, float> pos;
 		std::pair<float, float> speed;

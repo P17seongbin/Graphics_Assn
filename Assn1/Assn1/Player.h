@@ -10,6 +10,11 @@ public:
 	void Draw() override;
 	void setSize(float x, float y) { size = std::make_pair(x, y); }
 	std::pair<float, float> getSize() { return size; }
+	void updateAABB()
+	{
+	
+	}
+	
 private:
 	std::pair<float, float> size;
 	bool is_1P;

@@ -1,5 +1,7 @@
 #include "System.h"
 #include <algorithm>
+#include "Ball.h"
+#include "Player.h"
 #include <GL/glew.h>
 #include <GL/freeglut.h> 
 GameManager::GameManager()
@@ -20,6 +22,7 @@ void GameManager::Draw()
 void GameManager::Step(int dt)
 {
 	//1. 오브젝트 충돌 판정
+	
 	calCollide();
 	//2. 각 Object의 Step을 호출
 	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)

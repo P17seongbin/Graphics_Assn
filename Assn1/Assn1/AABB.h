@@ -25,7 +25,7 @@ public:
 	};//다른 AABB와 충돌했는지 검사합니다
 	const std::pair<float, float> getPos() { return pos; }
 	void setPos(float x, float y) { pos.first = x; pos.second = y; }
-
+	void setType(int i) { if (i == 0) type = Circle; else type = Rect; }
 protected:
 	std::pair<float, float> pos;
 	AABBType type;
@@ -37,6 +37,7 @@ class RectAABB : public AABB
 {
 public:
 	RectAABB();
+	RectAABB(float x, float y, float first, float second) { size.first = first; size.second=second; setPos(x, y); }
 	void SetCollider();
 
 	const std::pair<float, float> getSize() { return size; }
@@ -49,6 +50,9 @@ class CircleAABB : public AABB
 {
 public:
 	CircleAABB();
+	CircleAABB(float rad, float x, float y) {
+		r = rad; setPos(x, y);
+	}
 	void SetCollider();
 
 	const float getRadius() { return r; }

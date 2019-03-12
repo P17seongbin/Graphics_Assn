@@ -1,5 +1,7 @@
 #pragma once
 #include "Object.h"
+#include "Ball.h"
+#include "Player.h"
 #include <vector>
 #include <string>
 #define SPEED 0.1

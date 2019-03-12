@@ -9,19 +9,23 @@ Player::Player(KeyHandler *handler,bool _1P)
 	setSize(30, 10);
 	setSpeed(0, 0);
 	is_1P = _1P;
+	AABB rect;
+	rect.setType(1);
+	rect.setPos(0, 0);
+	collidebox.push_back(&rect);//이거넣는순간 안됨(ball에서는 넣어도 돌아감)
 }
 
 void Player::Draw()
 {
 	//glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(0.0, 0.5, 0.8);
+	glColor3f(1, 1, 0.2);
 	glBegin(GL_POLYGON);
 	glVertex2f(pos.first, pos.second);
 	glVertex2f(pos.first, pos.second + size.first);
 	glVertex2f(pos.first + size.second, pos.second + size.first);
 	glVertex2f(pos.first + size.second, pos.second);
 	glVertex2f(pos.first + size.second, pos.second + size.first);
-
+	
 	glEnd();
 }
 void Player::Step(int dt)
@@ -45,5 +49,6 @@ void Player::Step(int dt)
 		}
 		else setSpeed(0, 0);
 	}
+	updateAABB();
 	Move(dt);
 }

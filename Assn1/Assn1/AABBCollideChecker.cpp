@@ -39,6 +39,7 @@ bool CheckCollide_CR(AABB *a, AABB *b)
 	CircleAABB *A = (CircleAABB*)a;
 	RectAABB *B = (RectAABB*)b;
 
+	//B->setSIze(10, 30);
 	std::pair<float, float> posA = A->getPos(), posB = B->getPos();
 	std::pair<float, float> sizeB = B->getSize();
 	std::pair<float, float> diff = posA - posB;
