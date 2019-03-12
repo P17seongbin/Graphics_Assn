@@ -7,21 +7,28 @@ public:
 	Ball();
 	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override//지금은 충돌 안함
 	{
-		if (pos.second > 30)
+		if (otherAABB->getType() == 1)
 		{
-			if (speed.second <0)
-				setSpeed(speed.first, -speed.second);
+			if (pos.second > 30)
+			{
+				if (speed.second < 0)
+					setSpeed(speed.first, -speed.second);
+			}
+			if (pos.first <= other->getPos().first)
+			{
+				if (speed.first > 0)
+					setSpeed(-speed.first, speed.second);
+			}
+			if (pos.first >= other->getPos().first + 15)
+			{
+				if (speed.first < 0)
+					setSpeed(-speed.first, speed.second);
+			}
 		}
-		if (pos.first <= other->getPos().first)
+		else//circle to circle
 		{
-			if (speed.first > 0)
-				setSpeed(-speed.first, speed.second);			
-		}
-		if (pos.first >= other->getPos().first+15)
-		{
-			if (speed.first < 0)
-				setSpeed(-speed.first, speed.second);
-			
+			printf("1");
+			setSpeed(-speed.first, -speed.second);
 		}
 	
 	}
@@ -33,7 +40,7 @@ public:
 
 	void updateAABB()
 	{
-		collidebox[0]->setPos(getPos().first, getPos().second);
+		collidebox[0]->setPos(pos.first, pos.second);
 	}
 	
 private:

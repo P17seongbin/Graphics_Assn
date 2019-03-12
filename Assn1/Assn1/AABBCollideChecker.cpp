@@ -50,12 +50,9 @@ bool CheckCollide_CR(AABB *a, AABB *b)
 	//printf("%d",sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius());
 	//return sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius();
 	
-	return (posA.first >= posB.first - 5 && posA.first <= posB.first + 20 && posA.second <= 35);
-		
-
-	//printf("%d", ((sizeB.first + 1) > posA.second) && (posB.first - 1 < posA.first) && (posB.first + sizeB.second + 1 > posA.first));
-	//return ((sizeB.first + 1) > posA.second) && (posB.first-1<posA.first) &&(posB.first+sizeB.second+1>posA.first);
+	return (posA.first >= posB.first - 5 && posA.first <= posB.first + 20 && posA.second <= 35);		
 }
+
 //Rect-Circle
 bool CheckCollide_RC(AABB *a, AABB *b)
 {
@@ -66,6 +63,7 @@ bool CheckCollide_CC(AABB *a,AABB *b)
 	CircleAABB *A = (CircleAABB*)a;
 	CircleAABB *B = (CircleAABB*)b;
 	float dist = getDist(A->getPos(), B->getPos());
+	//printf("%d", dist <= (A->getRadius() + B->getRadius()));
 	return dist <= (A->getRadius() + B->getRadius());
 }
 //pair operator+

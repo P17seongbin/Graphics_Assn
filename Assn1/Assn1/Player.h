@@ -13,12 +13,18 @@ public:
 	std::pair<float, float> getSize() { return size; }
 	void updateAABB()
 	{
-		collidebox[0]->setPos(getPos().first, getPos().second);
+		
+		center_x = pos.first + size.second / 2;
+		center_y = size.first - head_rad;
+		collidebox[1]->setPos(center_x, center_y);
+		collidebox[0]->setPos(pos.first, pos.second);
 	}
 	
 private:
 	std::pair<float, float> size;
 	float head_rad;
 	float body;
+	float center_x;
+	float center_y;
 	bool is_1P;
 };

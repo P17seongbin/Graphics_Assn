@@ -4,14 +4,14 @@ Ball::Ball()
 {
 	tag = "Ball";
 	setRadius(5.0);
-	setSpeed(0.10, 0.10);
+	setSpeed(0.050, 0.050);
 	setPos(70, 50);
 	collidebox.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
 void Ball::Step(int dt) {
 	if (pos.first < 0 || pos.first > 100) speed = std::make_pair(speed.first * -1, speed.second);
 	if (pos.second < 0 || pos.second > 100)  speed = std::make_pair(speed.first, speed.second * -1);
-	collidebox[0]->setPos(pos.first, pos.second);
+	updateAABB();
 	Move(dt);
 }
 

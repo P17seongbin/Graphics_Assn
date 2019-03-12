@@ -9,9 +9,12 @@ Player::Player(KeyHandler *handler,bool _1P)
 	setSize(30,15);
 	head_rad = 0.4*size.first / 2;
 	body=size.first-1.5*head_rad;
+	center_x = pos.first + size.second / 2;
+	center_y = size.first - head_rad;
 	setSpeed(0, 0);
 	is_1P = _1P;
-	collidebox.push_back(new RectAABB(0,0,30,10));//이거넣는순간 안됨(ball에서는 넣어도 돌아감)
+	collidebox.push_back(new RectAABB(0,0,body,15));
+	collidebox.push_back(new CircleAABB(head_rad, 0, 0));
 }
 
 void Player::Draw()
@@ -19,8 +22,6 @@ void Player::Draw()
 	int i;
 	int triangleAmount = 20; //# of triangles used to draw circle
 	GLfloat twicePi = 2.0f * PI;
-	float center_x = pos.first + size.second / 2;
-	float center_y = size.first - head_rad;
 	//glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1, 1, 0.2);
 	glBegin(GL_POLYGON);
@@ -70,6 +71,6 @@ void Player::Step(int dt)
 		}
 		else setSpeed(0, 0);
 	}
-	collidebox[0]->setPos(getPos().first, getPos().second);
+	updateAABB();
 	Move(dt);
 }
