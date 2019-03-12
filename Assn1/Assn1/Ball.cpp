@@ -1,5 +1,12 @@
 #include "Ball.h"
 #define PI 3.1415
+Ball::Ball()
+{
+	tag = "Ball";
+	setRadius(1.0);
+	setSpeed(0.2, 0.15);
+	collidebox.push_back(new CircleAABB(radius,pos.first,pos.second));
+}
 void Ball::Step(int dt) {
 	if (pos.first < 0 || pos.first > 100) speed = std::make_pair(speed.first * -1, speed.second);
 	if (pos.second < 0 || pos.second > 100)  speed = std::make_pair(speed.first, speed.second * -1);

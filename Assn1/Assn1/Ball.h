@@ -4,16 +4,7 @@
 class Ball : public Object
 {
 public:
-	Ball()
-	{
-		tag = "Ball";
-		setRadius(1.0);
-		setSpeed(0.2, 0.15);
-		AABB ball;
-		ball.setType(0);
-		ball.setPos(0, 0);
-		collidebox.push_back(&ball);
-	}
+	Ball();
 	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override//지금은 충돌 안함
 	{
 		//printf("1");

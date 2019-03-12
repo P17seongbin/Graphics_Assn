@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <list>
-
+#include <iostream>
 class AABB;
 bool CheckCollide_RR(AABB *a, AABB *b);
 bool CheckCollide_RC(AABB *a, AABB *b);
@@ -21,6 +21,7 @@ class AABB
 public:
 	const AABBType getType() { return type; }//AABB의 타입을 리턴
 	bool IsCollide(AABB *other) {
+		std::cout << other->getType();
 		return collidechecker[other->getType()];
 	};//다른 AABB와 충돌했는지 검사합니다
 	const std::pair<float, float> getPos() { return pos; }
@@ -37,9 +38,8 @@ class RectAABB : public AABB
 {
 public:
 	RectAABB();
-	RectAABB(float x, float y, float first, float second) { size.first = first; size.second=second; setPos(x, y); }
+	RectAABB(float x, float y, float first, float second);
 	void SetCollider();
-
 	const std::pair<float, float> getSize() { return size; }
 	void setSIze(float x, float y) { size.first = x; size.second = y; }
 private:
@@ -50,14 +50,10 @@ class CircleAABB : public AABB
 {
 public:
 	CircleAABB();
-	CircleAABB(float rad, float x, float y) {
-		r = rad; setPos(x, y);
-	}
+	CircleAABB(float rad, float x, float y);
 	void SetCollider();
-
 	const float getRadius() { return r; }
 	void setRadius(float R) { r = R; }
-
 private:
 	float r;
 };

@@ -9,10 +9,7 @@ Player::Player(KeyHandler *handler,bool _1P)
 	setSize(30, 10);
 	setSpeed(0, 0);
 	is_1P = _1P;
-	AABB rect;
-	rect.setType(1);
-	rect.setPos(0, 0);
-	collidebox.push_back(&rect);//이거넣는순간 안됨(ball에서는 넣어도 돌아감)
+	collidebox.push_back(new RectAABB(0,0,30,10));//이거넣는순간 안됨(ball에서는 넣어도 돌아감)
 }
 
 void Player::Draw()
