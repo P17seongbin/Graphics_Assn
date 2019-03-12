@@ -24,6 +24,7 @@ void CircleAABB::SetCollider()
 //Rect-Rect
 bool CheckCollide_RR(AABB *a, AABB *b)
 {
+	
 	RectAABB *A = (RectAABB*)a;
 	RectAABB *B = (RectAABB*)b;
 	std::pair<float, float> posA = A->getPos(), posB = B->getPos();
@@ -36,10 +37,11 @@ bool CheckCollide_RR(AABB *a, AABB *b)
 //Circle-Rect
 bool CheckCollide_CR(AABB *a, AABB *b)
 {
+	
 	CircleAABB *A = (CircleAABB*)a;
 	RectAABB *B = (RectAABB*)b;
 
-	//B->setSIze(10, 30);
+	
 	std::pair<float, float> posA = A->getPos(), posB = B->getPos();
 	std::pair<float, float> sizeB = B->getSize();
 	std::pair<float, float> diff = posA - posB;
@@ -53,6 +55,7 @@ bool CheckCollide_CR(AABB *a, AABB *b)
 //Rect-Circle
 bool CheckCollide_RC(AABB *a, AABB *b)
 {
+	
 	return CheckCollide_CR(b, a);
 }
 //CIrcle-Circle

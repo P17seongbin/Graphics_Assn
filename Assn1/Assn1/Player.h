@@ -12,7 +12,7 @@ public:
 	std::pair<float, float> getSize() { return size; }
 	void updateAABB()
 	{
-	
+		collidebox[0]->setPos(getPos().first, getPos().second);
 	}
 	
 private:

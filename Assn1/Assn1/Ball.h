@@ -8,7 +8,7 @@ public:
 	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override//지금은 충돌 안함
 	{
 		//printf("1");
-		//setSpeed((-1)*speed.first,(-1)* speed.second);
+		setSpeed((-1)*speed.first,speed.second);
 	}
 	void setRadius(float r) { radius = r; }
 	float getRadius() { return radius; }
@@ -18,7 +18,7 @@ public:
 
 	void updateAABB()
 	{
-		//collidebox[0]->setPos(getPos().first, getPos().second);
+		collidebox[0]->setPos(getPos().first, getPos().second);
 	}
 	
 private:

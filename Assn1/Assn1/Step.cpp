@@ -29,7 +29,7 @@ void GameManager::Step(int dt)
 	{
 		it->second->Step(dt);
 	}
-
+	
 	//3. 죽은 오브젝트에 대한 데이터를 말소
 	//ObjectList.erase(std::remove_if(ObjectList.begin(), ObjectList.end(), [](std::pair<std::string, Object*> &v) { return v.second->isDestroy(); }));
 	//ObjectList.shrink_to_fit();

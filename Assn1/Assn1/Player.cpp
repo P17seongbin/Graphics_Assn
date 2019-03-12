@@ -46,6 +46,6 @@ void Player::Step(int dt)
 		}
 		else setSpeed(0, 0);
 	}
-	updateAABB();
+	collidebox[0]->setPos(getPos().first, getPos().second);
 	Move(dt);
 }

@@ -21,8 +21,9 @@ class AABB
 public:
 	const AABBType getType() { return type; }//AABB의 타입을 리턴
 	bool IsCollide(AABB *other) {
-		std::cout << other->getType();
-		return collidechecker[other->getType()];
+		//std::cout << other->getType();
+		//printf("%d ", collidechecker[other->getType()](this,other));
+		return collidechecker[other->getType()](this,other);
 	};//다른 AABB와 충돌했는지 검사합니다
 	const std::pair<float, float> getPos() { return pos; }
 	void setPos(float x, float y) { pos.first = x; pos.second = y; }

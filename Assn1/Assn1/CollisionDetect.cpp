@@ -14,6 +14,7 @@ void GameManager::calCollide()
 	//모든 오브젝트의 충돌 판정을 검사합니다.
 	for (std::vector<std::pair<std::string, Object*>>::iterator lhs = ObjectList.begin(); lhs != ObjectList.end(); lhs++)
 	{
+		
 		for (std::vector<std::pair<std::string, Object*>>::iterator rhs = ObjectList.begin(); rhs != ObjectList.end(); rhs++)
 		{
 			if (lhs->first != rhs->first)//두 오브젝트가 다른건가요?
@@ -25,8 +26,10 @@ void GameManager::calCollide()
 					{
 						for (std::vector<AABB*>::iterator rc = rhs.begin(); rc != rhs.end(); rc++)
 						{
+							//printf("%f", (*rc)->getPos().first);
 							if ((*lc)->IsCollide((*rc)))
 							{
+								//printf("1");
 								info.collided = true;
 								info.self = *lc;
 								info.other = *rc;
