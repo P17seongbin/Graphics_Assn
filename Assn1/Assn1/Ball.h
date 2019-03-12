@@ -7,8 +7,23 @@ public:
 	Ball();
 	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override//지금은 충돌 안함
 	{
-		//printf("1");
-		setSpeed((-1)*speed.first,speed.second);
+		if (pos.second > 30)
+		{
+			if (speed.second <0)
+				setSpeed(speed.first, -speed.second);
+		}
+		if (pos.first <= other->getPos().first)
+		{
+			if (speed.first > 0)
+				setSpeed(-speed.first, speed.second);			
+		}
+		if (pos.first >= other->getPos().first+15)
+		{
+			if (speed.first < 0)
+				setSpeed(-speed.first, speed.second);
+			
+		}
+	
 	}
 	void setRadius(float r) { radius = r; }
 	float getRadius() { return radius; }

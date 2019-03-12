@@ -37,11 +37,9 @@ bool CheckCollide_RR(AABB *a, AABB *b)
 //Circle-Rect
 bool CheckCollide_CR(AABB *a, AABB *b)
 {
-	
 	CircleAABB *A = (CircleAABB*)a;
 	RectAABB *B = (RectAABB*)b;
 
-	
 	std::pair<float, float> posA = A->getPos(), posB = B->getPos();
 	std::pair<float, float> sizeB = B->getSize();
 	std::pair<float, float> diff = posA - posB;
@@ -49,16 +47,20 @@ bool CheckCollide_CR(AABB *a, AABB *b)
 		std::make_pair(clamp(diff.first,(-0.5f)*sizeB.first,(0.5f)*sizeB.first),clamp(diff.second, (-0.5f)*sizeB.second, (0.5f)*sizeB.second));
 	std::pair<float, float> closest = posB + clamped;
 	diff = closest - posA;
-	return sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius();
+	//printf("%d",sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius());
+	//return sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius();
+	
+	return (posA.first >= posB.first - 5 && posA.first <= posB.first + 20 && posA.second <= 35);
+		
 
+	//printf("%d", ((sizeB.first + 1) > posA.second) && (posB.first - 1 < posA.first) && (posB.first + sizeB.second + 1 > posA.first));
+	//return ((sizeB.first + 1) > posA.second) && (posB.first-1<posA.first) &&(posB.first+sizeB.second+1>posA.first);
 }
 //Rect-Circle
 bool CheckCollide_RC(AABB *a, AABB *b)
 {
-	
 	return CheckCollide_CR(b, a);
-}
-//CIrcle-Circle
+}//CIrcle-Circle
 bool CheckCollide_CC(AABB *a,AABB *b)
 {
 	CircleAABB *A = (CircleAABB*)a;

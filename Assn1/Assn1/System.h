@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #define SPEED 0.1
-#define TIMEPERFRAME 16//단위:ms
+#define TIMEPERFRAME 5//단위:ms
 
 class GameManager
 {

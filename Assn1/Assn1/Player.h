@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#define PI 3.14151
 
 class Player : public Object
 {
@@ -17,5 +18,7 @@ public:
 	
 private:
 	std::pair<float, float> size;
+	float head_rad;
+	float body;
 	bool is_1P;
 };

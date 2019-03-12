@@ -3,8 +3,9 @@
 Ball::Ball()
 {
 	tag = "Ball";
-	setRadius(1.0);
-	setSpeed(0.05, 0.05);
+	setRadius(5.0);
+	setSpeed(0.10, 0.10);
+	setPos(70, 50);
 	collidebox.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
 void Ball::Step(int dt) {
@@ -16,7 +17,7 @@ void Ball::Step(int dt) {
 
 void Ball::Draw()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	//(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 0.0, 0.0);
 	int i;
 	int triangleAmount = 20; //# of triangles used to draw circle

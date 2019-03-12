@@ -26,10 +26,8 @@ void GameManager::calCollide()
 					{
 						for (std::vector<AABB*>::iterator rc = rhs.begin(); rc != rhs.end(); rc++)
 						{
-							//printf("%f", (*rc)->getPos().first);
 							if ((*lc)->IsCollide((*rc)))
 							{
-								//printf("1");
 								info.collided = true;
 								info.self = *lc;
 								info.other = *rc;
