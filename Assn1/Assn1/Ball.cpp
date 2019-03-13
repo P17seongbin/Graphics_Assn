@@ -1,5 +1,6 @@
 #include "Ball.h"
 #define PI 3.1415
+
 Ball::Ball()
 {
 	tag = "Ball";
@@ -9,12 +10,32 @@ Ball::Ball()
 	collidebox.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
 void Ball::Step(int dt) {
-	if (pos.first < 0 || pos.first > 100) speed = std::make_pair(speed.first * -1, speed.second);
-	if (pos.second < 0 || pos.second > 100)  speed = std::make_pair(speed.first, speed.second * -1);
+
+	if (pos.first < radius || pos.first > 100-radius) speed = std::make_pair(speed.first * -1, speed.second);
+	if (pos.second < radius || pos.second > 100-radius)  speed = std::make_pair(speed.first, speed.second * -1);
 	updateAABB();
 	Move(dt);
 }
 
+void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
+{
+	
+		if (pos.second > other->getSize().first)
+		{
+			if (speed.second < 0)
+				setSpeed(speed.first, -speed.second);
+		}
+		if (pos.first <= other->getPos().first)
+		{
+			if (speed.first > 0)
+				setSpeed(-speed.first, speed.second);
+		}
+		if (pos.first >= (other->getPos().first) + (other->getSize().second))
+		{
+			if (speed.first < 0)
+				setSpeed(-speed.first, speed.second);
+		}
+}
 void Ball::Draw()
 {
 	//(GL_COLOR_BUFFER_BIT);

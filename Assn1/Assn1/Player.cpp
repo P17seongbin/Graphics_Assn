@@ -13,10 +13,22 @@ Player::Player(KeyHandler *handler,bool _1P)
 	center_y = size.first - head_rad;
 	setSpeed(0, 0);
 	is_1P = _1P;
+	min = (!is_1P) * 50;
+	max = min + 50 - size.second;
 	collidebox.push_back(new RectAABB(0,0,body,15));
 	collidebox.push_back(new CircleAABB(head_rad, 0, 0));
 }
 
+void Player::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
+{
+	/*if (other->tag == "Ball")
+	{
+		if (is_1P)
+			setminMax(2.0*other->getRadius(), 50 - 2.0*(other->getRadius()));
+		else
+			setminMax((50 + 2.0 * (other->getRadius())), (100 - 2.0*(other->getRadius())));
+	}*/
+}
 void Player::Draw()
 {
 	int i;
@@ -29,7 +41,7 @@ void Player::Draw()
 	glVertex2f(pos.first, pos.second + body);
 	glVertex2f(pos.first + size.second, pos.second + body);
 	glVertex2f(pos.first + size.second, pos.second);
-	//GLfloat radius = 0.8f; //radius
+
 	glEnd();
 
 	glBegin(GL_TRIANGLE_FAN);
@@ -71,6 +83,14 @@ void Player::Step(int dt)
 		}
 		else setSpeed(0, 0);
 	}
+	
+	center_x = pos.first + size.second / 2;
+	center_y = size.first - head_rad;
+
+	if (pos.first < min)
+		setPos(min, 0);
+	if (pos.first > max)
+		setPos(max, 0);
 	updateAABB();
 	Move(dt);
 }

@@ -38,13 +38,21 @@ public:
 	const std::pair<float, float> getAccel() { return accel; }
 	void setAccel(float ax, float ay) { accel = std::make_pair(ax, ay);}
 
+	void setSize(float x, float y) { size = std::make_pair(x, y); }
+	std::pair<float, float> getSize() { return size; }
+	
+	void setRadius(float r) { radius = r; }
+	float getRadius() { return radius; }
+
 	bool isDestroy() { return destroyed; }
 	void setDestroy(bool v) { destroyed = v; }
 
 protected:
 		std::pair<float, float> pos;
+		std::pair<float, float> size;
 		std::pair<float, float> speed;
 		std::pair<float, float> accel;
+		float radius;
 		bool destroyed = false;//이 오브젝트가 수명을 다했는지를 나타냅니다. 
 		KeyHandler* keyhandler;
 };

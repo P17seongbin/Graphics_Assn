@@ -30,9 +30,19 @@ bool CheckCollide_RR(AABB *a, AABB *b)
 	std::pair<float, float> posA = A->getPos(), posB = B->getPos();
 	std::pair<float, float> sizeA = A->getSize(), sizeB = B->getSize();
 
-	bool colX = posA.first + sizeA.first >= posB.first && posB.first + sizeB.first >= posB.first;
-	bool colY = posA.second + sizeA.second >= posB.second && posB.second + sizeB.second >= posB.second;
-	return colX && colY;
+	if (posA.first > posB.first)
+		return CheckCollide_RR(b,a);
+	else
+	{
+		//printf("%d", (posB.first < posA.first + sizeA.first));
+		return (posB.first < posA.first + sizeA.second);
+	}
+	//bool colX = posA.first + sizeA.first >= posB.first && posB.first + sizeB.first >= posB.first;
+	//bool colY = posA.second + sizeA.second >= posB.second && posB.second + sizeB.second >= posB.second;
+	/*
+	printf("%d", colX &&colY);
+	return colX && colY;*/
+	
 }
 //Circle-Rect
 bool CheckCollide_CR(AABB *a, AABB *b)
@@ -42,15 +52,17 @@ bool CheckCollide_CR(AABB *a, AABB *b)
 
 	std::pair<float, float> posA = A->getPos(), posB = B->getPos();
 	std::pair<float, float> sizeB = B->getSize();
-	std::pair<float, float> diff = posA - posB;
+	float radius = A->getRadius();
+	/*std::pair<float, float> diff = posA - posB;
 	std::pair<float,float> clamped = 
 		std::make_pair(clamp(diff.first,(-0.5f)*sizeB.first,(0.5f)*sizeB.first),clamp(diff.second, (-0.5f)*sizeB.second, (0.5f)*sizeB.second));
 	std::pair<float, float> closest = posB + clamped;
 	diff = closest - posA;
 	//printf("%d",sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius());
 	//return sqrt(pow(diff.first, 2) + pow(diff.second, 2)) < A->getRadius();
-	
-	return (posA.first >= posB.first - 5 && posA.first <= posB.first + 20 && posA.second <= 35);		
+	*/
+	return ((posA.first >= posB.first - radius) && (posA.first <= posB.first + radius+sizeB.second)
+		&& (posA.second <= sizeB.first+radius));
 }
 
 //Rect-Circle

@@ -9,22 +9,22 @@ public:
 	Player(KeyHandler* handler,bool _1P);
 	void Step(int dt) override;
 	void Draw() override;
-	void setSize(float x, float y) { size = std::make_pair(x, y); }
-	std::pair<float, float> getSize() { return size; }
+	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override;
 	void updateAABB()
 	{
-		
-		center_x = pos.first + size.second / 2;
-		center_y = size.first - head_rad;
 		collidebox[1]->setPos(center_x, center_y);
 		collidebox[0]->setPos(pos.first, pos.second);
 	}
+	void setminMax(float m, float M) { min = m; max = M; }
+	void setMin(float val) { min = val; }
 	
 private:
-	std::pair<float, float> size;
+	//std::pair<float, float> size;
 	float head_rad;
 	float body;
 	float center_x;
 	float center_y;
+	float min;
+	float max;
 	bool is_1P;
 };

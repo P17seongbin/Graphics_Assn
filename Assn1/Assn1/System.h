@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Ball.h"
 #include "Player.h"
+#include "Net.h"
 #include <vector>
 #include <string>
 #define SPEED 0.1
@@ -18,11 +19,13 @@ public:
 	void Draw();
 	const std::vector<std::pair<std::string, Object*>> getObjectList() { return ObjectList; }
 /*==========================================================*/
-	void setKey(int x) { keyinput = x; }//key input
-	int getKey() { return keyinput; }
+	//void setKey(int x) { keyinput = x; }//key input
+	//int getKey() { return keyinput; }
 private:
 	std::vector<std::pair<std::string, Object*>> ObjectList;
+	int score_1=0;
+	int score_2 = 0;
 	int l;
-	int keyinput;
+	//int keyinput;
 
 };
