@@ -9,6 +9,14 @@ GameManager::GameManager()
 	//Init AABB's Collider Function Point vector
 	l = 0;
 }
+void drawBitmapText(std::string string, float x, float y, float z)
+{
+	glRasterPos2f(x, y);
+	for (int i=0;i<string.length();i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, string[i]);
+	}
+}
 void GameManager::Draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -16,6 +24,11 @@ void GameManager::Draw()
 	{
 		it->second->Draw();
 	}
+	glColor3f(0, 0, 0);//넘 작음,차라리 7-segment를 만들깡
+	drawBitmapText(std::to_string(score_1),10,80,0); 
+	drawBitmapText(std::to_string(score_2), 88, 80, 0);
+	
+
 	glutPostRedisplay();
 	glutSwapBuffers();
 }
@@ -25,7 +38,6 @@ void GameManager::Step(int dt)
 	Object* ball = getObjectList()[2].second;;
 	std::pair<float,float> pos=ball->getPos();
 	
-
 	calCollide();
 	//2. 각 Object의 Step을 호출
 	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
@@ -38,8 +50,6 @@ void GameManager::Step(int dt)
 		if (pos.first < 50)
 			score_2++;
 		else score_1++;
-
-		printf("/%d %d", score_1, score_2);
 	}
 	
 	//3. 죽은 오브젝트에 대한 데이터를 말소
