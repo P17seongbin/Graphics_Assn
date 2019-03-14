@@ -160,14 +160,17 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="AABBCollideChecker.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Register.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Net.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Step.cpp" />
     <ClCompile Include="CollisionDetect.cpp" />
+    <ClCompile Include="WindowRelated.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Assn1.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="KeyInputHandler.hpp" />
     <ClInclude Include="Object.h" />
