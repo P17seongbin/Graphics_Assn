@@ -12,8 +12,9 @@ class GameManager
 {
 public:
 	GameManager();
-	void addObject(std::string tag, Object* t) ;
+	void addObject(std::string tag, Object* t);
 	bool removeObject(std::string tag);
+	Object* findObjectwithTag(std::string tag);
 	void calCollide();
 	void Step(int dt);
 	void Draw();

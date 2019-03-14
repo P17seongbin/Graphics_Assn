@@ -13,8 +13,7 @@ void GameManager::calCollide()
 {
 	//모든 오브젝트의 충돌 판정을 검사합니다.
 	for (std::vector<std::pair<std::string, Object*>>::iterator lhs = ObjectList.begin(); lhs != ObjectList.end(); lhs++)
-	{
-		
+	{		
 		for (std::vector<std::pair<std::string, Object*>>::iterator rhs = ObjectList.begin(); rhs != ObjectList.end(); rhs++)
 		{
 			if (lhs->first != rhs->first)//두 오브젝트가 다른건가요?
@@ -57,6 +56,15 @@ bool GameManager::removeObject(std::string tag)
 	}
 }
 
+Object * GameManager::findObjectwithTag(std::string tag)
+{
+	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
+	{
+		if (it->first == tag)
+			return it->second;
+	}
+	return nullptr;
+}
 void GameManager::addObject(std::string tag, Object* t) {
 	ObjectList.push_back(std::make_pair(tag, t));
 	l++;

@@ -18,8 +18,7 @@ void Ball::Step(int dt) {
 }
 
 void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
-{
-	
+{	
 		if (pos.second > other->getSize().first)
 		{
 			if (speed.second < 0)
@@ -44,7 +43,7 @@ void Ball::Draw()
 	int triangleAmount = 20; //# of triangles used to draw circle
 
 	//GLfloat radius = 0.8f; //radius
-	GLfloat twicePi = 2.0f * PI;
+	GLfloat twicePi = RADIUS * PI;
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(pos.first, pos.second); // center of circle
