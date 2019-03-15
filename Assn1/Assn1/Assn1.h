@@ -26,3 +26,4 @@ void InitScene(void);
 void RegisterCallback();
 void Control2P();
 void RegisterObject(GameManager* GM, KeyHandler* keyhandler);
+void PrintHelpText();

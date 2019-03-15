@@ -92,9 +92,6 @@ void GameManager::Step(int dt)
 		newy += rand() % (WIN_VER / 2-10);//random y-start-position
 		ball->setPos(WIN_HOR/2, newy);
 	}
-	
-	//3. 죽은 오브젝트에 대한 데이터를 말소
-	//ObjectList.erase(std::remove_if(ObjectList.begin(), ObjectList.end(), [](std::pair<std::string, Object*> &v) { return v.second->isDestroy(); }));
-	//ObjectList.shrink_to_fit();
+
 	Draw();
 }

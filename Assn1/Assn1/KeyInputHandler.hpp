@@ -10,6 +10,7 @@ public:
 	}
 	void AsciiKeyRelease(unsigned char key, int x, int y)
 	{
+		if(key != ' ')//Enter means start, so It should not be released
 		AsciiKeyPressed[key] = false;
 	}
 	void SpecialKeyPress(int key, int x, int y)
