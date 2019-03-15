@@ -1,9 +1,7 @@
-키보드 입력 처리를 위해 GLFW library를 추가로 Install
+피카츄 배구를 모방한 2D 핑퐁 게임입니다.
 
-Class 설명
-Object -> 각 오브젝트가 반드시 구현해야 하는 함수를 선언한 abstract class 입니다.
-AABB -> 각 오브젝트의 충돌 범위를 나타내는 AABB의 abstract class 입니다.
+왼쪽에 있는 Player를 조종해서 반대쪽 진영에 공을 떨어트리면 됩니다. 
 
-Function 설명
+z키를 눌러 왼쪽으로, c키를 눌러 오른쪽으로 이동 가능합니다.
 
-bool GetKey(string key) -> 지난 프레임에 key가 입력되었는지를 확인합니다.
+배구 규칙을 따라 먼저 15점을 득점하면 승리합니다. 이때 게임을 다시 하기 위해서는 게임을 껐다가 켜야 합니다.
