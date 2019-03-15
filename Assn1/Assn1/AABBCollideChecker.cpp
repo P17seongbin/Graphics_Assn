@@ -34,7 +34,6 @@ bool CheckCollide_RR(AABB *a, AABB *b)
 		return CheckCollide_RR(b,a);
 	else
 	{
-		//printf("%d", (posB.first < posA.first + sizeA.first));
 		return (posB.first < posA.first + sizeA.second);
 	}	
 }

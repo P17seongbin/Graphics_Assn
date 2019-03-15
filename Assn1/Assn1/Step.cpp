@@ -20,7 +20,7 @@ void drawBitmapText(std::string string, float x, float y, float z)
 }
 void GameManager::Draw()
 {
-	int max = 1;
+	int max = 15;
 	int size = 30;
 	int winner = 1;
 
@@ -89,7 +89,7 @@ void GameManager::Step(int dt)
 			ball->setSpeed(-SPEED, -SPEED);
 		}
 
-		newy += rand() % (WIN_VER / 2-1);//random y-start-position
+		newy += rand() % (WIN_VER / 2-10);//random y-start-position
 		ball->setPos(WIN_HOR/2, newy);
 	}
 	
