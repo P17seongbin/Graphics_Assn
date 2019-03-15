@@ -3,7 +3,7 @@
 #include <vector>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-
+#define SPEED 0.1
 #pragma once
 
 class Object

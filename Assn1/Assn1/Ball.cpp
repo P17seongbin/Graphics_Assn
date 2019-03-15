@@ -5,8 +5,8 @@
 Ball::Ball()
 {
 	tag = "Ball";
-	setRadius(5.0);
-	setSpeed(0.050, 0.050);
+	setRadius(RADIUS);
+	setSpeed(SPEED,SPEED);
 	setPos(70, 50);
 	collidebox.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
@@ -63,15 +63,12 @@ void Ball::Draw()
 	int i;
 	int triangleAmount = 20; //# of triangles used to draw circle
 
-	//GLfloat radius = 0.8f; //radius
-	GLfloat twicePi = RADIUS * PI;
-
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(pos.first, pos.second); // center of circle
 	for (i = 0; i <= triangleAmount; i++) {
 		glVertex2f(
-			pos.first + (radius * cos(i *  twicePi / triangleAmount)),
-			pos.second + (radius * sin(i * twicePi / triangleAmount))
+			pos.first + (radius * cos(i * 2 * PI / triangleAmount)),
+			pos.second + (radius * sin(i * 2 * PI / triangleAmount))
 		);
 	}
 	glEnd();

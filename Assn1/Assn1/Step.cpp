@@ -4,6 +4,7 @@
 #include "Player.h"
 #include <GL/glew.h>
 #include <GL/freeglut.h> 
+#include "Assn1.h"
 GameManager::GameManager()
 {
 	//Init AABB's Collider Function Point vector
@@ -24,10 +25,9 @@ void GameManager::Draw()
 	{
 		it->second->Draw();
 	}
-	glColor3f(0, 0, 0);//넘 작음,차라리 7-segment를 만들깡
+	glColor3f(0, 0, 0);
 	drawBitmapText(std::to_string(score_1),10,80,0); 
 	drawBitmapText(std::to_string(score_2), 88, 80, 0);
-	
 
 	glutPostRedisplay();
 	glutSwapBuffers();
@@ -47,9 +47,19 @@ void GameManager::Step(int dt)
 	
 	if (pos.second < ball->getRadius())
 	{
-		if (pos.first < 50)
+		if (pos.first < WIN_HOR / 2)
+		{
 			score_2++;
-		else score_1++;
+			ball->setSpeed(SPEED, -SPEED);
+		}
+		else
+		{
+			score_1++;
+			ball->setSpeed(-SPEED, -SPEED);
+		}
+
+		ball->setPos(WIN_HOR/2, 3*WIN_VER/4);
+	
 	}
 	
 	//3. 죽은 오브젝트에 대한 데이터를 말소

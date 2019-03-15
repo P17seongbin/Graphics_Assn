@@ -24,4 +24,5 @@ void SpecialKeyRelease(int key, int x, int y);
 void DrawCaller(); 
 void InitScene(void);
 void RegisterCallback();
+void Control2P();
 void RegisterObject(GameManager* GM, KeyHandler* keyhandler);
