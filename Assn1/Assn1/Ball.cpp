@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include <cmath>
 #define PI 3.1415
 
 Ball::Ball()
@@ -18,7 +19,10 @@ void Ball::Step(int dt) {
 }
 
 void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
-{	
+{
+	//selfAABB는 언제나 원형!
+	if (otherAABB->getType() == AABBType::Rect)
+	{
 		if (pos.second > other->getSize().first)
 		{
 			if (speed.second < 0)
@@ -34,6 +38,23 @@ void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 			if (speed.first < 0)
 				setSpeed(-speed.first, speed.second);
 		}
+	}
+	//원형 AABB에 충돌한 경우
+	else
+	{
+		std::pair<float, float> d = std::make_pair(selfAABB->getPos().first - otherAABB->getPos().first, selfAABB->getPos().second - otherAABB->getPos().second);
+		double angle = atan2(d.second, d.first);
+		double c = cos(angle);
+		double s = sin(angle);
+		if (c*speed.first + s * speed.second < 0)
+		{
+			std::pair<float, float> newspeed = std::make_pair(
+				(pow(s, 2) - pow(c, 2)) * speed.first - (2.0 * c * s * speed.second),
+				(pow(c, 2) - pow(s, 2)) * speed.second - (2.0 * c * s * speed.first));
+			std::cout << angle << " " << d.first << " " << d.second << " " << speed.first << " " << speed.second << std::endl;
+			setSpeed(newspeed.first, newspeed.second);
+		}
+	}
 }
 void Ball::Draw()
 {

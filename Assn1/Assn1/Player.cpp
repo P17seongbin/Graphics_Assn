@@ -21,13 +21,6 @@ Player::Player(KeyHandler *handler,bool _1P)
 
 void Player::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
-	/*if (other->tag == "Ball")
-	{
-		if (is_1P)
-			setminMax(2.0*other->getRadius(), 50 - 2.0*(other->getRadius()));
-		else
-			setminMax((50 + 2.0 * (other->getRadius())), (100 - 2.0*(other->getRadius())));
-	}*/
 }
 void Player::Draw()
 {
