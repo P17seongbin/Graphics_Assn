@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
-#define RADIUS 2.0f
+#define RADIUS 5.0
+
 class Ball : public Object
 {
 public:

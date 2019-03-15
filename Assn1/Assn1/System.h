@@ -5,7 +5,7 @@
 #include "Net.h"
 #include <vector>
 #include <string>
-#define SPEED 0.1
+
 #define TIMEPERFRAME 5//¥‹¿ß:ms
 
 class GameManager
