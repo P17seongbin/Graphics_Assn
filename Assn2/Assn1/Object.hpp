@@ -11,6 +11,10 @@ class Object
 public:
 	std::string tag;//이 오브젝트의 Tag를 나타냅니다.
 	std::vector<AABB*> collidebox;//충돌 범위를 나타냅니다.
+	Object()
+	{
+
+	}
 	void Move(int dt)
 	{
 		float dx = (speed.first * dt) + (accel.first * dt * dt / (float)2);
@@ -44,8 +48,23 @@ public:
 	void setRadius(float r) { radius = r; }
 	float getRadius() { return radius; }
 
+	void setParent(Object* p) { Parent = p; }
+	Object* getParent() { return Parent; }
+	
 	bool isDestroy() { return destroyed; }
 	void setDestroy(bool v) { destroyed = v; }
+
+	std::pair<float, float>  getGlobalPos()
+	{
+		if (Parent == NULL)
+			return pos;
+		else
+		{
+			std::pair<float, float> t = Parent->getGlobalPos();
+			return std::make_pair(pos.first + t.first, pos.second + t.second);
+		}
+	}
+	void addChild(Object* c) { ChildList.push_back(c); }
 
 protected:
 		std::pair<float, float> pos;
@@ -55,4 +74,6 @@ protected:
 		float radius;
 		bool destroyed = false;//이 오브젝트가 수명을 다했는지를 나타냅니다. 
 		KeyHandler* keyhandler;
+		std::vector<Object*> ChildList;//하위 캐릭터를 나타냅니다.
+		Object* Parent;
 };

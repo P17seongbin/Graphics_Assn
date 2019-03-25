@@ -1,18 +1,18 @@
 #pragma once
-#include "Object.h"
+#include "Object.hpp"
 #define PI 3.14151
 
 class Player : public Object
 {
 public:
-	//BAAAAAAAAAAAD code!
 	Player(KeyHandler* handler,bool _1P);
+
 	void Step(int dt) override;
 	void Draw() override;
 	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override;
 	void updateAABB()
 	{
-		collidebox[1]->setPos(center_x, center_y);
+		//collidebox[1]->setPos(center_x, center_y);
 		collidebox[0]->setPos(pos.first, pos.second);
 	}
 	void setminMax(float m, float M) { min = m; max = M; }
@@ -27,4 +27,36 @@ private:
 	float min;
 	float max;
 	bool is_1P;
+};
+
+class UnitCircle : public Object
+{
+public:
+	UnitCircle(float posx, float posy, float r, Object* parent) : Object()
+	{
+		boundary = new CircleAABB(r, 0, 0);
+		collidebox.push_back(boundary);
+		std::cout << r;
+		setPos(posx, posy);
+		setRadius(r);
+		Parent = parent;
+	}
+	UnitCircle();
+	void Step(int dt) override;
+	void Draw() override;
+	void updateAABB()
+	{
+		std::pair<float, float> gpos = getGlobalPos();
+		std::cout << gpos.first << " " << gpos.second << std::endl;
+		boundary->setPos(gpos.first, gpos.second);
+	}
+	void setRadius(float r)
+	{
+		Radius = r;
+		boundary->setRadius(r);
+	}
+	float getRadius() { return Radius; }
+private:
+	CircleAABB * boundary;
+	float Radius;
 };

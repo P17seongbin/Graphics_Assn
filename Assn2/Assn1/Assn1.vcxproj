@@ -173,7 +173,7 @@
     <ClInclude Include="Assn1.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="KeyInputHandler.hpp" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Object.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Net.h" />

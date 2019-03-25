@@ -52,6 +52,7 @@ void GameManager::Draw()
 	else {
 		for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
 		{
+			if (it->second->getParent() == NULL)
 			it->second->Draw();
 		}
 		glColor3f(0, 0, 0);
@@ -72,6 +73,7 @@ void GameManager::Step(int dt)
 	//2. 각 Object의 Step을 호출
 	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
 	{
+		if(it->second->getParent() == NULL)
 		it->second->Step(dt);
 	}
 	

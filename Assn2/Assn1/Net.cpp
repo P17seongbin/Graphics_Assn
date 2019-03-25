@@ -10,6 +10,7 @@ Net::Net(float x, float y, float height, float width)
 
 void Net::Draw()
 {
+	glPushMatrix();
 	glColor3f(1.0,1,1);
 	glBegin(GL_POLYGON);
 	glVertex2f(pos.first, pos.second);
@@ -17,4 +18,5 @@ void Net::Draw()
 	glVertex2f(pos.first + size.second, pos.second + size.first);
 	glVertex2f(pos.first + size.second, pos.second);
 	glEnd();
+	glPopMatrix();
 }

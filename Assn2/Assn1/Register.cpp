@@ -15,14 +15,31 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 {
 	Ball* ball = new Ball();
 	Player* player1 = new Player(keyhandler, true);
+
+	std::pair<float,float> size = player1->getSize();
+	float head_rad = 0.4*size.first / 2;
+
+	UnitCircle* h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player1);
+	player1->addChild(h);
+	GM->addObject("h1", h);
+
 	Player* player2 = new Player(keyhandler, false);
+
+	size = player2->getSize();
+	head_rad = 0.4*size.first / 2;
+	h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player2);
+	player2->addChild(h);
+	GM->addObject("h2", h);
+
 	Net* net = new Net(49, 0, 25, 2);
+
 	player1->setPos(15, 0);
 	player2->setPos(65.0, 0);
 	GM->addObject("player1", player1);
 	GM->addObject("player2", player2);
 	GM->addObject("ball", ball);
 	GM->addObject("net", net);
+
 }
 
 void PrintHelpText()
