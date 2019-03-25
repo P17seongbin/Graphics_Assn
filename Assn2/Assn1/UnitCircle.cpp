@@ -12,10 +12,11 @@ void UnitCircle::Draw()
 {
 	glPushMatrix();
 	glTranslatef(pos.first, pos.second, 0);
+	glColor3f(color.r, color.g, color.b);
 	int triangleAmount = 20; //# of triangles used to draw circle
 
 	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(color.r, color.g, color.b);
+
 	glVertex2f(0, 0); // center of circle
 	for (int i = 0; i <= triangleAmount; i++) {
 		glVertex2f(

@@ -1,4 +1,4 @@
-#include "Assn1.h"
+#include "Assn2.h"
 
 void RegisterCallback()
 {
@@ -19,7 +19,7 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	Player* player1 = new Player(keyhandler, true);
 	player1->setColor(1, 1, 0.2);
 	std::pair<float,float> size = player1->getSize();
-	float head_rad = 0.4*size.first / 2;
+	float head_rad = 0.4 * size.first / 2;
 	UnitCircle* h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player1);
 	h->setColor(1, 1, 0.2);
 	player1->addChild(h);

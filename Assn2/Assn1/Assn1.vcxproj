@@ -162,7 +162,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Register.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Net.cpp" />
+    <ClCompile Include="UnitRect.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Step.cpp" />
     <ClCompile Include="CollisionDetect.cpp" />
@@ -171,7 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
-    <ClInclude Include="Assn1.h" />
+    <ClInclude Include="Assn2.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="KeyInputHandler.hpp" />
     <ClInclude Include="Object.hpp" />

@@ -45,9 +45,6 @@
     <ClCompile Include="Ball.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Net.cpp">
-      <Filter>소스 파일\Object</Filter>
-    </ClCompile>
     <ClCompile Include="WindowRelated.cpp">
       <Filter>소스 파일\Assn1</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
       <Filter>소스 파일\Assn1</Filter>
     </ClCompile>
     <ClCompile Include="UnitCircle.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitRect.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,10 +80,10 @@
     <ClInclude Include="Net.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Assn1.h">
+    <ClInclude Include="Object.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object.hpp">
+    <ClInclude Include="Assn2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
