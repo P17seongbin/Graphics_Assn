@@ -1,10 +1,10 @@
 #pragma once
 #include "Object.hpp"
 
-class Net : public Object
+class UnitRect : public Object
 {
 public:
-	Net(float x, float y, float height, float width);
+	UnitRect(float x, float y, float height, float width);
 	void Step(int dt) override {}
 	void Draw() override;
 };

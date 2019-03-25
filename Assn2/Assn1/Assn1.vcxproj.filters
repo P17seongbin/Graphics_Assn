@@ -57,6 +57,9 @@
     <ClCompile Include="Register.cpp">
       <Filter>소스 파일\Assn1</Filter>
     </ClCompile>
+    <ClCompile Include="UnitCircle.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System.h">

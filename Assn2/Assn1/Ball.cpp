@@ -59,7 +59,7 @@ void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 void Ball::Draw()
 {
 	//(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 0.0, 0.0);
+	glColor3f(color.r, color.g, color.b);
 	int i;
 	int triangleAmount = 20; //# of triangles used to draw circle
 

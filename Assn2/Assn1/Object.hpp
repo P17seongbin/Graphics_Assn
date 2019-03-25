@@ -6,6 +6,13 @@
 #define SPEED 0.1
 #pragma once
 
+typedef struct C3
+{
+	float r;
+	float g;
+	float b;
+} Color3;
+
 class Object
 {
 public:
@@ -65,7 +72,10 @@ public:
 		}
 	}
 	void addChild(Object* c) { ChildList.push_back(c); }
-
+	void setColor(float r, float g, float b) { color.r = r; color.b = b; color.g = g; }
+	float getcolorR() { return color.r; }
+	float getcolorG() { return color.g; }
+	float getcolorB() { return color.b; }
 protected:
 		std::pair<float, float> pos;
 		std::pair<float, float> size;
@@ -76,4 +86,5 @@ protected:
 		KeyHandler* keyhandler;
 		std::vector<Object*> ChildList;//하위 캐릭터를 나타냅니다.
 		Object* Parent;
+		Color3 color;
 };

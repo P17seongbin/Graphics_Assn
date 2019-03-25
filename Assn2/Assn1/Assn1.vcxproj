@@ -166,6 +166,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Step.cpp" />
     <ClCompile Include="CollisionDetect.cpp" />
+    <ClCompile Include="UnitCircle.cpp" />
     <ClCompile Include="WindowRelated.cpp" />
   </ItemGroup>
   <ItemGroup>

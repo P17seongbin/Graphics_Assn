@@ -14,24 +14,28 @@ void RegisterCallback()
 void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 {
 	Ball* ball = new Ball();
-	Player* player1 = new Player(keyhandler, true);
+	ball->setColor(1, 0, 0);
 
+	Player* player1 = new Player(keyhandler, true);
+	player1->setColor(1, 1, 0.2);
 	std::pair<float,float> size = player1->getSize();
 	float head_rad = 0.4*size.first / 2;
-
 	UnitCircle* h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player1);
+	h->setColor(1, 1, 0.2);
 	player1->addChild(h);
 	GM->addObject("h1", h);
 
 	Player* player2 = new Player(keyhandler, false);
-
+	player2->setColor(1, 1, 0.2);
 	size = player2->getSize();
 	head_rad = 0.4*size.first / 2;
 	h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player2);
+	h->setColor(1, 1, 0.2);
 	player2->addChild(h);
 	GM->addObject("h2", h);
 
-	Net* net = new Net(49, 0, 25, 2);
+	UnitRect* net = new UnitRect(49, 0, 25, 2);
+	net->setColor(1, 0, 1);
 
 	player1->setPos(15, 0);
 	player2->setPos(65.0, 0);
