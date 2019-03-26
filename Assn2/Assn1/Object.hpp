@@ -11,13 +11,13 @@ typedef struct C3
 	float r;
 	float g;
 	float b;
-} Color3;
+} Vector3;
 
 class Object
 {
 public:
 	std::string tag;//이 오브젝트의 Tag를 나타냅니다.
-	std::vector<AABB*> collidebox;//충돌 범위를 나타냅니다.
+	std::vector<AABB*> collidelist;//충돌 범위를 나타냅니다.
 	Object()
 	{
 
@@ -30,6 +30,8 @@ public:
 	}
 	virtual void Draw()
 	{
+		glPushMatrix();
+		glTranslatef(pos.first, pos.second, 0);
 	}//이 오브젝트를 화면 상에 그리는 함수입니다.모든 오브젝트에 대해 구현해야만 합니다.
 	virtual void Step(int dt)
 	{
@@ -86,5 +88,5 @@ protected:
 		KeyHandler* keyhandler;
 		std::vector<Object*> ChildList;//하위 캐릭터를 나타냅니다.
 		Object* Parent;
-		Color3 color;
+		Vector3 color;
 };

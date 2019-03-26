@@ -14,18 +14,18 @@ Player::Player(KeyHandler *handler,bool _1P)
 	is_1P = _1P;
 	min = (!is_1P) * 50;
 	max = min + 50 - size.second;
-	collidebox.push_back(new RectAABB(0,0,body,15));
+	collidelist.push_back(new RectAABB(0,0,body,15));
 }
 
 void Player::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
 }
 
-void Player::Draw()
+void Player::Draw() 
 {
+	Object::Draw();
 	//glClear(GL_COLOR_BUFFER_BIT);
-	glPushMatrix();
-	glTranslatef(pos.first, pos.second, 0);
+
 	glColor3f(color.r, color.g, color.b);
 
 	glBegin(GL_POLYGON);
@@ -45,9 +45,9 @@ void Player::Step(int dt)
 {
 	if (is_1P)
 	{
-		if (keyhandler->isAsciiKeyPressed('z'))
+		if (keyhandler->isAsciiKeyPressed('z') || keyhandler->isAsciiKeyPressed('Z'))
 			setSpeed(-1 * SPEED, 0);
-		else if (keyhandler->isAsciiKeyPressed('c'))
+		else if (keyhandler->isAsciiKeyPressed('c') || keyhandler->isAsciiKeyPressed('C'))
 			setSpeed(SPEED, 0);
 		else setSpeed(0, 0);
 	}

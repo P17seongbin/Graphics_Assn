@@ -65,7 +65,7 @@ void GameManager::Draw()
 void GameManager::Step(int dt)
 {
 	//1. 오브젝트 충돌 판정
-	Object* ball = getObjectList()[2].second;;
+	Object* ball = findObjectwithTag("ball");
 	std::pair<float,float> pos=ball->getPos();
 	float newy = WIN_VER/2;
 

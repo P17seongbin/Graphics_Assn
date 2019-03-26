@@ -4,7 +4,7 @@ UnitRect::UnitRect(float x, float y, float height, float width)
 {
 	setPos(x, y);
 	setSize(height,width);
-	collidebox.push_back(new RectAABB(x, y, height, width));
+	collidelist.push_back(new RectAABB(x, y, height, width));
 }
 
 void UnitRect::Draw()

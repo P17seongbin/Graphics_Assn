@@ -13,7 +13,7 @@ public:
 	void updateAABB()
 	{
 		//collidebox[1]->setPos(center_x, center_y);
-		collidebox[0]->setPos(pos.first, pos.second);
+		collidelist[0]->setPos(pos.first, pos.second);
 	}
 	void setminMax(float m, float M) { min = m; max = M; }
 	void setMin(float val) { min = val; }
@@ -35,7 +35,7 @@ public:
 	UnitCircle(float posx, float posy, float r, Object* parent) : Object()
 	{
 		boundary = new CircleAABB(r, 0, 0);
-		collidebox.push_back(boundary);
+		collidelist.push_back(boundary);
 		std::cout << r;
 		setPos(posx, posy);
 		setRadius(r);

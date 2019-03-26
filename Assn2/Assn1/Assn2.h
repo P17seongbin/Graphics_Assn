@@ -5,7 +5,7 @@
 #include "System.h"
 #include "Player.h"
 #include "Ball.h"
-//물리엔진과 무관한, 순수히 Assn1을 위한 헤더파일이나 함수 등을 선언하는 헤더입니다.
+//물리엔진과 무관한, 순수히 Assn2을 위한 헤더파일이나 함수 등을 선언하는 헤더입니다.
 #define MAX(x,y) (x > y ? x : y)
 #define MIN(x,y) (x > y ? y : x)
 #define WIN_HOR 100

@@ -8,7 +8,7 @@ Ball::Ball()
 	setRadius(RADIUS);
 	setSpeed(SPEED,SPEED);
 	setPos(70, 50);
-	collidebox.push_back(new CircleAABB(radius,pos.first,pos.second));
+	collidelist.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
 void Ball::Step(int dt) {
 
@@ -17,7 +17,6 @@ void Ball::Step(int dt) {
 	updateAABB();
 	Move(dt);
 }
-
 void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
 	//selfAABB는 언제나 원형!
@@ -58,18 +57,18 @@ void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 }
 void Ball::Draw()
 {
-	//(GL_COLOR_BUFFER_BIT);
+	Object::Draw();
 	glColor3f(color.r, color.g, color.b);
-	int i;
 	int triangleAmount = 20; //# of triangles used to draw circle
-
 	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(pos.first, pos.second); // center of circle
-	for (i = 0; i <= triangleAmount; i++) {
+
+	glVertex2f(0,0); // center of circle
+	for (int i = 0; i <= triangleAmount; i++) {
 		glVertex2f(
-			pos.first + (radius * cos(i * 2 * PI / triangleAmount)),
-			pos.second + (radius * sin(i * 2 * PI / triangleAmount))
+			(radius * cos(i * 2 * PI / triangleAmount)),
+			(radius * sin(i * 2 * PI / triangleAmount))
 		);
 	}
 	glEnd();
+	glPopMatrix();
 }

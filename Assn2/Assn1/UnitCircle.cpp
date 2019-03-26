@@ -28,7 +28,7 @@ void UnitCircle::Draw()
 
 	glBegin(GL_POINTS);
 	glColor3f(0, 0, 0);
-	glPointSize(5);
+	glPointSize(20);
 	glVertex2f(-1.5, 2);
 	glVertex2f(1.5, 2);
 	glEnd();

@@ -12,7 +12,7 @@ public:
 
 	void updateAABB()
 	{
-		collidebox[0]->setPos(pos.first, pos.second);
+		collidelist[0]->setPos(pos.first, pos.second);
 	}
 private:
 
