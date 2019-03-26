@@ -36,7 +36,7 @@ public:
 	{
 		boundary = new CircleAABB(r, 0, 0);
 		collidelist.push_back(boundary);
-		std::cout << r;
+		//std::cout << r;
 		setPos(posx, posy);
 		setRadius(r);
 		Parent = parent;
@@ -47,7 +47,7 @@ public:
 	void updateAABB()
 	{
 		std::pair<float, float> gpos = getGlobalPos();
-		std::cout << gpos.first << " " << gpos.second << std::endl;
+		//std::cout << gpos.first << " " << gpos.second << std::endl;
 		boundary->setPos(gpos.first, gpos.second);
 	}
 	void setRadius(float r)
@@ -59,4 +59,19 @@ public:
 private:
 	CircleAABB * boundary;
 	float Radius;
+};
+
+class UnitTri : public Object
+{
+public:
+	UnitTri(float posx, float posy, Object* parent) :Object()
+	{
+		setPos(posx, posy);
+		Parent = parent;
+		setSize(12, 3);
+	}
+	UnitTri();
+	void Step(int dt) override;
+	void Draw() override;
+	//updateAABB not needed
 };

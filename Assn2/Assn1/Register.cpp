@@ -25,6 +25,16 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	player1->addChild(h);
 	GM->addObject("h1", h);
 
+	UnitTri* t_branch = new UnitTri(0,0, player1);
+	t_branch->setColor(0.2, 0.2, 1);
+	player1->addChild(t_branch);
+	UnitTri* t_leaf = new UnitTri(-3, 5, t_branch);
+	t_leaf->setColor(1, 0.4, 0.6);
+	t_branch->addChild(t_leaf);
+
+	//don't need to add to game manager....do we?
+
+
 	Player* player2 = new Player(keyhandler, false);
 	player2->setColor(1, 1, 0.2);
 	size = player2->getSize();

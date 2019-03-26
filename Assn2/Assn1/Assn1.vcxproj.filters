@@ -63,6 +63,9 @@
     <ClCompile Include="Ear.hpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTri.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System.h">

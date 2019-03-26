@@ -50,7 +50,7 @@ void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 			std::pair<float, float> newspeed = std::make_pair(
 				(pow(s, 2) - pow(c, 2)) * speed.first - (2.0 * c * s * speed.second),
 				(pow(c, 2) - pow(s, 2)) * speed.second - (2.0 * c * s * speed.first));
-			std::cout << angle << " " << d.first << " " << d.second << " " << speed.first << " " << speed.second << std::endl;
+			//std::cout << angle << " " << d.first << " " << d.second << " " << speed.first << " " << speed.second << std::endl;
 			setSpeed(newspeed.first, newspeed.second);
 		}
 	}
