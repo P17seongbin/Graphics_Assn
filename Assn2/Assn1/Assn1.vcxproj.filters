@@ -60,6 +60,9 @@
     <ClCompile Include="UnitRect.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Ear.hpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System.h">
@@ -74,17 +77,17 @@
     <ClInclude Include="Ball.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="KeyInputHandler.hpp">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Net.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Assn2.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyInputHandler.hpp">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.hpp">
+      <Filter>소스 파일\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
