@@ -35,6 +35,7 @@ void GameManager::calCollide()
 						}
 					}
 					return info;
+
 				}(lhs->second->collidelist, rhs->second->collidelist);
 				if (isCollide.collided)
 					lhs->second->onCollide(rhs->second,isCollide.self,isCollide.other);//¤·¤·¤·

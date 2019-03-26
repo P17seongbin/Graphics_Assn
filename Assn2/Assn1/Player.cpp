@@ -20,6 +20,7 @@ Player::Player(KeyHandler *handler,bool _1P)
 
 void Player::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
+	//shake
 }
 
 void Player::Draw() 
@@ -36,9 +37,13 @@ void Player::Draw()
 	glVertex2f(size.second,0);
 
 	glEnd();
-
+	
 	for (int i = 0; i < ChildList.size(); i++) {
+		if (ChildList[i]->tag == "tail")
+			glRotatef(10, 0, 0, 1);
 		ChildList[i]->Draw();
+		if (ChildList[i]->tag == "tail")
+			glRotatef(-10, 0, 0, 1);
 	}
 	glPopMatrix();
 }
