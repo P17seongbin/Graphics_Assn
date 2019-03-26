@@ -35,6 +35,15 @@ void UnitCircle::Draw()
 		);
 	}
 	glEnd();
+	for (int i = 0; i < ChildList.size(); i++) {
+		ChildList[i]->Draw();
+	}
+
+	glPopMatrix();
+}
+
+void Face::Draw()//draw sunglasses
+{
 	glColor3f(0, 0, 0);
 	glRectf(-4, 1, 4, 1.5);
 	glRectf(-3.5, -1.5, -0.5, 1.5);
@@ -42,6 +51,4 @@ void UnitCircle::Draw()
 	glColor3f(1, 1, 1);
 	glRectf(-3, -0.5, -2.5, 1);
 	glRectf(1, -0.5, 1.5, 1);
-
-	glPopMatrix();
 }

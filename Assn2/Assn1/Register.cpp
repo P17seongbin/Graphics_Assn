@@ -16,6 +16,11 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	Ball* ball = new Ball();
 	ball->setColor(1, 0, 0);
 
+	Cloud* c = new Cloud(50, 80, 1);
+	GM->addObject("cloud1", c);
+	Cloud* cl = new Cloud(20, 50, -1);
+	GM->addObject("cloud2", cl);
+
 	Player* player1 = new Player(keyhandler, true);
 	player1->setColor(1, 1, 0.2);
 	std::pair<float,float> size = player1->getSize();
@@ -38,7 +43,12 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	t_leaf->setColor(0, 0, 0);
 	t_leaf->tag = "tail";
 	t_branch->addChild(t_leaf);
+	Face* g = new Face(0, 0, h);
+	g->tag = "sunglasses";
+	h->addChild(g);
+	
 
+	
 
 	//don't need to add to game manager....do we?
 

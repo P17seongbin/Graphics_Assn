@@ -77,3 +77,15 @@ public:
 	//updateAABB not needed
 
 };
+
+class Face : public Object
+{
+public:
+	Face(float x, float y, Object* parent) 
+	{
+		setPos(x, y);
+		Parent = parent;
+	}
+	Face();
+	void Draw() override;
+};
