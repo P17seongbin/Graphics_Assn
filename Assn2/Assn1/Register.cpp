@@ -25,19 +25,20 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	player1->addChild(h);
 	GM->addObject("h1", h);
 
-	UnitTri* t_branch = new UnitTri(0,0, player1);
-	t_branch->setColor(0.2, 0.2, 1);
-	t_branch->tag = "tail";
-	player1->addChild(t_branch);
-	UnitTri* ear = new UnitTri(size.second/4, size.first+head_rad, player1);
+	UnitTri* ear = new UnitTri(size.second / 2, size.first + head_rad, player1);
 	ear->setColor(1, 1, 0.2);
 	ear->tag = "ear";
 	ear->setSize(12, 6);
-	player1->addChild(ear);
+	player1->addChild(ear); 
+	UnitTri* t_branch = new UnitTri(0,0, player1);
+	t_branch->setColor(1, 1, 0.2);
+	t_branch->tag = "tail";
+	player1->addChild(t_branch);
 	UnitTri* t_leaf = new UnitTri(0, t_branch->getSize().first/2, t_branch);
-	t_leaf->setColor(1, 0.4, 0.6);
+	t_leaf->setColor(0, 0, 0);
 	t_leaf->tag = "tail";
 	t_branch->addChild(t_leaf);
+
 
 	//don't need to add to game manager....do we?
 

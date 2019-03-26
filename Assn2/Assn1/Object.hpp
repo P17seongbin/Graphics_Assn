@@ -78,11 +78,14 @@ public:
 		}
 	}
 	void addChild(Object* c) { ChildList.push_back(c); }
+	std::vector<Object*> getChildList(void){ return ChildList; }
 	void setColor(float r, float g, float b) { color.r = r; color.b = b; color.g = g; }
 	float getcolorR() { return color.r; }
 	float getcolorG() { return color.g; }
 	float getcolorB() { return color.b; }
 
+	void setalpha(float w) { alpha = w; }
+	float getalpha(void) { return alpha; }
 	void setAnchor(float ax, float ay) { anchor.r = ax; anchor.g = ay; }
 	std::pair<float, float> getAnchor() { return std::make_pair(anchor.r, anchor.g); }
 protected:
@@ -91,6 +94,7 @@ protected:
 		std::pair<float, float> speed;
 		std::pair<float, float> accel;
 		float radius;
+		float alpha;
 		bool destroyed = false;//이 오브젝트가 수명을 다했는지를 나타냅니다. 
 		KeyHandler* keyhandler;
 		std::vector<Object*> ChildList;//하위 캐릭터를 나타냅니다.

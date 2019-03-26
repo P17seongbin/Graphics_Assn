@@ -43,6 +43,7 @@ public:
 	}
 	UnitCircle();
 	void Step(int dt) override;
+	void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB) override;
 	void Draw() override;
 	void updateAABB()
 	{
@@ -74,4 +75,5 @@ public:
 	void Step(int dt) override;
 	void Draw() override;
 	//updateAABB not needed
+
 };

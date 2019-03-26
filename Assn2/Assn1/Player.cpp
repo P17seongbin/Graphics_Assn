@@ -16,11 +16,20 @@ Player::Player(KeyHandler *handler,bool _1P)
 	min = (!is_1P) * 50;
 	max = min + 50 - size.second;
 	collidelist.push_back(new RectAABB(0,0,body,15));
+
+	alpha = -2;
 }
 
 void Player::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
-	//shake
+	//only covers cases when body and ball collides
+	if (other->tag == "Ball") {
+		if (alpha == -2)
+		{
+			alpha = 2;
+		}
+	}
+	
 }
 
 void Player::Draw() 
@@ -38,15 +47,15 @@ void Player::Draw()
 
 	glEnd();
 	
-	for (int i = 0; i < ChildList.size(); i++) {
-		if (ChildList[i]->tag == "tail")
-			glRotatef(10, 0, 0, 1);
+	ChildList[0]->Draw();//draw head
+	for (int i = 1; i < ChildList.size(); i++) {
+		glRotatef(10+2*alpha, 0, 0, 1);
 		ChildList[i]->Draw();
-		if (ChildList[i]->tag == "tail")
-			glRotatef(-10, 0, 0, 1);
 	}
 	glPopMatrix();
 }
+
+
 void Player::Step(int dt)
 {
 	if (is_1P)
@@ -77,5 +86,10 @@ void Player::Step(int dt)
 
 	for (int i = 0; i < ChildList.size(); i++) {
 		ChildList[i]->Step(dt);
+	}
+
+	if (alpha !=-2)
+	{
+		alpha--;
 	}
 }

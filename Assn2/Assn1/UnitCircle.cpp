@@ -8,6 +8,16 @@ UnitCircle::UnitCircle()
 {
 	setPos(0, 0);
 }
+void UnitCircle::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
+{
+	if (other->tag == "Ball")
+	{
+		if (Parent->getalpha() == -2)
+		{
+			Parent->setalpha(2);
+		}
+	}
+}
 void UnitCircle::Draw()
 {
 	glPushMatrix();
@@ -25,13 +35,13 @@ void UnitCircle::Draw()
 		);
 	}
 	glEnd();
-
-	glBegin(GL_POINTS);
 	glColor3f(0, 0, 0);
-	glPointSize(20);
-	glVertex2f(-1.5, 2);
-	glVertex2f(1.5, 2);
-	glEnd();
+	glRectf(-4, 1, 4, 1.5);
+	glRectf(-3.5, -1.5, -0.5, 1.5);
+	glRectf(0.5, -1.5, 3.5, 1.5);
+	glColor3f(1, 1, 1);
+	glRectf(-3, -0.5, -2.5, 1);
+	glRectf(1, -0.5, 1.5, 1);
 
 	glPopMatrix();
 }
