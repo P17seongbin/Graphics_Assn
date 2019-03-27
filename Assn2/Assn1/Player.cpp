@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "System.h"
-#include "Ear.hpp"
+//#include "Ear.hpp"
 const float DEG2RAD = 3.14159f / 180;
 
 Player::Player(KeyHandler *handler,bool _1P)
