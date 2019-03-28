@@ -4,7 +4,7 @@ Cloud::Cloud(float x, float y,float speed_x)
 {
 	setPos(x, y);//initial position of cloud
 	setSpeed(speed_x, 0);
-	setColor(0.2, 0.2, 0.2);
+	setColor(1,1,1);
 	move_x = 1;
 	wing_speed = 0.2;
 	move_y = 1;

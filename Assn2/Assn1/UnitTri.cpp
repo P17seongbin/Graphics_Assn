@@ -3,6 +3,7 @@
 void UnitTri::Draw() 
 {
 	Object::Draw();
+
 	for (int i = 0; i < ChildList.size(); i++) {
 		ChildList[i]->Draw();
 	}
@@ -11,7 +12,7 @@ void UnitTri::Draw()
 	glBegin(GL_POLYGON);
 	glVertex2f(0, 0);
 	glVertex2f(0, size.first);
-	glVertex2f(-size.second, size.first);
+	glVertex2f(-1 * size.second, size.first);
 	glEnd();
 	glPopMatrix();
 }

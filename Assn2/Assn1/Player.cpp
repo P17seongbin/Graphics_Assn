@@ -39,9 +39,7 @@ void Player::Draw()
 
 	glEnd();
 	
-	ChildList[0]->Draw();//draw head
-	for (int i = 1; i < ChildList.size(); i++) {
-		glRotatef(10+2*alpha, 0, 0, 1);
+	for (int i = 0; i < ChildList.size(); i++) {
 		ChildList[i]->Draw();
 	}
 	glPopMatrix();
@@ -77,14 +75,12 @@ void Player::Step(int dt)
 
 	for (int i = 0; i < ChildList.size(); i++) {
 		ChildList[i]->Step(dt);
+		if (ChildList[i]->tag == "tail" || ChildList[i]->tag == "ear")
+			ChildList[i]->setAngle((alpha + 2) * 7.5 + 15);
 	}
-
 	if (alpha !=-2)
 	{
-		for (int i = 1; i < ChildList.size(); i++) {
-			if (ChildList[i]->tag == "tail" || ChildList[i]->tag == "ear")
-				ChildList[i]->setAngle((alpha+2) * 7.5);
-		}
+
 		alpha--;
 	}
 }

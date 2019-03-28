@@ -34,6 +34,7 @@ public:
 	{
 		glPushMatrix();
 		glTranslatef(pos.first+anchor.first, pos.second+anchor.second, 0);
+		//if (-1 > angle || 1 < angle)
 		glRotatef(angle, 0, 0, 1);
 		glTranslatef(-1 * anchor.first, -1 * anchor.second, 0);
 		

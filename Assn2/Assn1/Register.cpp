@@ -22,6 +22,7 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	GM->addObject("cloud2", cl);
 
 	Player* player1 = new Player(keyhandler, true);
+	player1->tag = "player1";
 	player1->setColor(1, 1, 0.2);
 	std::pair<float,float> size = player1->getSize();
 	float head_rad = 0.4 * size.first / 2;
@@ -31,7 +32,7 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	player1->addChild(h);
 	GM->addObject("h1", h);
 
-	UnitTri* ear = new UnitTri(size.second / 2, size.first + head_rad, player1);
+	UnitTri* ear = new UnitTri(size.second / 3, size.first + head_rad*1.2, player1);
 	ear->setColor(1, 1, 0.2);
 	ear->tag = "ear";
 	ear->setSize(12, 6);
