@@ -10,18 +10,18 @@ UnitCircle::UnitCircle()
 }
 void UnitCircle::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
+	/*
 	if (other->tag == "Ball")
 	{
 		if (Parent->getalpha() == -2)
 		{
 			Parent->setalpha(2);
 		}
-	}
+	}*/
 }
 void UnitCircle::Draw()
 {
-	glPushMatrix();
-	glTranslatef(pos.first, pos.second, 0);
+	Object::Draw();
 	glColor3f(color.r, color.g, color.b);
 	int triangleAmount = 20; //# of triangles used to draw circle
 

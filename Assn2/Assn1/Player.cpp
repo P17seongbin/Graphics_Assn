@@ -22,14 +22,6 @@ Player::Player(KeyHandler *handler,bool _1P)
 
 void Player::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
-	//only covers cases when body and ball collides
-	if (other->tag == "Ball") {
-		if (alpha == -2)
-		{
-			alpha = 2;
-		}
-	}
-	
 }
 
 void Player::Draw() 
@@ -54,8 +46,6 @@ void Player::Draw()
 	}
 	glPopMatrix();
 }
-
-
 void Player::Step(int dt)
 {
 	if (is_1P)
@@ -81,6 +71,7 @@ void Player::Step(int dt)
 		setPos(min, 0);
 	if (pos.first > max)
 		setPos(max, 0);
+
 	updateAABB();
 	Move(dt);
 
@@ -90,6 +81,10 @@ void Player::Step(int dt)
 
 	if (alpha !=-2)
 	{
+		for (int i = 1; i < ChildList.size(); i++) {
+			if (ChildList[i]->tag == "tail" || ChildList[i]->tag == "ear")
+				ChildList[i]->setAngle((alpha+2) * 7.5);
+		}
 		alpha--;
 	}
 }

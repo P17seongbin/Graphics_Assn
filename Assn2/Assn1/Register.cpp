@@ -27,6 +27,7 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	float head_rad = 0.4 * size.first / 2;
 	UnitCircle* h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player1);
 	h->setColor(1, 1, 0.2);
+	h->tag = "h1";
 	player1->addChild(h);
 	GM->addObject("h1", h);
 

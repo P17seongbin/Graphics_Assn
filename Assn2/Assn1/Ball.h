@@ -14,6 +14,7 @@ public:
 	{
 		collidelist[0]->setPos(pos.first, pos.second);
 	}
+	bool IsCollidedwithP1 = false;
 private:
 
 };

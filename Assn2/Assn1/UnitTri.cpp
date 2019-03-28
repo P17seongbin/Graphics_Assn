@@ -1,11 +1,8 @@
 #include "Player.h"
 
-void UnitTri::Draw()
+void UnitTri::Draw() 
 {
-	//glPushMatrix();
-	glPushMatrix();
-	glTranslatef(pos.first, pos.second, 0);
-	
+	Object::Draw();
 	for (int i = 0; i < ChildList.size(); i++) {
 		ChildList[i]->Draw();
 	}
@@ -19,4 +16,6 @@ void UnitTri::Draw()
 	glPopMatrix();
 }
 void UnitTri::Step(int dt)
-{}
+{
+
+}

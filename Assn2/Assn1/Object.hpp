@@ -20,9 +20,8 @@ public:
 	std::vector<AABB*> collidelist;//충돌 범위를 나타냅니다.
 	Object()
 	{
-		anchor.r = pos.first;
-		anchor.g = pos.second;
-		anchor.b = 0;
+		anchor.first = pos.first;
+		anchor.second = pos.second;
 		angle = 0;
 	}
 	void Move(int dt)
@@ -34,7 +33,9 @@ public:
 	virtual void Draw()
 	{
 		glPushMatrix();
-		glTranslatef(pos.first, pos.second, 0);
+		glTranslatef(pos.first+anchor.first, pos.second+anchor.second, 0);
+		glRotatef(angle, 0, 0, 1);
+		glTranslatef(-1 * anchor.first, -1 * anchor.second, 0);
 		
 	}//이 오브젝트를 화면 상에 그리는 함수입니다.모든 오브젝트에 대해 구현해야만 합니다.
 	virtual void Step(int dt)
@@ -86,8 +87,13 @@ public:
 
 	void setalpha(float w) { alpha = w; }
 	float getalpha(void) { return alpha; }
-	void setAnchor(float ax, float ay) { anchor.r = ax; anchor.g = ay; }
-	std::pair<float, float> getAnchor() { return std::make_pair(anchor.r, anchor.g); }
+	void setAnchor(float ax, float ay) { anchor.first = ax; anchor.second = ay; }
+
+	void setAngle(float theta) { angle = theta; }
+	float getAngle() { return angle; }
+
+	std::pair<float, float> getAnchor() { return anchor; }
+
 protected:
 		std::pair<float, float> pos;
 		std::pair<float, float> size;
@@ -100,6 +106,6 @@ protected:
 		std::vector<Object*> ChildList;//하위 캐릭터를 나타냅니다.
 		Object* Parent;
 		Vector3 color;
-		Vector3 anchor;//회전의 기준점을 나타냅니다.
-		float angle;//+x축 기준 CCW 방향으로 얼마나 돌아갔는지를 나타냅니다. 단위는 rad입니다.
+		std::pair<float, float> anchor;//회전의 기준점을 나타냅니다.
+		float angle;//+x축 기준 CCW 방향으로 얼마나 돌아갔는지를 나타냅니다. 단위는 degree입니다.
 };

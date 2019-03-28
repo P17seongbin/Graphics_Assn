@@ -1,27 +1,31 @@
 #include "Ball.h"
 #include <cmath>
 #define PI 3.1415
-const float deg2rad = (PI / 180);
 Ball::Ball()
 {
 	tag = "Ball";
 	setRadius(RADIUS);
 	setSpeed(SPEED,SPEED);
 	setPos(70, 50);
+	setAnchor(0,0);
 	collidelist.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
 void Ball::Step(int dt) {
-	float dangle = PI / 16;
+	float dangle = 15;
 
 	if (pos.first < radius || pos.first > 100-radius) speed = std::make_pair(speed.first * -1, speed.second);
 	if (pos.second < radius || pos.second > 100-radius)  speed = std::make_pair(speed.first, speed.second * -1);
 	updateAABB();
 	angle += dangle;
-	if (angle >= 2 * PI) angle -= (2 * PI);
+	if (angle >= 360) angle -= 360;
 	Move(dt);
 }
 void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
+	if (other->tag == "h1" || other->tag == "player1")
+	{
+		IsCollidedwithP1 = true;
+	}
 	//selfAABB는 언제나 원형!
 	if (otherAABB->getType() == AABBType::Rect)
 	{
@@ -88,7 +92,7 @@ void Ball::Draw_Electricity()
 	glPushMatrix();
 	//rotate
 
-	glRotatef(angle / deg2rad, 0,0,1);
+	glRotatef(angle, 0,0,1);
 	glTranslatef(0, -1 * radius, 0);
 	glColor3f(1,1,0);
 	for (int i = 0; i < line_count; i++)

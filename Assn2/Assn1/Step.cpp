@@ -65,11 +65,18 @@ void GameManager::Draw()
 void GameManager::Step(int dt)
 {
 	//1. 오브젝트 충돌 판정
-	Object* ball = findObjectwithTag("ball");
+	Ball* ball = (Ball*)findObjectwithTag("ball");
 	std::pair<float,float> pos=ball->getPos();
 	float newy = WIN_VER/2;
-
 	calCollide();
+
+	//2. 만약 공이 충돌했으면 귀를 돌아가게 한다
+	if (ball -> IsCollidedwithP1)
+	{
+		ball->IsCollidedwithP1 = false;
+		Player* P1 = (Player*)findObjectwithTag("player1");
+		P1->setalpha(2);
+	}
 	//2. 각 Object의 Step을 호출
 	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
 	{
