@@ -19,7 +19,8 @@ public:
 	void Step(int dt);
 	void Draw();
 	const std::vector<std::pair<std::string, Object*>> getObjectList() { return ObjectList; }
-
+	void Restart();
+	bool finished = false;
 private:
 	std::vector<std::pair<std::string, Object*>> ObjectList;
 	int score_1=0;

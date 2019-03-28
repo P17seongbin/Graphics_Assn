@@ -27,7 +27,8 @@ void GameManager::Draw()
 	glClear(GL_COLOR_BUFFER_BIT);
 	if (score_1 == max || score_2 == max) //game over
 	{
-		ObjectList[2].second->setSpeed(0, 0);//stop ball
+		finished = true;
+		findObjectwithTag("ball")->setSpeed(0, 0);//stop ball
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		glColor3f(1.0, 0.5, 0.2);
@@ -41,11 +42,11 @@ void GameManager::Draw()
 		glColor3f(0, 0, 0);//print message
 		if (score_1 == max)
 		{
-			drawBitmapText("You WIN!!", WIN_HOR / 2-6, WIN_VER / 2,0);
+			drawBitmapText("You WIN! Press R to restart", WIN_HOR / 2-6, WIN_VER / 2,0);
 		}
 		else
 		{
-			drawBitmapText("You LOSE!!", WIN_HOR / 2-6, WIN_VER / 2, 0);
+			drawBitmapText("You LOSE...Press R to restart",  WIN_HOR / 2-6, WIN_VER / 2, 0);
 		}
 
 	}
@@ -61,6 +62,16 @@ void GameManager::Draw()
 	}
 	glutPostRedisplay();
 	glutSwapBuffers();
+}
+void GameManager::Restart()
+{
+	finished = false;
+	Ball* ball = (Ball*)findObjectwithTag("ball");
+	score_1 = 0;
+	score_2 = 0;
+	ball->setSpeed(SPEED, -SPEED);
+	float newy = WIN_VER/2 + rand() % (WIN_VER / 2 - 10);//random y-start-position
+	ball->setPos(WIN_HOR / 2, newy);
 }
 void GameManager::Step(int dt)
 {
@@ -86,21 +97,17 @@ void GameManager::Step(int dt)
 	
 	if (pos.second < ball->getRadius())
 	{
-
 		if (pos.first < WIN_HOR / 2)
 		{
 			score_2++;
-			ball->setSpeed(SPEED, -SPEED);
 		}
 		else
 		{
 			score_1++;
-			ball->setSpeed(-SPEED, -SPEED);
 		}
-
+		ball->setSpeed(SPEED, -SPEED);
 		newy += rand() % (WIN_VER / 2-10);//random y-start-position
 		ball->setPos(WIN_HOR/2, newy);
 	}
-
 	Draw();
 }
