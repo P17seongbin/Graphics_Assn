@@ -14,7 +14,7 @@
 #define CAM_SIZE 20
 #define BALL_SIZE 20
 #define P2_TOLERANCE (rand() % 30)
-#define GRAVITITIONAL_ACCEL -0.00098
+#define GRAVITITIONAL_ACCEL -0.00038
 
 using namespace std;
 void ReShape(int w, int h);
