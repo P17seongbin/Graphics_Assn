@@ -15,23 +15,29 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 {
 	Ball* ball = new Ball();
 	ball->setColor(1, 0, 0);
+	ball->setAccel(0, GRAVITITIONAL_ACCEL);
+	GM->addObject("ball", ball);
 
-	Cloud* c = new Cloud(50, 80, 1);
+	Cloud* c = new Cloud(50, 80, 0.1);
 	GM->addObject("cloud1", c);
-	Cloud* cl = new Cloud(20, 50, -1);
+
+	Cloud* cl = new Cloud(20, 50, -0.1);
 	GM->addObject("cloud2", cl);
 
 	Player* player1 = new Player(keyhandler, true);
 	player1->tag = "player1";
 	player1->setColor(1, 1, 0.2);
+	player1->setPos(15, 0);
 	std::pair<float,float> size = player1->getSize();
 	float head_rad = 0.4 * size.first / 2;
+	GM->addObject("player1", player1);
+
 	UnitCircle* h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player1);
 	h->setColor(1, 1, 0.2);
 	h->tag = "h1";
 	player1->addChild(h);
 	GM->addObject("h1", h);
-
+	
 	UnitTri* ear = new UnitTri(size.second / 3, size.first + head_rad*1.2, player1);
 	ear->setColor(1, 1, 0.2);
 	ear->tag = "ear";
@@ -48,32 +54,22 @@ void RegisterObject(GameManager* GM,KeyHandler* keyhandler)
 	Face* g = new Face(0, 0, h);
 	g->tag = "sunglasses";
 	h->addChild(g);
-	
-
-	
-
-	//don't need to add to game manager....do we?
-
 
 	Player* player2 = new Player(keyhandler, false);
 	player2->setColor(1, 1, 0.2);
 	size = player2->getSize();
 	head_rad = 0.4*size.first / 2;
+	player2->setPos(65.0, 0);
+	GM->addObject("player2", player2);
+
 	h = new UnitCircle(size.second / 2, size.first + head_rad, head_rad, player2);
 	h->setColor(1, 1, 0.2);
 	player2->addChild(h);
 	GM->addObject("h2", h);
-
+	
 	UnitRect* net = new UnitRect(49, 0, 25, 2);
 	net->setColor(1, 0, 1);
-
-	player1->setPos(15, 0);
-	player2->setPos(65.0, 0);
-	GM->addObject("player1", player1);
-	GM->addObject("player2", player2);
-	GM->addObject("ball", ball);
 	GM->addObject("net", net);
-
 }
 
 void PrintHelpText()
@@ -101,6 +97,5 @@ void PrintHelpText()
 		}
 		pos = make_pair(pos.first , pos.second - ver_size);
 	}
-	//glutPostRedisplay();
 	glutSwapBuffers();
 }

@@ -13,16 +13,21 @@
 #define WIN_VER 100
 #define CAM_SIZE 20
 #define BALL_SIZE 20
+#define P2_TOLERANCE (rand() % 30)
+#define GRAVITITIONAL_ACCEL -0.00098
 
 using namespace std;
 void ReShape(int w, int h);
 void setOrtho2D(GameManager* GM, KeyHandler* keyhandler);
+
 void StepCaller(int dt);
+void DrawCaller();
+
 void AsciiKeyPress(unsigned char key, int x, int y);
 void AsciiKeyRelease(unsigned char key, int x, int y);
 void SpecialKeyPress(int key, int x, int y);
 void SpecialKeyRelease(int key, int x, int y);
-void DrawCaller(); 
+
 void InitScene(void);
 void RegisterCallback();
 void Control2P();

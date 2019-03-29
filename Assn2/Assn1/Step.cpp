@@ -73,6 +73,7 @@ void GameManager::Restart()
 	float newy = WIN_VER/2 + rand() % (WIN_VER / 2 - 10);//random y-start-position
 	ball->setPos(WIN_HOR / 2, newy);
 }
+
 void GameManager::Step(int dt)
 {
 	//1. 오브젝트 충돌 판정
@@ -88,6 +89,7 @@ void GameManager::Step(int dt)
 		Player* P1 = (Player*)findObjectwithTag("player1");
 		P1->setalpha(2);
 	}
+
 	//2. 각 Object의 Step을 호출
 	for (std::vector<std::pair<std::string, Object*>>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
 	{

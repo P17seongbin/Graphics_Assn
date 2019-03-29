@@ -11,14 +11,23 @@ Ball::Ball()
 	collidelist.push_back(new CircleAABB(radius,pos.first,pos.second));
 }
 void Ball::Step(int dt) {
-	float dangle = 15;
 
-	if (pos.first < radius || pos.first > 100-radius) speed = std::make_pair(speed.first * -1, speed.second);
-	if (pos.second < radius || pos.second > 100-radius)  speed = std::make_pair(speed.first, speed.second * -1);
 	updateAABB();
+	Object::Step(dt);
+	
+	float dangle = 15;
+	if (pos.first < radius)
+	{
+		setPos(radius, pos.second);
+		setSpeed(speed.first * -1, speed.second);
+	}
+	if (pos.first > 100 - radius)
+	{
+		setPos(100 - radius, pos.second);
+		setSpeed(speed.first * -1, speed.second);
+	}
 	angle += dangle;
 	if (angle >= 360) angle -= 360;
-	Move(dt);
 }
 void Ball::onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 {
@@ -83,15 +92,12 @@ void Ball::Draw()
 
 void Ball::Draw_Electricity()
 {
-	//Lots of magic numbers! need to be refined
-	std::cout << angle << std::endl;
 	float dangle = 15;
 	float cangle = 30;
 	float line_len = radius / 2;
 	int line_count = 10;
 	glPushMatrix();
 	//rotate
-
 	glRotatef(angle, 0,0,1);
 	glTranslatef(0, -1 * radius, 0);
 	glColor3f(1,1,0);
@@ -103,7 +109,7 @@ void Ball::Draw_Electricity()
 		}
 		else
 		{
-			glRotatef(180 - 2 *dangle - cangle, 0, 0,1);
+			glRotatef(180 - 2 * cangle, 0, 0,1);
 		}
 		glBegin(GL_LINES);
 		glVertex2f(0, 0);
@@ -115,6 +121,5 @@ void Ball::Draw_Electricity()
 			glRotatef(180 - dangle, 0, 0, -1);
 		}
 	}
-
 	glPopMatrix();
 }

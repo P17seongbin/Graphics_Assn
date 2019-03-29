@@ -162,7 +162,7 @@
     <ClCompile Include="AABBCollideChecker.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Cloud.cpp" />
-    <ClCompile Include="Register.cpp" />
+    <ClCompile Include="RegisterObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UnitRect.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -170,7 +170,7 @@
     <ClCompile Include="CollisionDetect.cpp" />
     <ClCompile Include="UnitCircle.cpp" />
     <ClCompile Include="UnitTri.cpp" />
-    <ClCompile Include="WindowRelated.cpp" />
+    <ClCompile Include="WindowControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />

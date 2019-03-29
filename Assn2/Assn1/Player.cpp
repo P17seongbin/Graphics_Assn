@@ -46,6 +46,8 @@ void Player::Draw()
 }
 void Player::Step(int dt)
 {
+	updateAABB();
+	Object::Step(dt);
 	if (is_1P)
 	{
 		if (keyhandler->isAsciiKeyPressed('z') || keyhandler->isAsciiKeyPressed('Z'))
@@ -70,8 +72,6 @@ void Player::Step(int dt)
 	if (pos.first > max)
 		setPos(max, 0);
 
-	updateAABB();
-	Move(dt);
 
 	for (int i = 0; i < ChildList.size(); i++) {
 		ChildList[i]->Step(dt);
@@ -80,7 +80,6 @@ void Player::Step(int dt)
 	}
 	if (alpha !=-2)
 	{
-
 		alpha--;
 	}
 }

@@ -29,6 +29,7 @@ public:
 		float dx = (speed.first * dt) + (accel.first * dt * dt / (float)2);
 		float dy = (speed.second * dt) + (accel.second * dt * dt / (float)2);
 		addPos(dx, dy);
+		addSpeed(accel.first * dt, accel.second*dt);
 	}
 	virtual void Draw()
 	{
@@ -41,6 +42,7 @@ public:
 	}//이 오브젝트를 화면 상에 그리는 함수입니다.모든 오브젝트에 대해 구현해야만 합니다.
 	virtual void Step(int dt)
 	{
+		Move(dt);
 	}//매 프레임마다 할 행동을 나타냅니다. dt는 이전 프레임과 현재 프레임의 시간 차이를 나타냅니다.
 	virtual void onCollide(Object* other, AABB* selfAABB, AABB* otherAABB)
 	{

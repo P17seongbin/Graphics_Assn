@@ -8,6 +8,7 @@ Cloud::Cloud(float x, float y,float speed_x)
 	move_x = 1;
 	wing_speed = 0.2;
 	move_y = 1;
+
 	UnitCircle* c = new UnitCircle(0, 0, 5, NULL);
 	c->setColor(color.r, color.g, color.b);
 	addChild(c);
@@ -27,32 +28,20 @@ Cloud::Cloud(float x, float y,float speed_x)
 }
 void Cloud::Draw(void)
 {
-	glPushMatrix();
-	glTranslatef(pos.first, pos.second, 0);
-	for (int i = 0; i < 3; i++) 
+	Object::Draw();
+	for (int i = 0; i < 5; i++) 
 	{
 		ChildList[i]->Draw();
 	}
-	glPushMatrix();
-	glTranslatef(move_x, move_y, 0);
-	ChildList[3]->Draw();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(-move_x, move_y, 0);
-	ChildList[4]->Draw();
-	glPopMatrix();
-	
-
 	glPopMatrix();
 }
 
 void Cloud::Step(int dt)
 {
-	setPos(pos.first + speed.first, pos.second);
+	Object::Step(dt);
+	//setPos(pos.first + speed.first, pos.second);
 	if (pos.first > WIN_HOR || pos.first < 0)
 		speed.first = -speed.first;
-
-	//printf("%f", move_x);
 
 	move_x = move_x + wing_speed;
 	move_y = move_y - wing_speed;
@@ -60,6 +49,8 @@ void Cloud::Step(int dt)
 	{
 		wing_speed = -wing_speed;
 	}
+	ChildList[3]->setPos(move_x, move_y);
+	ChildList[4]->setPos(-move_x, move_y);
 
 	
 }

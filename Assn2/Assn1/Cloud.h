@@ -6,7 +6,6 @@
 class Cloud : public Object
 {
 public:
-	Cloud();
 	Cloud(float x, float y,float speed_x);
 
 	void Draw(void) override;

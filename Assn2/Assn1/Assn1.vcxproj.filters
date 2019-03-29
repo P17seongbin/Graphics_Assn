@@ -45,13 +45,7 @@
     <ClCompile Include="Ball.cpp">
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
-    <ClCompile Include="WindowRelated.cpp">
-      <Filter>소스 파일\Assn1</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>소스 파일\Assn1</Filter>
-    </ClCompile>
-    <ClCompile Include="Register.cpp">
       <Filter>소스 파일\Assn1</Filter>
     </ClCompile>
     <ClCompile Include="UnitCircle.cpp">
@@ -65,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="Cloud.cpp">
       <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowControl.cpp">
+      <Filter>소스 파일\Assn1</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterObject.cpp">
+      <Filter>소스 파일\Assn1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
