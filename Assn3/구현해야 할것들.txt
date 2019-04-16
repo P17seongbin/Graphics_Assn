@@ -1,0 +1,31 @@
+Shader Handler
+-> 일반 쉐이더와 hidden line removal(with Z-buffer, 하드웨어에게 시키면 됨) 쉐이더를 둘다 구현하고, 사용자 입력에 따라 bind되는 쉐이더를 전환
+-> 쉐이더를 Object별로 바꾸도록 구현해도 되고, 일괄적으로 바꾸도록 구현해도 됨. 4번 과제를 고려했을때 둘다 구현하는게 나을듯.
+
+VAO handler
+-> 버퍼 오브젝트(GPU buffer)를 관리, Object가 새로 생성되면 미리 생성한 버퍼의 크기를 확인하고, 공간이 있으면 삽입, 없으면 재할당.(기존 Index를 유지해야 함)
+
+Obj file loader
+-> 외부 폴리곤 파일을 Load해서 vec2,3,4로 변환해서 저장하는 함수(이브이, 공, 판때기를 Load하는데 사용.)
+-> 폴리곤 파일을 다 Load했으면 이를 하나의 Buffer에 다 저장해서 사용 가능, 이를 Load하는 과정은 Object에게 떠넘김
+
+Object 
+-> 오브젝트가 기본적으로 가져야 하는 함수 등을 구현 (이동/충돌 관련 물리연산)
+-> 각 Object별로 static const type의 vertex data를 저장(from Obj file loader)하고 이를 오브젝트를 생성할 때 마다 버퍼에 추가, 그리고 Offset 같은건 저장하기
+-> Object별로 사용할 Shader의 ID를 저장하는 기능 필요
+
+Collision Detection
+-> 플레이어와 공 사이의 충돌은 플레이어와 공 사이의 거리를 기준으로 측정
+-> 플레이어의 Boundary는 좌표의 최대 / 최소값을 한정해서 구현
+-> 공과 벽 간의 충돌도 좌표 최대 최소 정해서 구현
+-> 별도의 subclass를 쓰지는 않고, Object의 하위 method로써 구현.
+
+Game Handler(GameManager)
+-> 점수, 맨 처음 설명서, 승리 판정, Reset 기능 구현
+-> Object와 Camera를 관리.
+-> Shader를 관리
+-> Object, Camera 등 모든 Class는 GameManager가 필요로 하는 정보를 Return하는 함수를 작성할 필요가 있다.
+
+Camera Control
+-> 카메라의 Properties를 미리 지정해두고, 키 입력에 따라 이를 적절히 Swap해서 Vertex Shader에게 전달하는 기능
+-> Camera도 Object처럼 관리해도 될듯 (좌표와 여타 Properties)
