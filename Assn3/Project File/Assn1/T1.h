@@ -7,5 +7,4 @@
 #include <glm/glm.hpp>
 // GLFW 도 포함
 #include <GLFW/glfw3.h>
-//fstream츄가 해
 #include <fstream>
