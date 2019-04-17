@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return -1;
 	}
-
+	GLuint programID = LoadShaders("vert.glsl","frag.glsl");
 
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -57,6 +57,8 @@ int main(int argc, char **argv)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
 	do {
+		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// 버퍼의 첫번째 속성값(attribute) : 버텍스들
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -68,6 +70,8 @@ int main(int argc, char **argv)
 			0,                  // 다음 요소 까지 간격(stride)
 			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
+
+		glUseProgram(programID);
 		// 삼각형 그리기!
 		glDrawArrays(GL_TRIANGLES, 0, 3); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 		glDisableVertexAttribArray(0);

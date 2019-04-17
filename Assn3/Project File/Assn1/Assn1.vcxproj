@@ -29,6 +29,10 @@
   <ItemGroup>
     <ClInclude Include="T1.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="frag.glsl" />
+    <None Include="vert.glsl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{4FE60CE4-3226-4A25-A3A8-54B08CDFE5A7}</ProjectGuid>
