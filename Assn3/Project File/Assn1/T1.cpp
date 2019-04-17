@@ -1,11 +1,4 @@
-// Include standard headers
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <glm/glm.hpp>
-#include <GL/glew.h>
-// GLFW 도 포함
-#include <GLFW/glfw3.h>
+#include "T1.h"
 // 이것이 우리의 버텍스 버퍼를 가리킵니다.
 GLuint vertexbuffer;
 GLuint VertexArrayID;
@@ -16,18 +9,7 @@ static void errorCallback(int errorCode, const char* errorDescription)
 {
 	fprintf(stderr, "Error: %s\n", errorDescription);
 }
-/*
-void DrawCaller();
-void InitScene(void)
-{
-	//Create Window
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(1000, 800);
-	glutInitWindowPosition(0, 0);
-	glutCreateWindow("Example");
-	glClearColor(0.6, 0.8, 1.0, 0);
-	glShadeModel(GL_FLAT);
-}*/
+
 int main(int argc, char **argv)
 {
 	glfwSetErrorCallback(errorCallback);

@@ -19,7 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="T1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="T1frag.txt" />
+    <Text Include="T1vertex.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="T1.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
