@@ -19,11 +19,11 @@
     <Filter Include="소스 파일\AABB">
       <UniqueIdentifier>{7e5e870a-1a5c-4f1a-8edb-7bdbee7f4e56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Object">
-      <UniqueIdentifier>{b8d7bc76-2c1e-45c5-b064-6abc172af1b2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Assn1">
       <UniqueIdentifier>{95171156-4937-497c-bf5f-a7635e1ea7c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Assn1\Object">
+      <UniqueIdentifier>{b8d7bc76-2c1e-45c5-b064-6abc172af1b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,13 +40,13 @@
       <Filter>소스 파일\System</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>소스 파일\Object</Filter>
+      <Filter>소스 파일\Assn1\Object</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
-      <Filter>소스 파일\Object</Filter>
+      <Filter>소스 파일\Assn1\Object</Filter>
     </ClCompile>
     <ClCompile Include="Net.cpp">
-      <Filter>소스 파일\Object</Filter>
+      <Filter>소스 파일\Assn1\Object</Filter>
     </ClCompile>
     <ClCompile Include="WindowRelated.cpp">
       <Filter>소스 파일\Assn1</Filter>

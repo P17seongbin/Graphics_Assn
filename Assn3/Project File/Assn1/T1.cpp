@@ -5,7 +5,6 @@ GLuint VertexArrayID;
 
 using namespace glm;
 static void errorCallback(int errorCode, const char* errorDescription)
-
 {
 	fprintf(stderr, "Error: %s\n", errorDescription);
 }
@@ -78,7 +77,4 @@ int main(int argc, char **argv)
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
-
-
-
 }
