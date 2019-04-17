@@ -3,8 +3,12 @@
 void ReShape(int w, int h)
 {
 	glLoadIdentity(); //Stack matrix = I
-	gluOrtho2D(0.0, WIN_HOR, 0.0, WIN_VER);
 	glViewport(0, 0, w, h);
+	
+	gluOrtho2D(0.0, WIN_HOR, 0.0, WIN_VER);
+	glTranslatef(10, 10, 0);
+	
+	
 }
 
 void setOrtho2D(GameManager* GM,KeyHandler* keyhandler)
