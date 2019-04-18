@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="IObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_object.html",tooltip=": 오브젝트 인터페이스입니다. 각 Object는 아래와 같은 Method를 구현해야 합니다."];
+}
