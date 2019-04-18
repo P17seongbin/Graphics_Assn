@@ -12,21 +12,27 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 /**
  * @brief 현재 게임 상황을 저장하는 State Machine
  */
+enum CameraMovement { CAM_FRONT, CAM_BACK, CAM_LEFT, CAM_RIGHT };
+
 class State
 {
 public:
-	enum CameraMovement { CAM_FRONT, CAM_BACK, CAM_LEFT, CAM_RIGHT };
+	GLuint getCameraID() {		return CameraID;	}
+	GLuint getShaderID() { return ShaderID; }
 
-	GLuint getCameraID();
-	GLuint getShaderID();
+	int getPlayerScore() { return PlayerScore; }
+	int getAIScore() { return AIScore;  }
 
-	int getPlayerScore();
-	int getAIScore();
+	void setPlayerScore(int score) { PlayerScore = score; }
+	void setAIScore(int score) { AIScore = score; }
 
-	bool setCameraID(GLuint ID);
-	bool setShaderID(GLuint ID);
+	void addPlayerScore(int ds) { PlayerScore += ds; }
+	void addAIScore(int ds) { AIScore += ds; }
 
-	bool CameraControl(CameraMovement dir);
+	bool setCameraID(GLuint ID) { CameraID = ID; }
+	bool setShaderID(GLuint ID) { ShaderID = ID; }
+
+	bool CameraControl(CameraMovement dir);	
 	
 private:
 	GLuint CameraID;

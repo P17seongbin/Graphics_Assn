@@ -20,12 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIPlayer.cpp" />
-    <ClCompile Include="BackBone.cpp" />
+    <ClCompile Include="Assn3.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderChannel.cpp" />
-    <ClCompile Include="RenderingManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="State.cpp" />
