@@ -35,4 +35,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="frag.glsl">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="vert.glsl">
+      <Filter>소스 파일</Filter>
+    </None>
+  </ItemGroup>
 </Project>
