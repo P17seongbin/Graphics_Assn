@@ -1,4 +1,4 @@
-#include "T1.h"
+#include "State.h"
 // 이것이 우리의 버텍스 버퍼를 가리킵니다.
 GLuint vertexbuffer;
 GLuint VertexArrayID;
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return -1;
 	}
-	GLuint programID = LoadShaders("vert.glsl","frag.glsl");
+	GLuint programID = LoadShaders("vert.glsl", "frag.glsl");
 
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -47,8 +47,8 @@ int main(int argc, char **argv)
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 	// 밑에서 Escape 키가 눌러지는 것을 감지할 수 있도록 할 것
-	
-	
+
+
 	glGenBuffers(1, &vertexbuffer);
 	// 아래의 명령어들은 우리의 "vertexbuffer" 버퍼에 대해서 다룰겁니다
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

@@ -19,15 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AIPlayer.cpp" />
+    <ClCompile Include="BackBone.cpp" />
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RenderChannel.cpp" />
+    <ClCompile Include="RenderingManager.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
-    <ClCompile Include="T1.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="T1frag.txt" />
-    <Text Include="T1vertex.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="T1.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IObject.h" />
+    <ClInclude Include="RenderChannel.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.glsl" />

@@ -1,8 +1,15 @@
-#include "T1.h"
+#include "State.h"
 #include <string>
 #include <vector>
 #include <sstream>
 
+/**
+* @brief: 미리 작성된 쉐이더를 Load해서 메인 스트림에 전달하는 Shader Loader입니다.
+* @return: GLuint ProgramID (bind된 프로그램의 고유번호를 리턴합니다)
+* @param: vertex_file_path: Vertex shader의 경로를 지정합니다. 
+* @param: fragment_file_path: Fragment shader의 경로를 지정합니다.
+* @todo: 코드 읽어오는 코드를 튜토리얼에서 우리만의 코드로 수정해야 함
+*/
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 
 	// 쉐이더들 생성
@@ -10,8 +17,22 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
 	// 버텍스 쉐이더 코드를 파일에서 읽기
+
+	std::ifstream VertexShaderStream(vertex_file_path);
 	std::string VertexShaderCode;
-	std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
+	/*
+	if (VertexShaderStream.is_open())
+	{
+
+	}
+	else
+	{
+		printf("주어진 경로 %s 를 읽을 수 없습니다.\n", vertex_file_path);
+		getchar();
+		return 0;
+	}
+	std::string VertexShaderCode(std::istreambuf_iterator<char>(VertexShaderStream), std::istreambuf_iterator<char>());*/
+	
 	if (VertexShaderStream.is_open()) {
 		std::stringstream sstr;
 		sstr << VertexShaderStream.rdbuf();

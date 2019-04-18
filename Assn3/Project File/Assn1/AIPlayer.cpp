@@ -1,6 +1,6 @@
 #include "IObject.h"
 
-class Ball : IObject
+class AIPlayer : IObject
 {
 public:
 	glm::vec3 getPos() { return Pos; }
@@ -18,6 +18,7 @@ public:
 	void setobjID(unsigned int i) { ID = i; }
 	void setTag(std::string tag) { Tag = tag; }
 	std::string getTag() { return Tag; }
+
 private:
 	glm::vec3 Pos;
 	glm::vec3 Speed;
