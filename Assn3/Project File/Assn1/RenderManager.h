@@ -2,21 +2,17 @@
 #include "State.h"
 #include <map>
 
-struct UnitRequest
-{
-	unsigned int PolygonID;
-	glm::vec3 pos;
-	glm::vec3 dir;
-};
 
 class RenderManager
 {
 public:
-	bool enqueueMesh(GLuint ID, GLuint offset);
-	RenderManager(State* state);
+	bool enqueueMesh(UnitMesh mesh);
+	RenderManager(State* state, GLFWwindow* &win);
 	bool drawObject(UnitRequest reqinfo);
-
+	void setVAO(GLuint ID) { VAO = ID; }
 private:
-	std::map<GLuint, GLuint> Meshqueue;
+	std::map<GLuint,UnitMesh> Meshqueue;//(ID,UnitMesh)
 	State* StateRef;
+	GLFWwindow* window; // (후술되는 코드를 보면, 이 변수는 전역(Global)입니다.)
+	GLuint VAO;
 };

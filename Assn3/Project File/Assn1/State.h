@@ -7,6 +7,8 @@
 // GLFW µµ Æ÷ÇÔ
 #include <GLFW/glfw3.h>
 #include <fstream>
+#include <glm/gtc/matrix_transform.hpp>
+
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path);
 
 /**
@@ -29,8 +31,8 @@ public:
 	void addPlayerScore(int ds) { PlayerScore += ds; }
 	void addAIScore(int ds) { AIScore += ds; }
 
-	bool setCameraID(GLuint ID) { CameraID = ID; }
-	bool setShaderID(GLuint ID) { ShaderID = ID; }
+	void setCameraID(GLuint ID) { CameraID = ID; }
+	void setShaderID(GLuint ID) { ShaderID = ID; }
 
 	bool CameraControl(CameraMovement dir);	
 	
@@ -39,4 +41,18 @@ private:
 	GLuint ShaderID;
 	int PlayerScore;
 	int AIScore;
+
+};
+
+struct UnitRequest
+{
+	unsigned int PolygonID;
+	glm::mat4 PositionMatrix;
+	glm::mat4 RotationMatrix;
+};
+struct UnitMesh
+{
+	GLuint ID;
+	GLuint offset;
+	unsigned int len;
 };

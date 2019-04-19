@@ -38,8 +38,11 @@
     <ClInclude Include="State.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="frag.glsl" />
-    <None Include="vert.glsl" />
+    <None Include="fragment.glsl" />
+    <None Include="vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Meshlist.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
