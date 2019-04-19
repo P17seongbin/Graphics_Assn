@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return -1;
 	}
-	GLuint programID = LoadShaders("vert.glsl", "frag.glsl");
+	GLuint programID = LoadShaders("vertex.glsl", "fragment.glsl");
 
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -55,6 +55,8 @@ int main(int argc, char **argv)
 	// 우리의 버텍스들을 OpenGL로 넘겨줍니다
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
+	//vertex shader에서 이름 "MVP"인 uniform variable의 location정보 저장*************************************************손주은이 추가한 줄
+	GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	do {
 		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -70,8 +72,25 @@ int main(int argc, char **argv)
 			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
 
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////손주은이 추가한 mvp설정 시작
+		GLuint width=50; //temporary variables for setting aspect ratio
+		GLuint height=50;
+		mat4 Model = mat4(1.0f); //identity matrix
+		mat4 View = lookAt(
+			glm::vec3(4, 3, 3), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
+			glm::vec3(0, 0, 0), // 그리고 카메라가 원점을 본다
+			glm::vec3(0, 1, 0)  // 머리가 위쪽이다 (0,-1,0 으로 해보면, 뒤집어 볼것이다)
+		);;
+		mat4 Projection=perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
+		mat4 mvp = Projection * View * Model;
+
+		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);//sending mvp information to vertex shader
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////손주은이 추가한 mvp설정 끝
+
+
 		glUseProgram(programID);
 		// 삼각형 그리기!
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//enable wireframe mode
 		glDrawArrays(GL_TRIANGLES, 0, 3); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 		glDisableVertexAttribArray(0);
 
