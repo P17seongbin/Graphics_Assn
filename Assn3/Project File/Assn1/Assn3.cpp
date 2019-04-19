@@ -1,4 +1,5 @@
 #include "State.h"
+#include "ObjLoader.hpp"
 // 이것이 우리의 버텍스 버퍼를 가리킵니다.
 GLuint vertexbuffer;
 GLuint VertexArrayID;
@@ -12,7 +13,7 @@ static void errorCallback(int errorCode, const char* errorDescription)
 int main(int argc, char **argv)
 {
 	glfwSetErrorCallback(errorCallback);
-	// GLFW 초
+	// GLFW 초기화
 	if (!glfwInit())
 	{
 		fprintf(stderr, "GLFW 초기화 실패\n");
@@ -37,7 +38,12 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return -1;
 	}
+
 	GLuint programID = LoadShaders("vert.glsl", "frag.glsl");
+
+
+	std::vector< glm::vec3 > vertices;
+	bool res = loadOBJ("Eevee.obj", vertices);
 
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -53,7 +59,7 @@ int main(int argc, char **argv)
 	// 아래의 명령어들은 우리의 "vertexbuffer" 버퍼에 대해서 다룰겁니다
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	// 우리의 버텍스들을 OpenGL로 넘겨줍니다
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
 	do {
 		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -72,7 +78,7 @@ int main(int argc, char **argv)
 
 		glUseProgram(programID);
 		// 삼각형 그리기!
-		glDrawArrays(GL_TRIANGLES, 0, 3); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size()); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 		glDisableVertexAttribArray(0);
 
 		glfwSwapBuffers(window);
