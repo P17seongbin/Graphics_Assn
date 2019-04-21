@@ -2,9 +2,9 @@
 
 
 
-Ball::Ball()
+Ball::Ball(RenderChannel * channel)
 {
-	glm::vec3 initialPos = glm::vec3(0,0,0);
+	glm::vec3 initialPos = glm::vec3(0, 0, 0);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0.05);
 	setTag("ball");
 	setPos(initialPos);

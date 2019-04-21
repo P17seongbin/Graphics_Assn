@@ -29,11 +29,11 @@ void GameManager :: AddObject(IObject * obj) {
 	ObjectQueue.insert(std::pair<string, IObject*>(tag, obj));
 }
 
-GameManager::GameManager( GLFWwindow* &win)
+GameManager::GameManager(GLFWwindow* win, RenderChannel* channel)
 {
-	Player* eevee = new Player();
-	AIPlayer* opponent = new AIPlayer();
-	Ball* ball = new Ball();
+	Player* eevee = new Player(channel);
+	AIPlayer* opponent = new AIPlayer(channel);
+	Ball* ball = new Ball(channel);
 
 	AddObject(eevee);
 	AddObject(opponent);

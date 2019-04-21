@@ -5,7 +5,7 @@ using namespace std;
 class GameManager
 {
 public:
-	GameManager(GLFWwindow* &win);
+	GameManager(GLFWwindow* win,RenderChannel* channel);
 	void Terminate_Game();
 	vector<IObject*> getCollideList(string tag);
 	//void Update();

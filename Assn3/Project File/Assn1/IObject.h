@@ -29,4 +29,10 @@ public:
 
 	virtual void setTag(std::string tag) = 0;
 	virtual std::string getTag() = 0;
+
+	virtual void setDir(float dir) = 0;
+	virtual float getDir() = 0;
+	virtual void addDir(float ddir) = 0;
+
+	virtual void DrawSelf() = 0;
 };

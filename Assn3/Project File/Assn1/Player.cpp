@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(RenderChannel* channel)
 {
 	glm::vec3 initialPos = glm::vec3(0.0, 0.0, 0.0);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
@@ -9,6 +9,8 @@ Player::Player()
 	setPos(initialPos);
 	//setDir(initialDir);
 	setSpeed(initialSpeed);
+
+	Channel = channel;
 }
 void Player::update(GLFWwindow* window) {
 	
@@ -23,6 +25,7 @@ void Player::update(GLFWwindow* window) {
 		addPos(-Speed);
 	}
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+		
 		//너무 빨라지면 안되니까 일단 max 잡겟음
 		if(max>Speed[0])
 			addSpeed(glm::vec3(dxspeed, 0, 0));
