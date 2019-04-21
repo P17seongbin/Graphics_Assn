@@ -30,6 +30,8 @@ bool RenderManager::enqueueMesh(UnitMesh mesh)
 */
 RenderManager::RenderManager(State* state, GLFWwindow* &win)
 {
+	BGColor = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	WireColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	glfwSetErrorCallback(errorCallback);
 	// GLFW 초기화
 	if (!glfwInit())
@@ -38,7 +40,7 @@ RenderManager::RenderManager(State* state, GLFWwindow* &win)
 	}
 
 	StateRef = state;
-	//glfwWindowHint(GLFW_SAMPLES, 4); // 4x 안티에일리어싱
+	glfwWindowHint(GLFW_SAMPLES, 4); // 4x 안티에일리어싱
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3 을 쓸 겁니다
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
@@ -78,7 +80,7 @@ bool RenderManager::drawObject(UnitRequest reqinfo)
 		GLuint matrixID = glGetUniformLocation(StateRef->getShaderID(), "MVP");
 		GLuint colorID = glGetUniformLocation(StateRef->getShaderID(),"vertexColor");
 
-			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+		glClearColor(BGColor.r, BGColor.g, BGColor.b, BGColor.a);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			// 버퍼의 첫번째 속성값(attribute) : 버텍스들
 			glEnableVertexAttribArray(0);
@@ -108,18 +110,21 @@ bool RenderManager::drawObject(UnitRequest reqinfo)
 			glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);//sending mvp information to vertex shader
 											  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////손주은이 추가한 mvp설정
 			glUseProgram(StateRef->getShaderID());
-			glUniform4f(colorID, 1, 0, 0,1);
+
+			if (StateRef->IsHiddenLineRemovalMode())
+			{
+				glUniform4f(colorID, BGColor.r, BGColor.g, BGColor.b, BGColor.a);
+				// Hidden Line Removal을 위한 것
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//enable wireframe mode	
+				glEnable(GL_POLYGON_OFFSET_FILL);
+				glDrawArrays(GL_TRIANGLES, 0, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+				glDisable(GL_POLYGON_OFFSET_FILL);
+			}
+
+			glUniform4f(colorID, WireColor.r,WireColor.g,WireColor.b,WireColor.a);
 			// 삼각형 그리기!
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//enable wireframe mode	
 			glDrawArrays(GL_TRIANGLES, 0, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
-			glUniform4f(colorID, 0.0f, 0.0f, 0.0f,0.0f);
-			// 삼각형 그리기!
-			
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//enable wireframe mode	
-			glEnable(GL_POLYGON_OFFSET_FILL);
-			glDrawArrays(GL_TRIANGLES, 0, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
-			glDisable(GL_POLYGON_OFFSET_FILL);
-			
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();

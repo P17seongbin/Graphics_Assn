@@ -37,12 +37,15 @@ public:
 	void setShaderID(GLuint ID) { ShaderID = ID; }
 
 	bool CameraControl(CameraMovement dir);	
+	bool IsHiddenLineRemovalMode() { return HLR; }
+	void ToggleHiddenLineRemovalMode() { HLR = !HLR; }
 	
 private:
 	GLuint CameraID;
 	GLuint ShaderID;
 	int PlayerScore;
 	int AIScore;
+	bool HLR = false;//Hidden Line Removal
 
 };
 
