@@ -11,6 +11,7 @@ class RenderChannel
 {
 public:
 	bool DrawAll();
+	bool EnqueueRequest(unsigned int ID, glm::vec3 pos, float dir);
 	bool EnqueueRequest(UnitRequest req);
 	RenderChannel(RenderManager* render);
 private:

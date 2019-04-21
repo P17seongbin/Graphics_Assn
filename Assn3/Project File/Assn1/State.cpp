@@ -1,6 +1,5 @@
 #include "State.h"
 
-
 /**
 * @brief 카메라가 움직일 수 있을 때, 카메라의 좌표를 이동하는 명령을 수행합니다.
 * @param CameraMovement dir 카메라 이동 방향을 나타냅니다.
