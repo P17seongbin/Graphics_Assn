@@ -22,17 +22,27 @@ int main(int argc, char **argv)
 	ObjLoader tObjLoader(&tRM);
 
 	//vertex shader에서 이름 "MVP"인 uniform variable의 location정보 저장*************************************************손주은이 추가한 줄
-	GLuint matrixID = glGetUniformLocation(programID, "MVP");
+	//GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	GameManager GM(window,&tC);//아직 안씀
 	Player* eevee = new Player(&tC);
 	//Ball* eevee = new Ball();
-	
+
+
+	bool IsPressed = false;
 
 	float x = 0;
 	do {
 		eevee->update(window);
 		eevee->DrawSelf();
 		tC.DrawAll();
+
+		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS && !IsPressed)
+		{
+			IsPressed = true;
+			state.ToggleHiddenLineRemovalMode();
+		}
+		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_RELEASE)
+			IsPressed = false;
 
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
