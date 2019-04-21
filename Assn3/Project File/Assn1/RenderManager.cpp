@@ -98,7 +98,7 @@ bool RenderManager::drawObject(UnitRequest reqinfo)
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////손주은이 추가한 mvp설정 시작
 			GLuint width = 50; //temporary variables for setting aspect ratio
 			GLuint height = 50;
-			mat4 Model = reqinfo.RotationMatrix * reqinfo.PositionMatrix; //Model Matrix
+			mat4 Model = reqinfo.PositionMatrix * reqinfo.RotationMatrix; //Model Matrix
 			mat4 View = lookAt(
 				glm::vec3(4, 3 ,3), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
 				glm::vec3(0, 0, 0), // 그리고 카메라가 원점을 본다

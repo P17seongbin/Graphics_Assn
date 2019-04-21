@@ -20,7 +20,7 @@ bool RenderChannel::EnqueueRequest(unsigned int ID, glm::vec3 pos, float dir)
 	UnitRequest r;
 	r.PolygonID = ID;
 	r.PositionMatrix = glm::translate(I, pos);
-	r.RotationMatrix = glm::rotate(I, dir, glm::vec3(0.0f, 1.0f, 0.0f));
+	r.RotationMatrix = glm::rotate(I, dir, glm::vec3(0,1,0));
 	Draw_Queue.push_back(r);
 	return true;
 }
