@@ -3,7 +3,7 @@
 #include "ObjLoader.hpp"
 #include "GameManager.h"
 #include "Player.h"
-#include "ball.h"
+//#include "ball.h"
 #include "RenderChannel.h"
 
 // 이것이 우리의 버텍스 버퍼를 가리킵니다.
