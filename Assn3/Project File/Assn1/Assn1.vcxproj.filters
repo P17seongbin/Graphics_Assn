@@ -85,6 +85,12 @@
     <None Include="fragment.glsl">
       <Filter>리소스 파일</Filter>
     </None>
+    <None Include="fragment_zbuffer.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="vertex_zbuffer.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Meshlist.txt">

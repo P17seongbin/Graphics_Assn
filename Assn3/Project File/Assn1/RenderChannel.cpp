@@ -6,7 +6,23 @@
  */
 bool RenderChannel::DrawAll()
 {
-	return false;
+	int reqc = Draw_Queue.size();
+	for (int i = 0; i < reqc; i++)
+	{
+		renderer->drawObject(Draw_Queue[i]);
+	}
+	Draw_Queue.clear();
+	return true;
+}
+bool RenderChannel::EnqueueRequest(unsigned int ID, glm::vec3 pos, float dir)
+{
+	glm::mat4  I(1.0f);
+	UnitRequest r;
+	r.PolygonID = ID;
+	r.PositionMatrix = glm::translate(I, pos);
+	r.RotationMatrix = glm::rotate(I, dir, glm::vec3(0.0f, 1.0f, 0.0f));
+	Draw_Queue.push_back(r);
+	return true;
 }
 /**
  * @brief 단일 오브젝트 Render 요청을 등록합니다.
@@ -15,11 +31,13 @@ bool RenderChannel::DrawAll()
  */
 bool RenderChannel::EnqueueRequest(UnitRequest req)
 {
-	return false;
+	Draw_Queue.push_back(req);
+	return true;
 }
 /**
  * @param RenderManager* render : Render 요청을 전달할 RenderManager Object를 가리키는 포인터입니다.
  */
 RenderChannel::RenderChannel(RenderManager * render)
 {
+	renderer = render;
 }

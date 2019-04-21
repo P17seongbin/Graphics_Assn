@@ -1,5 +1,11 @@
 #include "RenderManager.h"
 using namespace glm;
+
+static void errorCallback(int errorCode, const char* errorDescription)
+{
+	fprintf(stderr, "Error: %s\n", errorDescription);
+}
+
 /**
  * @brief ObjLoader에서 Load하고 VAO에 등록까지 마친 mesh의 Offset과 ID를 입력하는 함수
  * @param GLuint ID : Mesh의 ID, 각 오브젝트에 사전에 정의한 ID를 입력해야 합니다.
@@ -24,8 +30,15 @@ bool RenderManager::enqueueMesh(UnitMesh mesh)
 */
 RenderManager::RenderManager(State* state, GLFWwindow* &win)
 {
+	glfwSetErrorCallback(errorCallback);
+	// GLFW 초기화
+	if (!glfwInit())
+	{
+		fprintf(stderr, "GLFW 초기화 실패\n");
+	}
+
 	StateRef = state;
-	glfwWindowHint(GLFW_SAMPLES, 4); // 4x 안티에일리어싱
+	//glfwWindowHint(GLFW_SAMPLES, 4); // 4x 안티에일리어싱
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3 을 쓸 겁니다
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
@@ -33,7 +46,7 @@ RenderManager::RenderManager(State* state, GLFWwindow* &win)
 
 	window = glfwCreateWindow(1024, 768, "Tutorial 01", NULL, NULL);
 	if (window == NULL) {
-		fprintf(stderr, "GLFW 윈도우를 여는데 실패했습니다. Intel GPU 를 사용한다면, 3.3 지원을 하지 않습니다. 2.1 버전용 튜토리얼을 시도하세요.\n");
+		fprintf(stderr, "GLFW 윈도우를 여는데 실패했습니다. GLFW 3.3을 지원하지 않는 GPU를 사용할 가능성이 있습니다.");
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(window); // GLEW 초기화

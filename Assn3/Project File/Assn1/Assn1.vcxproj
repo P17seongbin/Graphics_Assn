@@ -39,7 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
+    <None Include="fragment_zbuffer.glsl" />
     <None Include="vertex.glsl" />
+    <None Include="vertex_zbuffer.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Meshlist.txt" />
