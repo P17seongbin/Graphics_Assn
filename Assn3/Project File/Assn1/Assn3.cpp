@@ -16,18 +16,14 @@ int main(int argc, char **argv)
 {
 	GLFWwindow* window;	
 	RenderManager tRM(&state,window);
-<<<<<<< HEAD
-	
-=======
 	RenderChannel tC(&tRM);
->>>>>>> f06c0ead5338f09c5d3441f5fea9033eb3b93c86
+
 	GLuint programID = LoadShaders("vertex.glsl", "fragment.glsl");
 	state.setShaderID(programID);
 	ObjLoader tObjLoader(&tRM);
 
-<<<<<<< HEAD
-	//vertex shader에서 이름 "MVP"인 uniform variable의 location정보 저장*************************************************손주은이 추가한 줄
-	GLuint matrixID = glGetUniformLocation(programID, "MVP");*/
+/*<<<<<<< HEAD
+	GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	GameManager GM(window);//아직 안씀
 	Player* eevee = new Player();
 	//Ball* eevee = new Ball();
@@ -36,7 +32,7 @@ int main(int argc, char **argv)
 	float x = 0;
 	do {
 		eevee->update(window);
-=======
+=======*/
 	float x = 0;
 	do {
 		tC.EnqueueRequest(0, vec3(0, 0, 0), x);
@@ -53,14 +49,9 @@ int main(int argc, char **argv)
 		tr.PolygonID = 0;
 		tRM.drawObject(tr);
 		*/
-<<<<<<< HEAD
-
-		//x %= 20;
-=======
+		
 		x += 0.1;
-		if (x > 360) x -= 360;
->>>>>>> f06c0ead5338f09c5d3441f5fea9033eb3b93c86
-	
+		if (x > 360) x -= 360;	
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
