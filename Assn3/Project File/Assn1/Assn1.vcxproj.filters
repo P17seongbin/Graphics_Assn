@@ -28,6 +28,9 @@
     <Filter Include="소스 파일\Game\Obj">
       <UniqueIdentifier>{7fd35b40-f05a-4300-a01c-65f3357bb9f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Game\Obj">
+      <UniqueIdentifier>{fc0d614c-a089-49ca-b552-47d604d68aa7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShaderLoader.cpp">
@@ -76,6 +79,15 @@
     </ClInclude>
     <ClInclude Include="ObjLoader.hpp">
       <Filter>헤더 파일\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ball.h">
+      <Filter>헤더 파일\Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>헤더 파일\Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="AIPlayer.h">
+      <Filter>헤더 파일\Game\Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

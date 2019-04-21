@@ -30,9 +30,12 @@
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIPlayer.h" />
+    <ClInclude Include="ball.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IObject.h" />
     <ClInclude Include="ObjLoader.hpp" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RenderChannel.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="State.h" />

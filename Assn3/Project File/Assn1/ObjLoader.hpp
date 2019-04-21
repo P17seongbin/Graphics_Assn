@@ -4,6 +4,7 @@
 #include "RenderManager.h"
 #include <vector>
 #include <map>
+
 using namespace std;
 class ObjLoader
 {

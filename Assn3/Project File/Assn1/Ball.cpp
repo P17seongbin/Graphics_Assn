@@ -1,27 +1,28 @@
-#include "IObject.h"
+#include "ball.h"
 
-class Ball : IObject
+
+
+Ball::Ball()
 {
-public:
-	glm::vec3 getPos() { return Pos; }
-	glm::vec3 getSpeed() { return Speed; }
-	glm::vec3 getAccel() { return Accel; }
+	glm::vec3 initialPos = glm::vec3(0,0,0);
+	glm::vec3 initialSpeed = glm::vec3(0, 0, 0.05);
+	setTag("ball");
+	setPos(initialPos);
+	setSpeed(initialSpeed);
+}
 
-	void setPos(glm::vec3 pos) { Pos = pos; }
-	void setSpeed(glm::vec3 speed) { Speed = speed; }
-	void setAccel(glm::vec3 accel) { Accel = accel; }
+void Ball::update(GLFWwindow* window)
+{
+	addPos(Speed);
+	printf("%f %f %f", Speed[0], Speed[1], Speed[2]);
+	if (Pos[0] > FIELD_WIDTH / 2 || Pos[0] <-FIELD_WIDTH/2)
+	{
+		Speed[0] = -Speed[0];
+	}
 
-	void addPos(glm::vec3 dpos) { Pos += dpos; }
-	void addSpeed(glm::vec3 dspeed) { Speed += dspeed; }
-	void addAccel(glm::vec3 daccel) { Accel += daccel; }
-
-	void setobjID(unsigned int i) { ID = i; }
-	void setTag(std::string tag) { Tag = tag; }
-	std::string getTag() { return Tag; }
-private:
-	glm::vec3 Pos;
-	glm::vec3 Speed;
-	glm::vec3 Accel;
-	std::string Tag;
-	unsigned int ID;
-};
+	if (Pos[2] > FIELD_LENGTH/2 || Pos[2]<-FIELD_LENGTH/2) //OUT OF BOUNDARY
+	{
+		Speed[2] = -Speed[2];
+		//Pos[2] = FIELD_LENGTH / 2;
+	}
+}
