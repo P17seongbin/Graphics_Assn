@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	GameManager GM(window,&tC);//¾ÆÁ÷ ¾È¾¸
 	
 	AIPlayer* eevee = new AIPlayer(&tC);
-	Ball* ball = new Ball(&tC);
+	//Ball* ball = new Ball(&tC);
 	//Ball* eevee = new Ball();
 
 
@@ -34,8 +34,7 @@ int main(int argc, char **argv)
 
 	float x = 0;
 	do {
-		ball->update(window, 0);//ball->getPos()[0]);
-		eevee->update(window, 0);//ball->getPos()[0]);
+		eevee->update(window, 0);
 		eevee->DrawSelf();
 		tC.DrawAll();
 
