@@ -15,6 +15,7 @@ vector<IObject*> GameManager::getCollideList(string tag)
 
 void GameManager::Update(GLFWwindow* window)
 {
+	std::map<int, CameraMovement>::iterator cit;
 	IObject* Player = FindObjectWithTag("player1");
 	bool IsPressed = false;
 	float x = 0;
@@ -42,14 +43,19 @@ void GameManager::Update(GLFWwindow* window)
 		StateMachine->UpdatePlayerPos(Player->getPos());
 		StateMachine->UpdatePlayerDir(Player->getDir());
 
-
 		//카메라 전환 키가 눌렸는지 확인
-		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-			StateMachine->setCameraID(1);
-		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-			StateMachine->setCameraID(2);
-		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-			StateMachine->setCameraID(3);
+		for (int k = 1; k <= 3; k++)
+		{
+			if (glfwGetKey(window, GLFW_KEY_0 + k) == GLFW_PRESS)
+				StateMachine->setCameraID(k);
+		}
+		//카메라 이동 키가 눌렸는지 확인
+		for (cit = control_map.begin(); cit != control_map.end(); cit++)
+		{
+			if (glfwGetKey(window, cit->first) == GLFW_PRESS)
+				StateMachine->CameraControl(cit->second);
+		}
+
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
@@ -82,4 +88,9 @@ GameManager::GameManager(GLFWwindow* win, RenderChannel* channel, State* state)
 	window = win;
 	Channel = channel;
 	StateMachine = state;
+
+	control_map.insert(std::pair<int,CameraMovement>(GLFW_KEY_W, CameraMovement::CAM_FRONT));
+	control_map.insert(std::pair<int, CameraMovement>(GLFW_KEY_A, CameraMovement::CAM_LEFT));
+	control_map.insert(std::pair<int, CameraMovement>(GLFW_KEY_S, CameraMovement::CAM_BACK));
+	control_map.insert(std::pair<int, CameraMovement>(GLFW_KEY_D, CameraMovement::CAM_RIGHT));
 }

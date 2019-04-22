@@ -41,7 +41,27 @@ glm::mat4 State::getLookAt()
 */
 bool State::CameraControl(CameraMovement dir)
 {
-
+	float dp = 0.1;
+	switch (dir)
+	{
+	case CameraMovement::CAM_FRONT:
+		CamPos.z += dp;
+		if (CamPos.z > 0) CamPos.z = 0;
+		break;
+	case CameraMovement::CAM_BACK:
+		CamPos.z -= dp;
+		if (CamPos.z < (-1 * FIELD_LENGTH)) CamPos.z = (-1 * FIELD_LENGTH);
+		break;
+	case CameraMovement::CAM_LEFT:
+		CamPos.x += dp;
+		if (CamPos.x > (0.5 * FIELD_WIDTH)) CamPos.x = (0.5 * FIELD_WIDTH);
+		break;
+	case CameraMovement::CAM_RIGHT:
+		CamPos.x -= dp;
+		if (CamPos.x < (-0.5 * FIELD_WIDTH)) CamPos.x = (-0.5 * FIELD_WIDTH);
+		break;
+	}
+	return true;
 }
 
 void State::UpdatePlayerPos(glm::vec3 p)
