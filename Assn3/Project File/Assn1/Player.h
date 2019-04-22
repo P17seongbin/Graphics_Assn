@@ -32,7 +32,6 @@ public:
 	void Move(float dt);
 	void update(GLFWwindow* window, float dt);
 private:
-
 	glm::vec3 Pos;
 	glm::vec3 Speed;
 	glm::vec3 Accel;

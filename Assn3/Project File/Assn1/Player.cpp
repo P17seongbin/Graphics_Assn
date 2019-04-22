@@ -1,5 +1,5 @@
+#include "GameManager.h"
 #include "Player.h"
-
 Player::Player(RenderChannel* channel)
 {
 	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.5 * FIELD_LENGTH);

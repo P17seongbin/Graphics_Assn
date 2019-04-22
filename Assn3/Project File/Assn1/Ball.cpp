@@ -1,6 +1,5 @@
 #include "ball.h"
-
-
+#include "GameManager.h"
 
 Ball::Ball(RenderChannel * channel)
 {

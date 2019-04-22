@@ -5,6 +5,7 @@ class AIPlayer : public IObject
 {
 public:
 	AIPlayer(RenderChannel* channel);
+
 	glm::vec3 getPos() { return Pos; }
 	glm::vec3 getSpeed() { return Speed; }
 	glm::vec3 getAccel() { return Accel; }

@@ -4,7 +4,7 @@
 class Ball : public IObject
 {
 public:
-	Ball(RenderChannel* channel);
+	Ball(RenderChannel * channel);
 	glm::vec3 getPos() { return Pos; }
 	glm::vec3 getSpeed() { return Speed; }
 	glm::vec3 getAccel() { return Accel; }
