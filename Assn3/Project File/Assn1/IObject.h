@@ -24,7 +24,7 @@ public:
 	virtual void addSpeed(glm::vec3 dspeed) = 0;
 	virtual void addAccel(glm::vec3 daccel) = 0;
 
-	virtual void update(GLFWwindow* window) = 0;
+	virtual void update(GLFWwindow* window,float dt) = 0;
 	virtual void setobjID(unsigned int ID) = 0;
 
 	virtual void setTag(std::string tag) = 0;

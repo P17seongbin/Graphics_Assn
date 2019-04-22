@@ -23,7 +23,7 @@ void GameManager::Update(GLFWwindow* window)
 		while (it != ObjectQueue.end())
 		{
 			//printf("1");
-			it->second->update(window);
+			it->second->update(window,1/30);
 			it->second->DrawSelf();
 			it++;
 		}
@@ -62,7 +62,7 @@ GameManager::GameManager(GLFWwindow* win, RenderChannel* channel, State* state)
 	Ball* ball = new Ball(channel);
 	
 	AddObject(eevee);
-	AddObject(opponent);
+	//AddObject(opponent);
 	AddObject(ball);
 
 	window = win;

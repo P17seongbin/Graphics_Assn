@@ -14,6 +14,10 @@ Ball::Ball(RenderChannel * channel)
 	Channel = channel;
 }
 
+void Ball::Move(float dt)
+{
+}
+
 void Ball::update(GLFWwindow* window, float dt)
 {
 	addPos(Speed);

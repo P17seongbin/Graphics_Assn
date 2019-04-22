@@ -10,6 +10,10 @@ AIPlayer::AIPlayer(RenderChannel * channel)
 	//setDir(initialDir);
 }
 
+void AIPlayer::Move(float dt)
+{
+}
+
 void AIPlayer::update(GLFWwindow* window, float dt)
 {
 
