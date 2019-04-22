@@ -16,17 +16,18 @@ int main(int argc, char **argv)
 {
 	GLFWwindow* window;	
 	RenderManager tRM(&state,window);
-	RenderChannel tC(&tRM);
+	RenderChannel tC(&tRM,window);
 	GLuint programID = LoadShaders("vertex.glsl", "fragment.glsl");
 	state.setShaderID(programID);
 	ObjLoader tObjLoader(&tRM);
 
 	//vertex shader에서 이름 "MVP"인 uniform variable의 location정보 저장*************************************************손주은이 추가한 줄
 	//GLuint matrixID = glGetUniformLocation(programID, "MVP");
-	GameManager GM(window,&tC);//아직 안씀
-	Player* eevee = new Player(&tC);
+	GameManager GM(window,&tC,&state);//아직 안씀
+	
+	GM.Update(window);
 	//Ball* eevee = new Ball();
-
+	/*
 
 	bool IsPressed = false;
 
@@ -47,5 +48,5 @@ int main(int argc, char **argv)
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
-
+		*/
 }

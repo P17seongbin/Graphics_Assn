@@ -8,6 +8,7 @@ Player::Player(RenderChannel* channel)
 	setTag("player1");
 	setPos(initialPos);
 	setDir(0);
+	setobjID(0);
 	//setDir(initialDir);
 	setSpeed(initialSpeed);
 
