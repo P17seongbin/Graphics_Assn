@@ -1,10 +1,8 @@
 #pragma once
-
+#include "Const.h"
 #include"State.h"
 #include<string>
 
-#define FIELD_WIDTH 50//코트 너비
-#define FIELD_LENGTH 100 // 코트 길이(?)
 /**
  * @brief: 오브젝트 인터페이스입니다. 각 Object는 아래와 같은 Method를 구현해야 합니다.
 */

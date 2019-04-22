@@ -89,6 +89,9 @@
     <ClInclude Include="AIPlayer.h">
       <Filter>헤더 파일\Game\Obj</Filter>
     </ClInclude>
+    <ClInclude Include="Const.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl">

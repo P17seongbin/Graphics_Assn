@@ -32,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="AIPlayer.h" />
     <ClInclude Include="ball.h" />
+    <ClInclude Include="Const.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="IObject.h" />
     <ClInclude Include="ObjLoader.hpp" />

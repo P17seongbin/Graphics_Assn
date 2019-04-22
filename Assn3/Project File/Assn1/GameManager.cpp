@@ -62,7 +62,7 @@ GameManager::GameManager(GLFWwindow* win, RenderChannel* channel, State* state)
 	Ball* ball = new Ball(channel);
 	
 	AddObject(eevee);
-	//AddObject(opponent);
+	AddObject(opponent);
 	AddObject(ball);
 
 	window = win;

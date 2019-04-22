@@ -36,6 +36,8 @@ public:
 	void setCameraID(GLuint ID) { CameraID = ID; }
 	void setShaderID(GLuint ID) { ShaderID = ID; }
 
+	glm::mat4 getLookAt();
+
 	bool CameraControl(CameraMovement dir);	
 	bool IsHiddenLineRemovalMode() { return HLR; }
 	void ToggleHiddenLineRemovalMode() { HLR = !HLR; }
@@ -46,6 +48,7 @@ private:
 	int PlayerScore;
 	int AIScore;
 	bool HLR = false;//Hidden Line Removal
+	glm::mat4 Camera_Transpose;
 
 };
 
