@@ -21,7 +21,10 @@ enum CameraMovement { CAM_FRONT, CAM_BACK, CAM_LEFT, CAM_RIGHT };
 class State
 {
 public:
-	GLuint getCameraID() {		return CameraID;	}
+
+	State();
+
+	GLuint getCameraID() { return CameraID;	}
 	GLuint getShaderID() { return ShaderID; }
 
 	int getPlayerScore() { return PlayerScore; }
@@ -42,13 +45,20 @@ public:
 	bool IsHiddenLineRemovalMode() { return HLR; }
 	void ToggleHiddenLineRemovalMode() { HLR = !HLR; }
 	
+	void UpdatePlayerPos(glm::vec3 p);
+	void UpdatePlayerDir(float d) { PlayerDir = d; }
+
 private:
 	GLuint CameraID;
 	GLuint ShaderID;
+
+	glm::vec3 PlayerPos;
+	float PlayerDir;
+
 	int PlayerScore;
 	int AIScore;
 	bool HLR = false;//Hidden Line Removal
-	glm::mat4 Camera_Transpose;
+	glm::vec3 CamPos;
 
 };
 

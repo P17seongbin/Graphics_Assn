@@ -15,6 +15,7 @@ vector<IObject*> GameManager::getCollideList(string tag)
 
 void GameManager::Update(GLFWwindow* window)
 {
+	IObject* Player = FindObjectWithTag("player1");
 	bool IsPressed = false;
 	float x = 0;
 	do {
@@ -36,6 +37,19 @@ void GameManager::Update(GLFWwindow* window)
 		}
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_RELEASE)
 			IsPressed = false;
+
+		//State Machine에 플레이어의 위치와 방향 정보를 업로드.
+		StateMachine->UpdatePlayerPos(Player->getPos());
+		StateMachine->UpdatePlayerDir(Player->getDir());
+
+
+		//카메라 전환 키가 눌렸는지 확인
+		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+			StateMachine->setCameraID(1);
+		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+			StateMachine->setCameraID(2);
+		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+			StateMachine->setCameraID(3);
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
