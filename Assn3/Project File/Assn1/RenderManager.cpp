@@ -1,4 +1,6 @@
 #include "RenderManager.h"
+#include "State.h"
+#include "Const.h"
 using namespace glm;
 
 static void errorCallback(int errorCode, const char* errorDescription)
@@ -95,18 +97,14 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 			3,                  // 크기(size)
 			GL_FLOAT,           // 타입(type)
 			GL_FALSE,           // 정규화(normalized)?
-			12,                  // 다음 요소 까지 간격(stride)
+			0,                  // 다음 요소 까지 간격(stride)
 			(void*)0           // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////손주은이 추가한 mvp설정 시작
 		GLuint width = 50; //temporary variables for setting aspect ratio
 		GLuint height = 50;
 		mat4 Model = reqinfo.PositionMatrix * reqinfo.RotationMatrix; //Model Matrix
-		mat4 View = lookAt(
-			getCamPos(), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
-			glm::vec3(0, 0, 0), // 그리고 카메라가 원점을 본다
-			glm::vec3(0, 1, 0)  // 머리가 위쪽이다 (0,-1,0 으로 해보면, 뒤집어 볼것이다)
-		);
+		mat4 View = getLookAt();
 		mat4 Projection = perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 		mat4 mvp = Projection * View * Model;
 
@@ -136,11 +134,14 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	return true;
 	//	else return false;
 }
-glm::vec3 RenderManager::getCamPos()
+glm::mat4 RenderManager::getLookAt()
 {
-	int CamID = StateRef->getCameraID();
-
-	return glm::vec3(4,3,3);
+	StateRef->getLookAt();
+	return  lookAt(
+		glm::vec3(0, 2, FIELD_LENGTH), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
+		glm::vec3(0, 2, 0), // 그리고 카메라가 원점을 본다
+		glm::vec3(0, 1, 0)  // 머리가 위쪽이다 (0,-1,0 으로 해보면, 뒤집어 볼것이다)
+	);
 }
 /*
 vector<string> mlist;

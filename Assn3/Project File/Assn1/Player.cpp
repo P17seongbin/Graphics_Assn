@@ -2,11 +2,11 @@
 
 Player::Player(RenderChannel* channel)
 {
-	glm::vec3 initialPos = glm::vec3(0.0, 0.0, 0.0);
+	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.5 * FIELD_LENGTH);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
 	setTag("player1");
 	setPos(initialPos);
-	setDir(3.14);
+	setDir(0);
 	setobjID(0);
 	setSpeed(initialSpeed);
 	Channel = channel;

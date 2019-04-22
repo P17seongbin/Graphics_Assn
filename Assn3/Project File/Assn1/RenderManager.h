@@ -11,7 +11,7 @@ public:
 	RenderManager(State* state, GLFWwindow* &win);
 	bool drawObject(std::vector<UnitRequest> &reqlist);
 	void setVAO(GLuint ID) { VAO = ID; }
-	glm::vec3 getCamPos();
+	glm::mat4 getLookAt();
 private:
 	std::map<GLuint,UnitMesh> Meshqueue;//(ID,UnitMesh)
 	State* StateRef;
