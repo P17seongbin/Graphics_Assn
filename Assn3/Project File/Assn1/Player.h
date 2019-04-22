@@ -29,7 +29,7 @@ public:
 
 	void DrawSelf() { Channel->EnqueueRequest(ID, Pos, Dir); }
 
-	void update(GLFWwindow* window);
+	void update(GLFWwindow* window, float ball_x);
 private:
 
 	glm::vec3 Pos;

@@ -1,13 +1,5 @@
-#  ==========================================================================
-#  
-#  Wavefront OBJ format exported by Red-i Productions' "Riptide Pro"
-#     (a commercial plugin for Cinema 4D PC & Mac, R9.6 or later)
-#  
-#  Red-i Productions
-#  http://skinprops.com
-#  
-#  ==========================================================================
 mtllib pokeball.mtl
+
 v 98.1337 -21.708 -0
 v 98.2458 -21.7065 -0
 v 98.3579 -21.702 -0

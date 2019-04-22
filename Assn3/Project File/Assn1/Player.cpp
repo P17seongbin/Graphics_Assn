@@ -2,18 +2,16 @@
 
 Player::Player(RenderChannel* channel)
 {
-	glm::vec3 initialPos = glm::vec3(0.0, 0.0, 0.0);
+	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -(float)FIELD_LENGTH/ 2);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
-	//glm::vec3 initialDir = glm::vec3(0, 0, 1);
 	setTag("player1");
 	setPos(initialPos);
 	setDir(0);
-	//setDir(initialDir);
 	setSpeed(initialSpeed);
 
 	Channel = channel;
 }
-void Player::update(GLFWwindow* window) {
+void Player::update(GLFWwindow* window,float ball_x) {
 	
 	float dxspeed = 0.00005;
 	float max = 0.01;
@@ -43,14 +41,14 @@ void Player::update(GLFWwindow* window) {
 
 	if (Pos[0] > FIELD_WIDTH / 2)
 	{
-		Pos[0] = FIELD_WIDTH/2;// setPos(glm::vec3(FIELD_WIDTH / 2, 0, 0));
+		Pos[0] = FIELD_WIDTH/2;
 	}
 	else if (Pos[0] < (-1)*FIELD_WIDTH / 2)
 	{
-		Pos[0] = -FIELD_WIDTH / 2;//setPos(glm::vec3(-FIELD_WIDTH / 2, 0, 0));
+		Pos[0] = -FIELD_WIDTH / 2;
 	}
 
 	// player의 y,z좌표는 0으로 고정
 	Pos[1] = 0;
-	Pos[2] = 0;
+	Pos[2] = (float)FIELD_LENGTH / 2;
 }

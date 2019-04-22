@@ -9,7 +9,7 @@ public:
 	void Terminate_Game();
 	vector<IObject*> getCollideList(string tag);
 	//void Update();
-	void Update(GLFWwindow* window);
+	void update(GLFWwindow* window, float ball_x);
 	void AddObject(IObject* obj);
 private:
 	map<string, IObject*> ObjectQueue;//(tag,object)

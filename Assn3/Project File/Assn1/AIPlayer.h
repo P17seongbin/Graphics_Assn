@@ -1,6 +1,7 @@
 #pragma once
 #include "IObject.h"
 #include "RenderChannel.h"
+
 class AIPlayer : public IObject
 {
 public:
@@ -29,7 +30,7 @@ public:
 
 	void DrawSelf() { Channel->EnqueueRequest(ID, Pos, Dir); }
 
-	void update(GLFWwindow* window);
+	void update(GLFWwindow* window, float ball_x);
 private:
 	glm::vec3 Pos;
 	glm::vec3 Speed;

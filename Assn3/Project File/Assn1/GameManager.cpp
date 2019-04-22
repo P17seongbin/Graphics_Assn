@@ -13,13 +13,13 @@ vector<IObject*> GameManager::getCollideList(string tag)
 	return vector<IObject*>();
 }
 
-void GameManager::Update(GLFWwindow* window)
+void GameManager::update(GLFWwindow* window, float ball_x)
 {
 	std::map<string, IObject*>::iterator it = ObjectQueue.begin();
 		//map<GLuint, UnitMesh>::iterator it = Meshqueue.find((GLuint)reqinfo.PolygonID);
 	if (it != ObjectQueue.end())
 	{
-		it->second->update(window);
+		it->second->update(window,ball_x);
 		it++;
 	}
 }
@@ -31,9 +31,9 @@ void GameManager :: AddObject(IObject * obj) {
 
 GameManager::GameManager(GLFWwindow* win, RenderChannel* channel)
 {
+	Ball* ball = new Ball(channel);
 	Player* eevee = new Player(channel);
 	AIPlayer* opponent = new AIPlayer(channel);
-	Ball* ball = new Ball(channel);
 
 	AddObject(eevee);
 	AddObject(opponent);
