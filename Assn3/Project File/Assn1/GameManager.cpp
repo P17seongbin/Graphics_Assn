@@ -2,7 +2,7 @@
 #include "Ball.h"
 #include "AIPlayer.h"
 #include "Player.h"
-
+#include <GL/glut.h>
 
 void GameManager::Terminate_Game()
 {
@@ -36,6 +36,8 @@ void GameManager::Update(GLFWwindow* window)
 		}
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_RELEASE)
 			IsPressed = false;
+
+		
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
@@ -60,7 +62,7 @@ GameManager::GameManager(GLFWwindow* win, RenderChannel* channel, State* state)
 	Player* eevee = new Player(channel);
 	AIPlayer* opponent = new AIPlayer(channel);
 	Ball* ball = new Ball(channel);
-	
+
 	AddObject(eevee);
 	//AddObject(opponent);
 	AddObject(ball);

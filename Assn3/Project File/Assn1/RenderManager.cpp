@@ -38,7 +38,7 @@ RenderManager::RenderManager(State* state, GLFWwindow* &win)
 	{
 		fprintf(stderr, "GLFW 초기화 실패\n");
 	}
-
+	
 	StateRef = state;
 	glfwWindowHint(GLFW_SAMPLES, 4); // 4x 안티에일리어싱
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3 을 쓸 겁니다
