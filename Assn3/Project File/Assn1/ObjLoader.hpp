@@ -58,13 +58,14 @@ inline int ObjLoader::findID(std::string name)
 
 bool ObjLoader::loadOBJ(vector<string> list)
 {
-	std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
-	std::vector< glm::vec3 > temp_vertices;
+
 	std::vector< glm::vec3> out_vertices(0);
 
 
 	for (int i = 0; i < list.size(); i++)
 	{
+		std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
+		std::vector< glm::vec3 > temp_vertices;
 		UnitMesh tmesh;
 		tmesh.ID = i;
 		tmesh.offset = out_vertices.size();
@@ -129,7 +130,7 @@ bool ObjLoader::loadOBJ(vector<string> list)
 			len++;
 		}
 		tmesh.len = len;
-		printf("%d %d %d", tmesh.ID, tmesh.len, tmesh.offset);
+		printf("%d %d %d\n", tmesh.ID, tmesh.len, tmesh.offset);
 		RM->enqueueMesh(tmesh);
 	}
 	glGenVertexArrays(1, &VertexArrayID);

@@ -24,7 +24,7 @@ public:
 	virtual void addSpeed(glm::vec3 dspeed) = 0;
 	virtual void addAccel(glm::vec3 daccel) = 0;
 
-	virtual void update(GLFWwindow* window,float ball_x) = 0;
+	virtual void update(GLFWwindow* window,float dt) = 0;
 	virtual void setobjID(unsigned int ID) = 0;
 
 	virtual void setTag(std::string tag) = 0;
@@ -35,4 +35,6 @@ public:
 	virtual void addDir(float ddir) = 0;
 
 	virtual void DrawSelf() = 0;
+
+	virtual void Move(float dt) = 0;
 };

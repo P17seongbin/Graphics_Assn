@@ -1,7 +1,6 @@
 #pragma once
 #include "IObject.h"
 #include "RenderChannel.h"
-
 class AIPlayer : public IObject
 {
 public:
@@ -29,8 +28,8 @@ public:
 	std::string getTag() { return Tag; }
 
 	void DrawSelf() { Channel->EnqueueRequest(ID, Pos, Dir); }
-
-	void update(GLFWwindow* window, float ball_x);
+	void Move(float dt);
+	void update(GLFWwindow* window, float dt);
 private:
 	glm::vec3 Pos;
 	glm::vec3 Speed;

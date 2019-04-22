@@ -6,12 +6,10 @@
  */
 bool RenderChannel::DrawAll()
 {
-	int reqc = Draw_Queue.size();
-	for (int i = 0; i < reqc; i++)
-	{
-		renderer->drawObject(Draw_Queue[i]);
-	}
+	renderer->drawObject(Draw_Queue);
 	Draw_Queue.clear();
+
+
 	return true;
 }
 bool RenderChannel::EnqueueRequest(unsigned int ID, glm::vec3 pos, float dir)
@@ -37,7 +35,8 @@ bool RenderChannel::EnqueueRequest(UnitRequest req)
 /**
  * @param RenderManager* render : Render 요청을 전달할 RenderManager Object를 가리키는 포인터입니다.
  */
-RenderChannel::RenderChannel(RenderManager * render)
+RenderChannel::RenderChannel(RenderManager * render,GLFWwindow* Window)
 {
+	window = Window;
 	renderer = render;
 }
