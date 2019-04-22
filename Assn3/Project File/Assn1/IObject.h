@@ -35,4 +35,6 @@ public:
 	virtual void addDir(float ddir) = 0;
 
 	virtual void DrawSelf() = 0;
+
+	virtual void Move(float dt) = 0;
 };

@@ -14,7 +14,7 @@ Ball::Ball(RenderChannel * channel)
 	Channel = channel;
 }
 
-void Ball::update(GLFWwindow* window)
+void Ball::update(GLFWwindow* window, float dt)
 {
 	addPos(Speed);
 	//printf("%f %f %f", Speed[0], Speed[1], Speed[2]);
