@@ -37,6 +37,7 @@ inline ObjLoader::ObjLoader(RenderManager * t)
 		char line[127];
 		// read the first word of the line
 		int res = fscanf(file, "%s", line);
+
 		if (res == EOF)
 			break; // EOF = End Of File. Quit the loop.
 		else
@@ -71,9 +72,13 @@ bool ObjLoader::loadOBJ(vector<string> list)
 
 		string t = list[i];
 		t.append(".obj");
-
 		const char* path = t.c_str();
-		FILE * file = fopen(path, "r");
+		FILE* file;
+		if (path[0] == '#')
+			file = fopen(path + 1, "r");
+		else
+			file = fopen(path, "r");
+
 		if (file == NULL) {
 			printf("Impossible to open the file %s !\n", path);
 			return false;
@@ -94,10 +99,21 @@ bool ObjLoader::loadOBJ(vector<string> list)
 			else if (strcmp(lineHeader, "f") == 0) {
 				std::string vertex1, vertex2, vertex3;
 				unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-				int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-				if (matches != 9) {
-					printf("File can't be read by this parser\n");
-					return false;
+				if (path[0] != '#')
+				{
+					int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+					if (matches != 9) {
+						printf("File can't be read by this parser\n");
+						return false;
+					}
+				}
+				else
+				{
+					int matches = fscanf(file, "%d/%d %d/%d %d/%d\n", &vertexIndex[0], &uvIndex[0], &vertexIndex[1], &uvIndex[1],&vertexIndex[2], &uvIndex[2]);
+					if (matches != 6) {
+						printf("File can't be read by this parser\n");
+						return false;
+					}
 				}
 				vertexIndices.push_back(vertexIndex[0]);
 				vertexIndices.push_back(vertexIndex[1]);
@@ -110,13 +126,11 @@ bool ObjLoader::loadOBJ(vector<string> list)
 			unsigned int vertexIndex = vertexIndices[i];
 			glm::vec3 vertex = temp_vertices[vertexIndex - 1];
 			out_vertices.push_back(vertex);
-			len += 3;
+			len++;
 		}
 		tmesh.len = len;
 		printf("%d %d %d", tmesh.ID, tmesh.len, tmesh.offset);
 		RM->enqueueMesh(tmesh);
-		
-
 	}
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
