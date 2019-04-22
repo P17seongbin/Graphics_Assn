@@ -51,4 +51,11 @@ void AIPlayer::update(GLFWwindow* window, float dt)
 	{
 		Pos[0] = -FIELD_WIDTH / 2;//setPos(glm::vec3(-FIELD_WIDTH / 2, 0, 0));
 	}
+
+	if (Pos[2] > FIELD_LENGTH / 2)
+		Pos[2] = FIELD_LENGTH / 2;
+	else if (Pos[2] <= 0)
+		
+		Pos[2] = 0;
+	Pos[0] = Ball_x;
 }

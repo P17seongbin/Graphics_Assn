@@ -16,6 +16,7 @@ public:
 	void setSpeed(glm::vec3 speed) { Speed = speed; }
 	void setAccel(glm::vec3 accel) { Accel = accel; }
 	void setDir(float dir) { Dir = dir; }
+	void setBallPos(float ball_x) { Ball_x = ball_x; }
 	//void setDir(glm::vec3 dir) { Dir = dir; }
 
 	void addPos(glm::vec3 dpos) { Pos += dpos; }
@@ -35,6 +36,7 @@ private:
 	glm::vec3 Pos;
 	glm::vec3 Speed;
 	glm::vec3 Accel;
+	float Ball_x;
 	float Dir;
 	//glm::vec3 Dir;//보고있는 방향
 	std::string Tag;

@@ -17,5 +17,6 @@ private:
 	GLFWwindow* window;
 	RenderChannel* Channel;
 	State* StateMachine;
+	int Score1, Score2;
 	std::map<int, CameraMovement> control_map;
 };

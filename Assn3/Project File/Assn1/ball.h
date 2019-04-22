@@ -9,12 +9,12 @@ public:
 	glm::vec3 getSpeed() { return Speed; }
 	glm::vec3 getAccel() { return Accel; }
 	float getDir() { return Dir; }
-	//glm::vec3 getDir() { return Dir; }
 
 	void setPos(glm::vec3 pos) { Pos = pos; }
 	void setSpeed(glm::vec3 speed) { Speed = speed; }
 	void setAccel(glm::vec3 accel) { Accel = accel; }
 	void setDir(float dir) { Dir = dir; }
+	void setBallPos(float ball_x) { Ball_x = ball_x; }
 	//void setDir(glm::vec3 dir) { Dir = dir; }
 
 	void addPos(glm::vec3 dpos) { Pos += dpos; }
@@ -31,11 +31,11 @@ public:
 	void Move(float dt);
 	void update(GLFWwindow* window, float dt);
 private:
-
 	glm::vec3 Pos;
 	glm::vec3 Speed;
 	glm::vec3 Accel;
 	float Dir;
+	float Ball_x;//not used
 	//glm::vec3 Dir;//보고있는 방향
 	std::string Tag;
 	unsigned int ID;

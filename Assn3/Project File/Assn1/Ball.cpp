@@ -4,7 +4,7 @@
 Ball::Ball(RenderChannel * channel)
 {
 	glm::vec3 initialPos = glm::vec3(0, 0, 0);
-	glm::vec3 initialSpeed = glm::vec3(0, 0, 0.01);
+	glm::vec3 initialSpeed = glm::vec3(0.4, 0, 0.3);
 	setTag("ball");
 	setDir(0);
 	setPos(initialPos);
@@ -15,12 +15,13 @@ Ball::Ball(RenderChannel * channel)
 
 void Ball::Move(float dt)
 {
+	Pos = Pos + Speed*dt;
 }
 
 void Ball::update(GLFWwindow* window, float dt)
 {
-	addPos(Speed);
-	//printf("%f %f %f", Speed[0], Speed[1], Speed[2]);
+	Move(dt);
+	
 	if (Pos[0] > FIELD_WIDTH / 2 || Pos[0] <-FIELD_WIDTH/2)
 	{
 		Speed[0] = -Speed[0];
@@ -29,6 +30,5 @@ void Ball::update(GLFWwindow* window, float dt)
 	if (Pos[2] > FIELD_LENGTH/2 || Pos[2]<-FIELD_LENGTH/2) //OUT OF BOUNDARY
 	{
 		Speed[2] = -Speed[2];
-		//Pos[2] = FIELD_LENGTH / 2;
 	}
 }

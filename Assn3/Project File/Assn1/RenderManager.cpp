@@ -90,7 +90,7 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	{
 		UnitRequest reqinfo = reqlist[i];
 		UnitMesh mesh = Meshqueue[(GLuint)reqinfo.PolygonID];
-		printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
+		//printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
 		// 버퍼의 첫번째 속성값(attribute) : 버텍스들
 		glVertexAttribPointer(
 			0,                  // 0번째 속성(attribute). 0 이 될 특별한 이유는 없지만, 쉐이더의 레이아웃(layout)와 반드시 맞추어야 합니다.

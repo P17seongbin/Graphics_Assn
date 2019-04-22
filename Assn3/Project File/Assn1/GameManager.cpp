@@ -2,24 +2,75 @@
 #include "Ball.h"
 #include "AIPlayer.h"
 #include "Player.h"
-
+#include<GL/glut.h>
 
 void GameManager::Terminate_Game()
 {
+	//Restart
+	Score1 = 0;
+	Score2 = 0;
 }
 
 vector<IObject*> GameManager::getCollideList(string tag)
 {
-	return vector<IObject*>();
+	vector<IObject*> CollideList;
+
+	float collision_dist =2;
+	IObject* Obj = FindObjectWithTag(tag);
+	glm::vec3 a_pos=Obj->getPos();
+	glm::vec3 b_pos;
+	std::map<string, IObject*>::iterator it = ObjectQueue.begin();
+
+
+	while (it != ObjectQueue.end())
+	{
+		b_pos = it->second->getPos();
+		if (float(distance(a_pos, b_pos)) < collision_dist)
+			CollideList.push_back(it->second);
+		it++;
+	}
+	return CollideList;
 }
 
+float distance(glm::vec3 a,glm::vec3 b) {
+	glm::vec3 diff = a - b;
+	return sqrt(int(diff[0])^2+int(diff[1])^2+int(diff[2])^2);
+}
 void GameManager::Update(GLFWwindow* window)
 {
 	std::map<int, CameraMovement>::iterator cit;
 	IObject* Player = FindObjectWithTag("player1");
+	IObject* AIPlayer = FindObjectWithTag("player2");
+	IObject* Ball = FindObjectWithTag("ball");
+	glm::vec3 BallPos = Ball->getPos();
 	bool IsPressed = false;
 	float x = 0;
+
 	do {
+
+
+		BallPos = Ball->getPos();
+		AIPlayer->setBallPos(BallPos[0]);//°øÀÇ ÁÂÇ¥ aiplayer¿¡°Ô ³Ñ°ÜÁÜ
+
+		if (getCollideList("ball").size() > 1)
+		{
+			//printf("collision");
+			Ball->setSpeed(glm::vec3(-(Ball->getSpeed()[0]), 0, Ball->getSpeed()[2]));
+			//printf("%d %d\n", Score1, Score2);
+		}
+
+		if (BallPos[2] > FIELD_LENGTH / 2)
+		{
+			Score2++;
+			printf("score2: %d\n", Score2);
+			Ball->setPos(glm::vec3(0, 0, 0));
+		}
+		else if (BallPos[2] < -FIELD_LENGTH / 2) 
+		{
+			Ball->setPos(glm::vec3(0, 0, 0)); 
+			Score1++;
+			printf("score1: %d\n", Score1);
+		}
 		std::map<string, IObject*>::iterator it = ObjectQueue.begin();
 		//map<GLuint, UnitMesh>::iterator it = Meshqueue.find((GLuint)reqinfo.PolygonID);
 		while (it != ObjectQueue.end())
@@ -93,4 +144,7 @@ GameManager::GameManager(GLFWwindow* win, RenderChannel* channel, State* state)
 	control_map.insert(std::pair<int, CameraMovement>(GLFW_KEY_A, CameraMovement::CAM_LEFT));
 	control_map.insert(std::pair<int, CameraMovement>(GLFW_KEY_S, CameraMovement::CAM_BACK));
 	control_map.insert(std::pair<int, CameraMovement>(GLFW_KEY_D, CameraMovement::CAM_RIGHT));
+
+	Score1 = 0;
+	Score2 = 0;
 }
