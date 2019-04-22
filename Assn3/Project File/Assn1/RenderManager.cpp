@@ -103,7 +103,7 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 		GLuint height = 50;
 		mat4 Model = reqinfo.PositionMatrix * reqinfo.RotationMatrix; //Model Matrix
 		mat4 View = lookAt(
-			glm::vec3(4, 3, 3), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
+			getCamPos(), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
 			glm::vec3(0, 0, 0), // 그리고 카메라가 원점을 본다
 			glm::vec3(0, 1, 0)  // 머리가 위쪽이다 (0,-1,0 으로 해보면, 뒤집어 볼것이다)
 		);
@@ -136,11 +136,11 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	return true;
 	//	else return false;
 }
-glm::mat4 RenderManager::getLookAt()
+glm::vec3 RenderManager::getCamPos()
 {
 	int CamID = StateRef->getCameraID();
 
-	return glm::mat4();
+	return glm::vec3(4,3,3);
 }
 /*
 vector<string> mlist;

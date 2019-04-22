@@ -23,7 +23,7 @@ void GameManager::Update(GLFWwindow* window)
 		while (it != ObjectQueue.end())
 		{
 			//printf("1");
-			it->second->update(window,1/30);
+			it->second->update(window,(1/30.0));
 			it->second->DrawSelf();
 			it++;
 		}
