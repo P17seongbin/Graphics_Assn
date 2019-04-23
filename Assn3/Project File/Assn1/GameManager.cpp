@@ -13,9 +13,10 @@ void GameManager::Terminate_Game()
 }
 void GameManager::Ball_Replace(IObject* Ball)
 {
+	float speed = 1;
 	Ball->setPos(glm::vec3(0, 0, 0));
-	Ball->setDir((3.14 / 6) * ((rand() % 100) / 100) - 15 + 3.14 * (rand() % 2));
-
+	Ball->setDir((3.14 / 6) * ((rand() % 100) / 100.0f - 0.5) + 3.14 * (rand() % 2));
+	Ball->setSpeed(glm::vec3(speed * sinf(Ball->getDir()), 0, speed * cosf(Ball->getDir())));
 }
 
 vector<IObject*> GameManager::getCollideList(string tag)
