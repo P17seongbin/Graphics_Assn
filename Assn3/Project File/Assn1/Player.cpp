@@ -2,7 +2,7 @@
 #include "Player.h"
 Player::Player(RenderChannel* channel)
 {
-	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.5 * FIELD_LENGTH);
+	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.25f * (float)FIELD_LENGTH);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
 	setTag("player1");
 	setPos(initialPos);

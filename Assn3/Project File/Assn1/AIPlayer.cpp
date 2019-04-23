@@ -2,7 +2,7 @@
 
 AIPlayer::AIPlayer(RenderChannel* channel)
 {
-	glm::vec3 initialPos = glm::vec3(0.0, 0.0, 0.5*(float)FIELD_LENGTH);
+	glm::vec3 initialPos = glm::vec3(0.0, 0.0, 0.25*(float)FIELD_LENGTH);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
 	setTag("player2");
 	setPos(initialPos);
