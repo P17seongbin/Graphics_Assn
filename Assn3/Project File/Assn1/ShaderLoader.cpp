@@ -2,13 +2,12 @@
 #include <string>
 #include <vector>
 #include <sstream>
-
+//Reference : http://www.opengl-tutorial.org/kr/beginners-tutorials/tutorial-2-the-first-triangle/
 /**
 * @brief: 미리 작성된 쉐이더를 Load해서 메인 스트림에 전달하는 Shader Loader입니다.
 * @return: GLuint ProgramID (bind된 프로그램의 고유번호를 리턴합니다)
 * @param: vertex_file_path: Vertex shader의 경로를 지정합니다. 
 * @param: fragment_file_path: Fragment shader의 경로를 지정합니다.
-* @todo: 보고서에 레퍼런스 명기.
 */
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path) {
 

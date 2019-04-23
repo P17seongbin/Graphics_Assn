@@ -26,7 +26,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderChannel.cpp" />
     <ClCompile Include="RenderManager.cpp" />
-    <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="State.cpp" />
   </ItemGroup>

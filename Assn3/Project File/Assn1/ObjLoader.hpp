@@ -1,4 +1,4 @@
-//Credit: http://www.opengl-tutorial.org/kr/beginners-tutorials/tutorial-7-model-loading/
+//Reference : http://www.opengl-tutorial.org/kr/beginners-tutorials/tutorial-7-model-loading/
 #pragma once
 #include "State.h"
 #include "RenderManager.h"
