@@ -2,7 +2,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "RenderManager.h"
-
+#include <string>
 
 /**
  * @brief: 각 Object가 자신을 그릴 것을 Request하는데 사용되는 Object입니다

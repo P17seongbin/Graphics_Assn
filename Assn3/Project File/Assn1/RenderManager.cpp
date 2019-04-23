@@ -90,7 +90,7 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	{
 		UnitRequest reqinfo = reqlist[i];
 		UnitMesh mesh = Meshqueue[(GLuint)reqinfo.PolygonID];
-		printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
+		//printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
 		// 버퍼의 첫번째 속성값(attribute) : 버텍스들
 		glVertexAttribPointer(
 			0,                  // 0번째 속성(attribute). 0 이 될 특별한 이유는 없지만, 쉐이더의 레이아웃(layout)와 반드시 맞추어야 합니다.
@@ -109,8 +109,7 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 		mat4 mvp = Projection * View * Model;
 
 		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);//sending mvp information to vertex shader
-
-
+		
 
 		if (StateRef->IsHiddenLineRemovalMode())
 		{
@@ -128,6 +127,7 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 		glDrawArrays(GL_TRIANGLES, mesh.offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 		glfwPollEvents();
 	}
+
 	glfwSwapBuffers(window);
 	glDisableVertexAttribArray(0);
 	//}

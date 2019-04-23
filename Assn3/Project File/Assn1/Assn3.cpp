@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	GLuint programID = LoadShaders("vertex.glsl", "fragment.glsl");
 	state.setShaderID(programID);
 	ObjLoader tObjLoader(&tRM);
-
+	glutInit(&argc, argv);
 
 	//GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	GameManager GM(window,&tC,&state);//¾ÆÁ÷ ¾È¾¸

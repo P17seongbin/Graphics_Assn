@@ -2,7 +2,7 @@
 #include "Ball.h"
 #include "AIPlayer.h"
 #include "Player.h"
-#include <GL/glut.h>
+
 
 void GameManager::Terminate_Game()
 {
@@ -18,6 +18,7 @@ void GameManager::Update(GLFWwindow* window)
 	bool IsPressed = false;
 	float x = 0;
 	do {
+
 		std::map<string, IObject*>::iterator it = ObjectQueue.begin();
 		//map<GLuint, UnitMesh>::iterator it = Meshqueue.find((GLuint)reqinfo.PolygonID);
 		while (it != ObjectQueue.end())
@@ -37,6 +38,7 @@ void GameManager::Update(GLFWwindow* window)
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_RELEASE)
 			IsPressed = false;
 
+		
 		
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
