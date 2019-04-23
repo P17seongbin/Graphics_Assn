@@ -6,6 +6,7 @@
 #include "ball.h"
 #include "RenderChannel.h"
 
+#include <ctime>
 // 이것이 우리의 버텍스 버퍼를 가리킵니다.
 GLuint vertexbuffer;
 GLuint VertexArrayID;
@@ -14,6 +15,7 @@ using namespace glm;
 
 int main(int argc, char **argv)
 {
+	srand((unsigned int)time(0));
 	GLFWwindow* window;	
 	RenderManager tRM(&state,window);
 	RenderChannel tC(&tRM,window);

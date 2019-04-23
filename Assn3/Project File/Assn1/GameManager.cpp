@@ -16,7 +16,7 @@ vector<IObject*> GameManager::getCollideList(string tag)
 {
 	vector<IObject*> CollideList;
 
-	float collision_dist =3;
+	float collision_dist = 2;
 	IObject* Obj = FindObjectWithTag(tag);
 	glm::vec3 a_pos=Obj->getPos();
 	glm::vec3 b_pos;
@@ -47,6 +47,7 @@ void GameManager::Update(GLFWwindow* window)
 	glm::vec3 BallPos = Ball->getPos();
 	glm::vec3 BallSpeed = Ball->getSpeed();
 	bool IsPressed = false;
+
 	int max = 10;//십점내기
 	float x = 0;
 
@@ -109,6 +110,11 @@ void GameManager::Update(GLFWwindow* window)
 			it->second->DrawSelf();
 			it++;
 		}
+		UnitRequest field;
+		field.PolygonID = 3;
+		field.PositionMatrix = field.RotationMatrix = glm::mat4(1.0f);
+		Channel->EnqueueRequest(field);
+
 		Channel->DrawAll();
 		
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS && !IsPressed)

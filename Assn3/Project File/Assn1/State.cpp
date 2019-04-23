@@ -3,7 +3,7 @@
 State::State()
 {
 	CameraID = 3;
-	CamPos = glm::vec3(0, 10, -1 * FIELD_LENGTH);
+	CamPos = glm::vec3(0, 10, -0.5 * FIELD_LENGTH);
 }
 
 glm::mat4 State::getLookAt()
@@ -46,21 +46,27 @@ bool State::CameraControl(CameraMovement dir)
 	{
 	case CameraMovement::CAM_FRONT:
 		CamPos.z += dp;
-		if (CamPos.z > 0) CamPos.z = 0;
+
 		break;
 	case CameraMovement::CAM_BACK:
 		CamPos.z -= dp;
-		if (CamPos.z < (-1 * FIELD_LENGTH)) CamPos.z = (-1 * FIELD_LENGTH);
+
 		break;
 	case CameraMovement::CAM_LEFT:
 		CamPos.x += dp;
-		if (CamPos.x > (0.5 * FIELD_WIDTH)) CamPos.x = (0.5 * FIELD_WIDTH);
+
 		break;
 	case CameraMovement::CAM_RIGHT:
 		CamPos.x -= dp;
-		if (CamPos.x < (-0.5 * FIELD_WIDTH)) CamPos.x = (-0.5 * FIELD_WIDTH);
+
 		break;
 	}
+	//Regulate Camera boundary
+	if (CamPos.z > 0) CamPos.z = 0;
+	if (CamPos.z < (-0.5 * FIELD_LENGTH)) CamPos.z = (-0.5 * FIELD_LENGTH);
+	if (CamPos.x > (0.5 * FIELD_WIDTH)) CamPos.x = (0.5 * FIELD_WIDTH);
+	if (CamPos.x < (-0.5 * FIELD_WIDTH)) CamPos.x = (-0.5 * FIELD_WIDTH);
+
 	return true;
 }
 
