@@ -1,8 +1,8 @@
+#include "GameManager.h"
 #include "Player.h"
-
 Player::Player(RenderChannel* channel)
 {
-	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.5 * FIELD_LENGTH);
+	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.25f * (float)FIELD_LENGTH);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
 	setTag("player1");
 	setPos(initialPos);
@@ -19,7 +19,6 @@ void Player::Move(float dt)
 void Player::update(GLFWwindow* window,float dt) {
 	
 	float dxspeed = 1;
-	float max = 0.01;
 	float ds = 0.1f;
 	//각도가 0일때 +z축, 각도가 180일때 -z축
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
@@ -42,11 +41,12 @@ void Player::update(GLFWwindow* window,float dt) {
 
 	Move(dt);
 	if (Pos[0] > FIELD_WIDTH / 2)
-	{
-		Pos[0] = FIELD_WIDTH/2;// setPos(glm::vec3(FIELD_WIDTH / 2, 0, 0));
-	}
+		Pos[0] = FIELD_WIDTH/2;
 	else if (Pos[0] < (-1)*FIELD_WIDTH / 2)
-	{
-		Pos[0] = -FIELD_WIDTH / 2;//setPos(glm::vec3(-FIELD_WIDTH / 2, 0, 0));
-	}
+		Pos[0] = -FIELD_WIDTH / 2;
+
+	if (Pos[2] < -FIELD_LENGTH / 2)
+		Pos[2] = -FIELD_LENGTH / 2;
+	else if (Pos[2] >= 0)
+		Pos[2] = 0;
 }

@@ -136,12 +136,8 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 }
 glm::mat4 RenderManager::getLookAt()
 {
-	StateRef->getLookAt();
-	return  lookAt(
-		glm::vec3(0, 2, FIELD_LENGTH), // 카메라는 (4,3,3) 에 있다. 월드 좌표에서
-		glm::vec3(0, 2, 0), // 그리고 카메라가 원점을 본다
-		glm::vec3(0, 1, 0)  // 머리가 위쪽이다 (0,-1,0 으로 해보면, 뒤집어 볼것이다)
-	);
+	return StateRef->getLookAt();
+
 }
 /*
 vector<string> mlist;

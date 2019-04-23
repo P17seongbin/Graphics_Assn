@@ -6,6 +6,7 @@
 #include "ball.h"
 #include "RenderChannel.h"
 
+#include <ctime>
 // 이것이 우리의 버텍스 버퍼를 가리킵니다.
 GLuint vertexbuffer;
 GLuint VertexArrayID;
@@ -14,6 +15,7 @@ using namespace glm;
 
 int main(int argc, char **argv)
 {
+	srand((unsigned int)time(0));
 	GLFWwindow* window;	
 	RenderManager tRM(&state,window);
 	RenderChannel tC(&tRM,window);
@@ -24,9 +26,10 @@ int main(int argc, char **argv)
 
 	//GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	GameManager GM(window,&tC,&state);//아직 안씀
-	
 
 	GM.Update(window);
+
+	printf("게임이 종료되었습니다. 다시 시작하시려면 게임을 종료하신 후 다시 시작해주세요.");
 
 	//Ball* eevee = new Ball();
 	/*
