@@ -7,6 +7,7 @@ class GameManager
 public:
 	GameManager(GLFWwindow* win,RenderChannel* channel,State* state);
 	void Terminate_Game();
+	void Ball_Replace(IObject* Ball);
 	vector<IObject*> getCollideList(string tag);
 	//void Update();
 	void Update(GLFWwindow* window);

@@ -26,8 +26,9 @@ int main(int argc, char **argv)
 	//vertex shader에서 이름 "MVP"인 uniform variable의 location정보 저장*************************************************손주은이 추가한 줄
 	//GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	GameManager GM(window,&tC,&state);//아직 안씀
-	
 	GM.Update(window);
+
+	printf("게임이 종료되었습니다. 다시 시작하시려면 게임을 종료하신 후 다시 시작해주세요.");
 	//Ball* eevee = new Ball();
 	/*
 

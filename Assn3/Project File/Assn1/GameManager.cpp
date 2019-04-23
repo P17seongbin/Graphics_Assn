@@ -11,6 +11,12 @@ void GameManager::Terminate_Game()
 	Score2 = 0;
 	winner = 0;
 }
+void GameManager::Ball_Replace(IObject* Ball)
+{
+	Ball->setPos(glm::vec3(0, 0, 0));
+	Ball->setDir((3.14 / 6) * ((rand() % 100) / 100) - 15 + 3.14 * (rand() % 2));
+
+}
 
 vector<IObject*> GameManager::getCollideList(string tag)
 {
@@ -83,14 +89,14 @@ void GameManager::Update(GLFWwindow* window)
 
 		if (BallPos[2] == FIELD_LENGTH / 2)
 		{
-			Ball->setPos(glm::vec3(0, 0, 0));
+			Ball_Replace(Ball);
 			Score1++;
 			printf("score1: %d\n", Score1);
 		}
 		else if (BallPos[2] == -FIELD_LENGTH / 2) 
 		{
+			Ball_Replace(Ball);
 			Score2++;
-			Ball->setPos(glm::vec3(0, 0, 0));
 			printf("score2: %d\n", Score2);
 		}
 
@@ -98,6 +104,11 @@ void GameManager::Update(GLFWwindow* window)
 		{
 			finished = true;
 			winner = (Score1 == max) ? 1 : 2;
+			if (winner == 1)
+				printf("Player가 이겼습니다!");
+			else
+				printf("AI가 이겼습니다!");
+			break;
 			//print winner
 		}
 
@@ -145,6 +156,8 @@ void GameManager::Update(GLFWwindow* window)
 	} // 만약 ESC 키가 눌러졌는지 혹은 창이 닫혔는지 체크 체크
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
+
+
 }
 
 void GameManager :: AddObject(IObject * obj) {
