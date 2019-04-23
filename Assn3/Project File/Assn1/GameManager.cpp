@@ -9,24 +9,26 @@ void GameManager::Terminate_Game()
 	//Restart
 	Score1 = 0;
 	Score2 = 0;
+	winner = 0;
 }
 
 vector<IObject*> GameManager::getCollideList(string tag)
 {
 	vector<IObject*> CollideList;
 
-	float collision_dist =2;
+	float collision_dist =3;
 	IObject* Obj = FindObjectWithTag(tag);
 	glm::vec3 a_pos=Obj->getPos();
 	glm::vec3 b_pos;
 	std::map<string, IObject*>::iterator it = ObjectQueue.begin();
 
-
 	while (it != ObjectQueue.end())
 	{
 		b_pos = it->second->getPos();
-		if (float(distance(a_pos, b_pos)) < collision_dist)
-			CollideList.push_back(it->second);
+		if (tag != it->first) {
+			if (float(distance(a_pos, b_pos)) < collision_dist)
+				CollideList.push_back(it->second);
+		}
 		it++;
 	}
 	return CollideList;
@@ -43,34 +45,61 @@ void GameManager::Update(GLFWwindow* window)
 	IObject* AIPlayer = FindObjectWithTag("player2");
 	IObject* Ball = FindObjectWithTag("ball");
 	glm::vec3 BallPos = Ball->getPos();
+	glm::vec3 BallSpeed = Ball->getSpeed();
 	bool IsPressed = false;
+	int max = 10;//십점내기
 	float x = 0;
 
 	do {
-
-
 		BallPos = Ball->getPos();
+		BallSpeed = Ball->getSpeed();
 		AIPlayer->setBallPos(BallPos[0]);//공의 좌표 aiplayer에게 넘겨줌
 
-		if (getCollideList("ball").size() > 1)
+		vector<IObject*> collidelist = getCollideList("ball");
+		if (!collidelist.empty())
 		{
 			//printf("collision");
-			Ball->setSpeed(glm::vec3(-(Ball->getSpeed()[0]), 0, Ball->getSpeed()[2]));
-			//printf("%d %d\n", Score1, Score2);
+
+			float posx = collidelist[0]->getPos()[0];
+			if(posx>=BallPos[0])
+			{
+				if (collidelist[0]->getTag()=="player1" && BallSpeed[2] < 0)
+					Ball->setSpeed(glm::vec3(BallSpeed[0], 0, -BallSpeed[2]));
+				if(collidelist[0]->getTag()=="player2" && BallSpeed[2]>0)
+					Ball->setSpeed(glm::vec3(BallSpeed[0], 0, -BallSpeed[2]));
+			}
+			else
+			{
+				if (collidelist[0]->getTag() == "player1" && BallSpeed[2] < 0)
+					Ball->setSpeed(glm::vec3(BallSpeed[0], 0, -BallSpeed[2]));
+				if (collidelist[0]->getTag() == "player2" && BallSpeed[2]>0)
+					Ball->setSpeed(glm::vec3(BallSpeed[0], 0, -BallSpeed[2]));
+			}
+				
+				//조건문
+			//Ball->setSpeed(glm::vec3(-(Ball->getSpeed()[0]), 0, Ball->getSpeed()[2]));
 		}
 
-		if (BallPos[2] > FIELD_LENGTH / 2)
+		if (BallPos[2] == FIELD_LENGTH / 2)
 		{
-			Score2++;
-			printf("score2: %d\n", Score2);
 			Ball->setPos(glm::vec3(0, 0, 0));
-		}
-		else if (BallPos[2] < -FIELD_LENGTH / 2) 
-		{
-			Ball->setPos(glm::vec3(0, 0, 0)); 
 			Score1++;
 			printf("score1: %d\n", Score1);
 		}
+		else if (BallPos[2] == -FIELD_LENGTH / 2) 
+		{
+			Score2++;
+			Ball->setPos(glm::vec3(0, 0, 0));
+			printf("score2: %d\n", Score2);
+		}
+
+		if (Score1 == max || Score2 == max)
+		{
+			finished = true;
+			winner = (Score1 == max) ? 1 : 2;
+			//print winner
+		}
+
 		std::map<string, IObject*>::iterator it = ObjectQueue.begin();
 		//map<GLuint, UnitMesh>::iterator it = Meshqueue.find((GLuint)reqinfo.PolygonID);
 		while (it != ObjectQueue.end())
@@ -147,4 +176,5 @@ GameManager::GameManager(GLFWwindow* win, RenderChannel* channel, State* state)
 
 	Score1 = 0;
 	Score2 = 0;
+	winner = 0;
 }

@@ -12,11 +12,13 @@ public:
 	void Update(GLFWwindow* window);
 	void AddObject(IObject* obj);
 	IObject* FindObjectWithTag(string Tag);
+	bool finished =false;
 private:
 	map<string, IObject*> ObjectQueue;//(tag,object)
 	GLFWwindow* window;
 	RenderChannel* Channel;
 	State* StateMachine;
 	int Score1, Score2;
+	int winner;
 	std::map<int, CameraMovement> control_map;
 };
