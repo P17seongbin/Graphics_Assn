@@ -1,8 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node0 [label="RenderChannel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_render_channel.html",tooltip=": 각 Object가 자신을 그릴 것을 Request하는데 사용되는 Object입니다"];
-}
