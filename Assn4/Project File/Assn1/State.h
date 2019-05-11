@@ -49,6 +49,15 @@ public:
 	void UpdatePlayerPos(glm::vec3 p);
 	void UpdatePlayerDir(float d) { PlayerDir = d; }
 
+	//광원의 위치를 조작할 수 있게 함.
+	void setPointLightPos(float x, float y, float z) { PointLightPos.x = x; PointLightPos.y = y; PointLightPos.z = z; }
+	void setPointLightPos(glm::vec3 p) { PointLightPos = p; }
+	glm::vec3 getPointLightPos() { return PointLightPos; }
+
+	void setDirLightPos(float x, float y, float z) { DirLightPos.x = x; DirLightPos.y = y; DirLightPos.z = z; }
+	void setDirLightPos(glm::vec3 p) { DirLightPos = p; }
+	glm::vec3 getDirLightPos() { return DirLightPos; }
+
 private:
 	GLuint CameraID;
 	GLuint ShaderID;
@@ -61,6 +70,8 @@ private:
 	bool HLR = false;//Hidden Line Removal
 	glm::vec3 CamPos;
 
+	glm::vec3 PointLightPos;
+	glm::vec3 DirLightPos;
 };
 
 struct UnitRequest
