@@ -20,9 +20,9 @@ void AIPlayer::Move(float dt)
 
 void AIPlayer::update(GLFWwindow* window, float dt)
 {
-	float dxspeed = 1;
+	float dxspeed = 2;
 	float max = 0.01;
-	float ds = 0.05f;
+	float ds = dxspeed * dt;
 	/*
 	//각도가 0일때 +z축, 각도가 180일때 -z축
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {

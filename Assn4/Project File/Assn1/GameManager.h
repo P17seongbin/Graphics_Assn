@@ -1,6 +1,8 @@
 #pragma once
 #include "RenderChannel.h"
 #include "IObject.h"
+#define DTIME (1/10.0)
+#define ROTATEPERSEC 0.6
 using namespace std;
 class GameManager
 {

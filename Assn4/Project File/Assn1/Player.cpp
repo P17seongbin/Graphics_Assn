@@ -4,6 +4,7 @@ Player::Player(RenderChannel* channel)
 {
 	glm::vec3 initialPos = glm::vec3(0.0, 0.0, -0.25f * (float)FIELD_LENGTH);
 	glm::vec3 initialSpeed = glm::vec3(0, 0, 0);
+	
 	setTag("player1");
 	setPos(initialPos);
 	setDir(0);
@@ -32,10 +33,10 @@ void Player::update(GLFWwindow* window,float dt) {
 		setSpeed(glm::vec3(0, 0, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-		addDir(-0.01f);
+		addDir(ROTATEPERSEC * (-1) * dt);
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-		addDir(0.01f);
+		addDir(ROTATEPERSEC * dt);
 	}
 	
 

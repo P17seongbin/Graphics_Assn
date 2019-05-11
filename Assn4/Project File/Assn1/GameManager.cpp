@@ -4,6 +4,8 @@
 #include "Player.h"
 #include<GL/glut.h>
 
+#define LIGHTHEIGHT 3
+
 void GameManager::Terminate_Game()
 {
 	//Restart
@@ -11,6 +13,7 @@ void GameManager::Terminate_Game()
 	Score2 = 0;
 	winner = 0;
 }
+
 void GameManager::Ball_Replace(IObject* Ball)
 {
 	float speed = 1;
@@ -45,6 +48,7 @@ float distance(glm::vec3 a,glm::vec3 b) {
 	glm::vec3 diff = a - b;
 	return sqrt(int(diff[0])^2+int(diff[1])^2+int(diff[2])^2);
 }
+
 void GameManager::Update(GLFWwindow* window)
 {
 	std::map<int, CameraMovement>::iterator cit;
@@ -62,6 +66,10 @@ void GameManager::Update(GLFWwindow* window)
 
 		BallPos = Ball->getPos();
 		BallSpeed = Ball->getSpeed();
+		
+		//광원의 위치를 공과 동기화 한다.
+		StateMachine->setPointLightPos(Ball->getPos() + glm::vec3(0,0,LIGHTHEIGHT));
+
 		AIPlayer->setBallPos(BallPos[0]);//공의 좌표 aiplayer에게 넘겨줌
 
 		vector<IObject*> collidelist = getCollideList("ball");
@@ -119,7 +127,7 @@ void GameManager::Update(GLFWwindow* window)
 		while (it != ObjectQueue.end())
 		{
 			//printf("1");
-			it->second->update(window,(1/30.0));
+			it->second->update(window,(DTIME));
 			it->second->DrawSelf();
 			it++;
 		}

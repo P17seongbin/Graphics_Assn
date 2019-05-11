@@ -11,6 +11,7 @@ Ball::Ball(RenderChannel * channel)
 	setSpeed(initialSpeed);
 	setobjID(1);
 	Channel = channel;
+
 }
 
 void Ball::Move(float dt)
