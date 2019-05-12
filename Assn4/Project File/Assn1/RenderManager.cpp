@@ -112,14 +112,14 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 			// Hidden Line Removal을 위한 것
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//enable wireframe mode	
 			//glEnable(GL_POLYGON_OFFSET_FILL);
-			glDrawArrays(GL_TRIANGLES, offset/5, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+			glDrawArrays(GL_TRIANGLES, offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 			//glDisable(GL_POLYGON_OFFSET_FILL);
 		}
 
 		glUniform4f(colorID, WireColor.r, WireColor.g, WireColor.b, WireColor.a);
 		// 삼각형 그리기!
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//enable wireframe mode	
-		glDrawArrays(GL_TRIANGLES, offset / 5, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+		glDrawArrays(GL_TRIANGLES, offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);

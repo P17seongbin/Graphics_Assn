@@ -66,10 +66,11 @@ bool ObjLoader::loadOBJ(vector<string> list)
 	{
 		std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 		std::vector< glm::vec3 > temp_vertices;
+		std::vector< glm::vec3 > temp_normals;
 		std::vector<glm::vec2> temp_uvs;
 		UnitMesh tmesh;
 		tmesh.ID = i;
-		tmesh.offset = out_vertices.size();
+		tmesh.offset = out_vertices.size() / 8;
 		int len = 0;
 
 		string t = list[i];
@@ -116,31 +117,30 @@ bool ObjLoader::loadOBJ(vector<string> list)
 				fscanf(file, "%f %f\n", &uv.x, &uv.y);
 				temp_uvs.push_back(uv);
 			}
+			else if (strcmp(lineHeader, "vn") == 0) {
+				glm::vec3 normal;
+				fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
+				temp_normals.push_back(normal);
+			}
 			else if (strcmp(lineHeader, "f") == 0) {
 
 				unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-				if (path[0] != '#')
-				{
-					int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-					if (matches != 9) {
-						printf("File can't be read by this parser\n");
-						return false;
-					}
+
+				int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+				if (matches != 9) {
+					printf("File can't be read by this parser\n");
+					return false;
 				}
-				else
-				{
-					int matches = fscanf(file, "%d/%d %d/%d %d/%d\n", &vertexIndex[0], &uvIndex[0], &vertexIndex[1], &uvIndex[1], &vertexIndex[2], &uvIndex[2]);
-					if (matches != 6) {
-						printf("File can't be read by this parser\n");
-						return false;
-					}
-				}
+
 				vertexIndices.push_back(vertexIndex[0]);
 				vertexIndices.push_back(vertexIndex[1]);
 				vertexIndices.push_back(vertexIndex[2]);
 				uvIndices.push_back(uvIndex[0]);
 				uvIndices.push_back(uvIndex[1]);
 				uvIndices.push_back(uvIndex[2]);
+				normalIndices.push_back(normalIndex[0]);
+				normalIndices.push_back(normalIndex[1]);
+				normalIndices.push_back(normalIndex[2]);
 			}
 		}
 
@@ -158,6 +158,13 @@ bool ObjLoader::loadOBJ(vector<string> list)
 			glm::vec2 uv = temp_uvs[uvindex - 1];
 			out_vertices.push_back(uv.x);
 			out_vertices.push_back(uv.y);
+
+			//save normal data
+			unsigned int normalindex = normalIndices[i];
+			glm::vec3 norm = temp_normals[uvindex - 1];
+			out_vertices.push_back(norm.x);
+			out_vertices.push_back(norm.y);
+			out_vertices.push_back(norm.z);
 			len++;
 		}
 		tmesh.len = len;
@@ -179,7 +186,7 @@ bool ObjLoader::loadOBJ(vector<string> list)
 		2,
 		GL_FLOAT,
 		GL_FALSE,
-		5 * sizeof(float),
+		8 * sizeof(float),
 		(void*)(3 * sizeof(float))
 	);
 
@@ -189,7 +196,7 @@ bool ObjLoader::loadOBJ(vector<string> list)
 		3,                  // 크기(size)
 		GL_FLOAT,           // 타입(type)
 		GL_FALSE,           // 정규화(normalized)?
-		5 * sizeof(float), // 다음 요소 까지 간격(stride)
+		8 * sizeof(float), // 다음 요소 까지 간격(stride)
 		(void*)0           // 배열 버퍼의 오프셋(offset; 옮기는 값)
 	);
 
