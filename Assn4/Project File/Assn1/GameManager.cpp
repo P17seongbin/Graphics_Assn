@@ -71,8 +71,9 @@ void GameManager::Update(GLFWwindow* window)
 		BallPos = Ball->getPos();
 		BallSpeed = Ball->getSpeed();
 		
+		glm::vec3 Bpos = Ball->getPos();
 		//광원의 위치를 공과 동기화 한다.
-		StateMachine->setPointLightPos(Ball->getPos() + glm::vec3(0,0,LIGHTHEIGHT));
+		StateMachine->setPointLightPos(Bpos.x,Bpos.y + LIGHTHEIGHT,Bpos.z);
 
 		AIPlayer->setBallPos(BallPos[0]);//공의 좌표 aiplayer에게 넘겨줌
 

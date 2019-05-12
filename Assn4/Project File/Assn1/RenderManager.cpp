@@ -32,9 +32,10 @@ bool RenderManager::enqueueMesh(UnitMesh mesh)
 */
 RenderManager::RenderManager(State* state, GLFWwindow* &win)
 {
-	BGColor = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+	BGColor = glm::vec4(0.1,0.1,0.1,1.0);
 	WireColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	glfwSetErrorCallback(errorCallback);
+
 	// GLFW 초기화
 	if (!glfwInit())
 	{
@@ -42,7 +43,7 @@ RenderManager::RenderManager(State* state, GLFWwindow* &win)
 	}
 	
 	StateRef = state;
-	glfwWindowHint(GLFW_SAMPLES, 4); // 4x 안티에일리어싱
+	glfwWindowHint(GLFW_SAMPLES, 2); // 2x 안티에일리어싱
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3 을 쓸 겁니다
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
@@ -81,6 +82,13 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	GLuint matrixID = glGetUniformLocation(ShaderID, "MVP");
 	GLuint colorID = glGetUniformLocation(ShaderID, "defaultColor");
 	GLuint textureID = glGetUniformLocation(ShaderID, "Texture");
+
+	GLuint RotID = glGetUniformLocation(ShaderID, "Rotate");
+	GLuint DirLightPosID = glGetUniformLocation(ShaderID, "DirLightPos");
+	GLuint PointLightPosID = glGetUniformLocation(ShaderID, "PointLightPos");
+
+	GLuint ViewPosID = glGetUniformLocation(ShaderID, "viewPos");
+
 	glClearColor(BGColor.r, BGColor.g, BGColor.b, BGColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -88,11 +96,17 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 
 	glBindVertexArray(VAO);
 
+	vec3 PointLightPos = StateRef->getPointLightPos();
+
+	glUniform3f(PointLightPosID, PointLightPos.x, PointLightPos.y, PointLightPos.z);
+
 	for (int i = 0; i < reqlist.size(); i++)
 	{
-		glEnableVertexAttribArray(0);
 
+		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+
 		UnitRequest reqinfo = reqlist[i];
 		UnitMesh mesh = Meshqueue[(GLuint)reqinfo.PolygonID];
 		glUniform1i(textureID, 0);
@@ -106,7 +120,8 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 		mat4 View = getLookAt();
 		mat4 Projection = perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 		mat4 mvp = Projection * View * Model;
-
+		glUniform3f(ViewPosID, View[0][0], View[0][1], View[0][2]);
+		glUniformMatrix4fv(RotID, 1, GL_FALSE, &reqinfo.RotationMatrix[0][0]);
 		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);//sending mvp information to vertex shader
 
 		if (StateRef->GetRenderMode() != 1)
@@ -115,20 +130,21 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 			// Hidden Line Removal을 위한 것
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//enable wireframe mode	
 			//glEnable(GL_POLYGON_OFFSET_FILL);
-			glDrawArrays(GL_TRIANGLES, offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+			glDrawArrays(GL_TRIANGLES, offset, mesh.len); 
 			//glDisable(GL_POLYGON_OFFSET_FILL);
 		}
 
 		glUniform1i(TextureOnID, StateRef->GetRenderMode() == 0 ? 0 : 1);
-
-
+		
 		glUniform4f(colorID, WireColor.r, WireColor.g, WireColor.b, WireColor.a);
 		// 삼각형 그리기!
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//enable wireframe mode	
-		glDrawArrays(GL_TRIANGLES, offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+		glDrawArrays(GL_TRIANGLES, offset, mesh.len); 
 
-		glDisableVertexAttribArray(1);
+
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
 		glfwPollEvents();
 	}
 

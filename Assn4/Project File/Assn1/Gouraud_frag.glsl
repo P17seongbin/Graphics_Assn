@@ -11,8 +11,10 @@ uniform bool IsTexture;
 out vec4 color;
 void main()
 {
+
 if (IsTexture) 
-color = defaultColor;
+color = vertexColor * defaultColor;
 else
-color = texture(Texture,UV);
+color = vertexColor * texture(Texture,UV);
+
 }	

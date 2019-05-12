@@ -182,6 +182,15 @@ bool ObjLoader::loadOBJ(vector<string> list)
 	glBufferData(GL_ARRAY_BUFFER, out_vertices.size() * sizeof(float), &out_vertices[0], GL_STATIC_DRAW);
 
 	glVertexAttribPointer(
+		2,                  
+		3,                  // 크기(size)
+		GL_FLOAT,           // 타입(type)
+		GL_FALSE,           // 정규화(normalized)?
+		8 * sizeof(float), // 다음 요소 까지 간격(stride)
+		(void*)(5 * sizeof(float))           // 배열 버퍼의 오프셋(offset; 옮기는 값)
+	);
+
+	glVertexAttribPointer(
 		1,
 		2,
 		GL_FLOAT,

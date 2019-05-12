@@ -51,8 +51,13 @@ public:
 	void UpdatePlayerDir(float d) { PlayerDir = d; }
 
 	//광원의 위치를 조작할 수 있게 함.
-	void setPointLightPos(float x, float y, float z) { PointLightPos.x = x; PointLightPos.y = y; PointLightPos.z = z; }
-	void setPointLightPos(glm::vec3 p) { PointLightPos = p; }
+	void setPointLightPos(float x, float y, float z) {
+		PointLightPos = glm::vec3(x, y, z); 	
+
+	}
+	void setPointLightPos(glm::vec3 p) {
+		PointLightPos = p;
+	}
 	glm::vec3 getPointLightPos() { return PointLightPos; }
 
 	void setDirLightPos(float x, float y, float z) { DirLightPos.x = x; DirLightPos.y = y; DirLightPos.z = z; }
