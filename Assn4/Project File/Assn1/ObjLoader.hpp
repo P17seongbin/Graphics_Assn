@@ -104,7 +104,12 @@ bool ObjLoader::loadOBJ(vector<string> list)
 				char* path = new char[128];
 				fscanf(file, "%s", path);
 				tmesh.TextureID = (GLuint)loadDDS(path);
-
+			}
+			else if (strcmp(lineHeader, "tbmp") == 0)
+			{
+				char* path = new char[128];
+				fscanf(file, "%s", path);
+				tmesh.TextureID = (GLuint)loadBMP(path);
 			}
 			else if (strcmp(lineHeader, "vt") == 0) {
 				glm::vec2 uv;

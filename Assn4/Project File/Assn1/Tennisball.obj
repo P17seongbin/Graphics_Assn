@@ -2,6 +2,7 @@
 # www.blender.org
 mtllib untitled.mtl.mtl
 o 10539_tennis_ball_v1
+tbmp Cube/Tennisball.bmp
 v 0.457548 1.480296 2.423520
 v 0.558691 1.477099 2.381215
 v 0.549840 1.580188 2.338548

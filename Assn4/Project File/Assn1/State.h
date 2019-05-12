@@ -14,6 +14,7 @@
 
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path);
 GLuint loadDDS(const char* path);
+GLuint loadBMP(const char* path);
 /**
  * @brief 현재 게임 상황을 저장하는 State Machine
  */

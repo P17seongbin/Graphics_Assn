@@ -3,7 +3,63 @@
 #include <vector>
 #include <sstream>
 
+GLuint loadBMP(const char* path)
+{
+	GLuint textureID = -1;
+	glGenTextures(1, &textureID);
 
+	unsigned char BMPheader[128];//BMPHeader는 128bytes, 32DWORDS
+	int width, height, imgsize;
+	int MipmapCount, Pixformat;
+
+	unsigned char* databuffer;
+	int bufsize;
+	FILE * file = fopen(path, "rb");
+
+	if (fread(BMPheader, 1, 54, file) != 54) { // If not 54 bytes read : problem
+		printf("Corrupted BMP Header, Unable to read.\n");
+		return false;
+	}
+	char t[3];
+	memcpy(t, &BMPheader[0], 2);
+	if (strncmp(t, "BM", 2) != 0)
+	{
+		printf("Given file %s is not BMP format!\n", path);
+		fclose(file);
+		return false;
+	}
+
+	width = *((int*)(&BMPheader[0x12]));//read 4 bytes and convert as integer.
+	height = *((int*)(&BMPheader[0x16]));
+	imgsize = *((int*)(&BMPheader[0x22]));
+
+
+	//linearsize는 mipmap중 가장 큰 데이터의 크기를 나타내므로, mipmap이 1단계가 아니면 그 크기의 2배로 하면 여유롭게 모든 mipmap을 load할 수 있습니다.
+	databuffer = new unsigned char[imgsize];
+	fread(databuffer, 1, imgsize, file);
+
+	//다 읽었으니 파일은 닫습니다.
+	fclose(file);
+
+	//데이터를 읽었으니 이를 OpenGL에 넘겨줍니다.
+
+	glGenTextures(1, &textureID);
+	// 새롭게 생성된 텍스처를 bind합니다.
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, databuffer);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	delete(databuffer);
+
+	return textureID;
+}
 GLuint loadDDS(const char* path)
 {
 	GLuint textureID = -1;
@@ -17,7 +73,7 @@ GLuint loadDDS(const char* path)
 	int bufsize;
 	FILE * file = fopen(path, "rb");
 
-	if (fread(DDSheader, 1, 128, file) != 128) { // If not 54 bytes read : problem
+	if (fread(DDSheader, 1, 128, file) != 128) { // If not 128 bytes read : problem
 		printf("Corrupted DDS Header, Unable to read.\n");
 		return false;
 	}
