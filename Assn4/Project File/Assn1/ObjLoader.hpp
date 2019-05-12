@@ -127,18 +127,6 @@ bool ObjLoader::loadOBJ(vector<string> list)
 		for (unsigned int i = 0; i < vertexIndices.size(); i++) {
 			unsigned int vertexIndex = vertexIndices[i];
 			glm::vec3 vertex = temp_vertices[vertexIndex - 1];
-			if (path[1] == 'p') //for pokeball
-			{
-				vertex.y += 1;
-			}
-			if (path[1] == 'C')//for Cube
-			{
-				vertex.x *= FIELD_WIDTH / 2;
-				if (vertex.y > 0)
-					vertex.y *= 20;
-				else vertex.y = 0;
-				vertex.z *= FIELD_LENGTH / 2;
-			}
 			out_vertices.push_back(vertex);
 			len++;
 		}
