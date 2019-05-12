@@ -22,9 +22,6 @@ int main(int argc, char **argv)
 
 
 
-	GLuint programID = LoadShaders("Gouraud_vertex.glsl", "Gouraud_frag.glsl");
-
-	state.setShaderID(programID);
 	ObjLoader tObjLoader(&tRM);
 	glutInit(&argc, argv);
 

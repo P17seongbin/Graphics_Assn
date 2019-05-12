@@ -58,9 +58,16 @@ void GameManager::Update(GLFWwindow* window)
 	glm::vec3 BallPos = Ball->getPos();
 	glm::vec3 BallSpeed = Ball->getSpeed();
 	bool IsPressed = false;
+	bool IsRPressed = false;
 
+	bool isPhong = true;
 	int max = 10;//십점내기
 	float x = 0;
+
+	GLuint PhongID = LoadShaders("Phong_vertex.glsl", "Phong_frag.glsl");
+	GLuint GouraudID = LoadShaders("Gouraud_vertex.glsl", "Gouraud_frag.glsl");
+	StateMachine->setShaderID(PhongID);
+
 
 	do {
 		UnitRequest field;
@@ -139,7 +146,8 @@ void GameManager::Update(GLFWwindow* window)
 		}
 
 		Channel->DrawAll();
-		
+
+		//change Rendermode;
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS && !IsPressed)
 		{
 			IsPressed = true;
@@ -148,6 +156,14 @@ void GameManager::Update(GLFWwindow* window)
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_RELEASE)
 			IsPressed = false;
 
+		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS && !IsRPressed)
+		{
+			IsRPressed = true;			
+			StateMachine->setShaderID((isPhong ? GouraudID : PhongID));
+			isPhong = !isPhong;
+		}
+		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE)
+			IsRPressed = false;
 
 		//State Machine에 플레이어의 위치와 방향 정보를 업로드.
 		StateMachine->UpdatePlayerPos(Player->getPos());
