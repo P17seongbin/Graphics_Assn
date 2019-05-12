@@ -75,9 +75,12 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	GLuint matrixID = glGetUniformLocation(StateRef->getShaderID(), "MVP");
-	GLuint colorID = glGetUniformLocation(StateRef->getShaderID(), "vertexColor");
-	GLuint textureID = glGetUniformLocation(StateRef->getShaderID(), "Texture");
+	GLuint ShaderID = StateRef->getShaderID();
+
+	GLuint TextureOnID = glGetUniformLocation(ShaderID, "IsTexture");
+	GLuint matrixID = glGetUniformLocation(ShaderID, "MVP");
+	GLuint colorID = glGetUniformLocation(ShaderID, "defaultColor");
+	GLuint textureID = glGetUniformLocation(ShaderID, "Texture");
 	glClearColor(BGColor.r, BGColor.g, BGColor.b, BGColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -92,12 +95,12 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 		glEnableVertexAttribArray(1);
 		UnitRequest reqinfo = reqlist[i];
 		UnitMesh mesh = Meshqueue[(GLuint)reqinfo.PolygonID];
-		glUniform1i(textureID,0);
+		glUniform1i(textureID, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh.TextureID);
 		int offset = mesh.offset;
-	//	glBindTexture(GL_TEXTURE_2D,mesh.TextureID);
-		//printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
+		//	glBindTexture(GL_TEXTURE_2D,mesh.TextureID);
+			//printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
 
 		mat4 Model = reqinfo.PositionMatrix * reqinfo.RotationMatrix; //Model Matrix
 		mat4 View = getLookAt();
@@ -106,7 +109,7 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 
 		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);//sending mvp information to vertex shader
 
-		if (StateRef->IsHiddenLineRemovalMode())
+		if (StateRef->GetRenderMode() != 1)
 		{
 			glUniform4f(colorID, BGColor.r, BGColor.g, BGColor.b, BGColor.a);
 			// Hidden Line Removal을 위한 것
@@ -115,6 +118,9 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 			glDrawArrays(GL_TRIANGLES, offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
 			//glDisable(GL_POLYGON_OFFSET_FILL);
 		}
+
+		glUniform1i(TextureOnID, StateRef->GetRenderMode() == 0 ? 0 : 1);
+
 
 		glUniform4f(colorID, WireColor.r, WireColor.g, WireColor.b, WireColor.a);
 		// 삼각형 그리기!

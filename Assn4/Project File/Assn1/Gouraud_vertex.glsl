@@ -16,7 +16,7 @@ uniform mat4 MVP;
 uniform mat4 ModelView;
 uniform mat4 Projection;
 
-uniform vec4 DirLightPos, DirLightNorm; 
+uniform vec4 DirLightPos; 
 uniform vec4 PointLightPos;
 
 uniform float sRef;//ºû³ª´Â Á¤µµ

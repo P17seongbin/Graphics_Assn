@@ -44,8 +44,8 @@ public:
 	glm::mat4 getLookAt();
 
 	bool CameraControl(CameraMovement dir);	
-	bool IsHiddenLineRemovalMode() { return HLR; }
-	void ToggleHiddenLineRemovalMode() { HLR = !HLR; }
+	int GetRenderMode() { return RenderState; }
+	void ChangeRenderMode() { RenderState = (RenderState +1) % 3; }
 	
 	void UpdatePlayerPos(glm::vec3 p);
 	void UpdatePlayerDir(float d) { PlayerDir = d; }
@@ -68,6 +68,8 @@ private:
 
 	int PlayerScore;
 	int AIScore;
+	int RenderState;
+	int ShaderState;
 	bool HLR = false;//Hidden Line Removal
 	glm::vec3 CamPos;
 

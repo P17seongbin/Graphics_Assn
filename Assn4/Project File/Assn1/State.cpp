@@ -5,6 +5,8 @@ State::State()
 	CameraID = 3;
 	CamPos = glm::vec3(0, 10, -0.5 * FIELD_LENGTH);
 
+	RenderState = 0;
+	ShaderState = 0;
 	//광원 위치 초기화
 	setPointLightPos(0, 0, 0);
 	setDirLightPos(0, 0, 0);

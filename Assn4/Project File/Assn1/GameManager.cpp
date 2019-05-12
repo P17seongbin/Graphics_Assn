@@ -142,7 +142,7 @@ void GameManager::Update(GLFWwindow* window)
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS && !IsPressed)
 		{
 			IsPressed = true;
-			StateMachine->ToggleHiddenLineRemovalMode();
+			StateMachine->ChangeRenderMode();
 		}
 		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_RELEASE)
 			IsPressed = false;
