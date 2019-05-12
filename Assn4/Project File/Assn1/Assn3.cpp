@@ -20,7 +20,9 @@ int main(int argc, char **argv)
 	RenderManager tRM(&state,window);
 	RenderChannel tC(&tRM,window);
 
-	GLuint programID = LoadShaders("vertex.glsl", "fragment.glsl");
+
+
+	GLuint programID = LoadShaders("Gouraud_vertex.glsl", "Gouraud_frag.glsl");
 
 	state.setShaderID(programID);
 	ObjLoader tObjLoader(&tRM);

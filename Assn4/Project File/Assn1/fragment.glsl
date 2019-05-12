@@ -4,5 +4,5 @@ uniform vec4 vertexColor;
 
 void main()
 {
-color = vertexColor;
+	color = vertexColor;
 }

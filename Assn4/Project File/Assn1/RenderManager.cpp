@@ -9,7 +9,7 @@ static void errorCallback(int errorCode, const char* errorDescription)
 }
 
 /**
- * @brief ObjLoader에서 Load하고 VAO에 등록까지 마친 mesh의 Offset과 ID를 입력하는 함수
+ * @brief ObjLoader에서 Load하고 VBO에 등록까지 마친 mesh의 Offset과 ID를 입력하는 함수
  * @param GLuint ID : Mesh의 ID, 각 오브젝트에 사전에 정의한 ID를 입력해야 합니다.
  * @param UnitMesh mesh : 단일 Mesh 관련 정보를 담고 있는 struct입니다.
  * @return 정상적으로 등록 되었는가를 나타냅니다.
@@ -32,7 +32,7 @@ bool RenderManager::enqueueMesh(UnitMesh mesh)
 */
 RenderManager::RenderManager(State* state, GLFWwindow* &win)
 {
-	BGColor = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	BGColor = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
 	WireColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	glfwSetErrorCallback(errorCallback);
 	// GLFW 초기화
@@ -62,7 +62,6 @@ RenderManager::RenderManager(State* state, GLFWwindow* &win)
 
 }
 
-
 /**
 * @brief 전달된 모든 오브젝트를 Render하는 함수입니다.
 * @param UnitRequest reqinfo: 오브젝트의 ID, 좌표, 회전 방향 정보를 담고 있습니다.
@@ -76,59 +75,59 @@ bool RenderManager::drawObject(std::vector<UnitRequest> &reqlist)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VAO);
-
 	GLuint matrixID = glGetUniformLocation(StateRef->getShaderID(), "MVP");
 	GLuint colorID = glGetUniformLocation(StateRef->getShaderID(), "vertexColor");
-
+	GLuint textureID = glGetUniformLocation(StateRef->getShaderID(), "Texture");
 	glClearColor(BGColor.r, BGColor.g, BGColor.b, BGColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	glUseProgram(StateRef->getShaderID());
+
+	glBindVertexArray(VAO);
+
 	for (int i = 0; i < reqlist.size(); i++)
 	{
+		glEnableVertexAttribArray(0);
+
+		glEnableVertexAttribArray(1);
 		UnitRequest reqinfo = reqlist[i];
 		UnitMesh mesh = Meshqueue[(GLuint)reqinfo.PolygonID];
+		glUniform1i(textureID,0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, mesh.TextureID);
+		int offset = mesh.offset;
+	//	glBindTexture(GL_TEXTURE_2D,mesh.TextureID);
 		//printf("%d %d %d\n", mesh.ID, mesh.offset, mesh.len);
-		// 버퍼의 첫번째 속성값(attribute) : 버텍스들
-		glVertexAttribPointer(
-			0,                  // 0번째 속성(attribute)
-			3,                  // 크기(size)
-			GL_FLOAT,           // 타입(type)
-			GL_FALSE,           // 정규화(normalized)?
-			0,                  // 다음 요소 까지 간격(stride)
-			(void*)0           // 배열 버퍼의 오프셋(offset; 옮기는 값)
-		);
-		GLuint width = 50; //temporary variables for setting aspect ratio
-		GLuint height = 50;
+
 		mat4 Model = reqinfo.PositionMatrix * reqinfo.RotationMatrix; //Model Matrix
 		mat4 View = getLookAt();
-		mat4 Projection = perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
+		mat4 Projection = perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 		mat4 mvp = Projection * View * Model;
 
 		glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);//sending mvp information to vertex shader
-		
 
 		if (StateRef->IsHiddenLineRemovalMode())
 		{
 			glUniform4f(colorID, BGColor.r, BGColor.g, BGColor.b, BGColor.a);
 			// Hidden Line Removal을 위한 것
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//enable wireframe mode	
-			glEnable(GL_POLYGON_OFFSET_FILL);
-			glDrawArrays(GL_TRIANGLES, mesh.offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
-			glDisable(GL_POLYGON_OFFSET_FILL);
+			//glEnable(GL_POLYGON_OFFSET_FILL);
+			glDrawArrays(GL_TRIANGLES, offset/5, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+			//glDisable(GL_POLYGON_OFFSET_FILL);
 		}
 
 		glUniform4f(colorID, WireColor.r, WireColor.g, WireColor.b, WireColor.a);
 		// 삼각형 그리기!
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//enable wireframe mode	
-		glDrawArrays(GL_TRIANGLES, mesh.offset, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+		glDrawArrays(GL_TRIANGLES, offset / 5, mesh.len); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
+
+		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(0);
 		glfwPollEvents();
 	}
 
 	glfwSwapBuffers(window);
-	glDisableVertexAttribArray(0);
+
 	//}
 	return true;
 	//	else return false;

@@ -63,6 +63,10 @@ void GameManager::Update(GLFWwindow* window)
 	float x = 0;
 
 	do {
+		UnitRequest field;
+		field.PolygonID = 3;
+		field.PositionMatrix = field.RotationMatrix = glm::mat4(1.0f);
+		Channel->EnqueueRequest(field);
 
 		BallPos = Ball->getPos();
 		BallSpeed = Ball->getSpeed();
@@ -128,13 +132,10 @@ void GameManager::Update(GLFWwindow* window)
 		{
 			//printf("1");
 			it->second->update(window,(DTIME));
+			
 			it->second->DrawSelf();
 			it++;
 		}
-		UnitRequest field;
-		field.PolygonID = 3;
-		field.PositionMatrix = field.RotationMatrix = glm::mat4(1.0f);
-		Channel->EnqueueRequest(field);
 
 		Channel->DrawAll();
 		
